@@ -4,13 +4,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>栄養クイズラボ</title>
+<title>ひらのの栄養教室</title>
 <style>
 :root{
-  --green:#167568;
-  --light:#eaf6f1;
+  --main:#167568;
   --bg:#f5f8f7;
   --text:#263c38;
+  --light:#e9f5ef;
 }
 *{box-sizing:border-box}
 body{
@@ -20,50 +20,49 @@ body{
   color:var(--text);
 }
 header{
-  background:var(--green);
+  background:var(--main);
   color:white;
-  padding:22px 16px;
+  padding:24px 15px;
   text-align:center;
 }
-header h1{margin:0;font-size:25px}
-header p{font-size:13px;margin:8px 0 0}
-main{max-width:750px;margin:auto;padding:15px}
+header h1{margin:0;font-size:26px}
+header p{font-size:13px}
+main{max-width:760px;margin:auto;padding:16px}
 .card{
   background:white;
-  padding:18px;
-  border-radius:16px;
-  margin-bottom:15px;
-  box-shadow:0 2px 9px #0000000c;
+  padding:20px;
+  border-radius:18px;
+  margin-bottom:16px;
+  box-shadow:0 2px 8px #0000000a;
 }
-h2{font-size:19px;margin-top:0}
-h3{font-size:16px}
+h2{font-size:20px;margin-top:0}
 p{line-height:1.7}
 button{
   font:inherit;
-  border:1px solid #d3dfda;
-  border-radius:11px;
+  border:1px solid #cbded6;
   background:white;
   color:var(--text);
   padding:13px;
+  border-radius:11px;
   cursor:pointer;
 }
 button:disabled{opacity:.5}
 .primary{
-  background:var(--green);
+  background:var(--main);
   color:white;
-  border-color:var(--green);
+  border-color:var(--main);
 }
 .grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:9px;
+  gap:10px;
 }
 .grid button{text-align:left}
 .grid small{
   display:block;
-  font-size:11px;
+  color:#728780;
+  font-size:12px;
   margin-top:5px;
-  color:#657c75;
 }
 .stats{
   display:grid;
@@ -72,25 +71,35 @@ button:disabled{opacity:.5}
 }
 .stat{
   background:var(--light);
-  border-radius:12px;
   padding:12px 4px;
+  border-radius:12px;
   text-align:center;
 }
-.stat strong{display:block;font-size:23px}
+.stat strong{display:block;font-size:25px}
 .stat small{font-size:11px}
+.progress{
+  background:#e1ebe6;
+  height:10px;
+  border-radius:10px;
+  overflow:hidden;
+}
+.progress div{
+  background:#29a48b;
+  height:100%;
+}
 .choice{
   display:block;
   width:100%;
   text-align:left;
   margin:9px 0;
-  line-height:1.6;
+  line-height:1.7;
 }
 .selected{
-  border:2px solid var(--green);
+  border:2px solid var(--main);
   background:var(--light);
 }
 .correct{
-  border:2px solid #27905b;
+  border:2px solid #289b61;
   background:#e5f8ed;
 }
 .wrong{
@@ -99,69 +108,48 @@ button:disabled{opacity:.5}
 }
 .explain{
   background:var(--light);
+  padding:15px;
   border-radius:12px;
-  padding:14px;
-  line-height:1.8;
+  line-height:1.9;
   white-space:pre-wrap;
 }
-.hidden{display:none}
-.row{display:flex;gap:9px;margin-top:14px}
+.row{display:flex;gap:10px;margin-top:15px}
 .row button{flex:1}
-.muted{color:#6a7e78;font-size:13px}
+.hidden{display:none!important}
+.muted{color:#728780;font-size:13px}
 .tag{
   display:inline-block;
   background:var(--light);
-  color:var(--green);
-  padding:5px 10px;
-  border-radius:30px;
+  color:var(--main);
+  padding:6px 12px;
+  border-radius:20px;
   font-size:12px;
 }
-.progress{
-  height:9px;
-  background:#e0eae6;
-  border-radius:9px;
-  overflow:hidden;
-}
-.progress div{
-  height:100%;
-  background:#27a485;
-}
-select,textarea{
-  width:100%;
-  padding:11px;
-  margin:8px 0;
-  border:1px solid #c9d8d2;
-  border-radius:9px;
-  font:inherit;
-}
-textarea{min-height:130px}
-canvas{
-  width:100%;
-  height:auto;
-  border:1px solid #ddd;
-  border-radius:10px;
-}
-.notice{
-  background:#fff8e8;
-  padding:12px;
-  border-radius:10px;
-  font-size:13px;
-  line-height:1.7;
+.admin-link{
+  position:fixed;
+  right:9px;
+  bottom:calc(9px + env(safe-area-inset-bottom));
+  font-size:10px;
+  color:#8da29a;
+  background:#ffffffd9;
+  padding:5px 8px;
+  border-radius:7px;
+  text-decoration:none;
+  z-index:10;
 }
 footer{
   text-align:center;
-  padding:25px;
-  color:#6a7e78;
+  padding:30px 10px 55px;
+  color:#728780;
   font-size:12px;
 }
 </style>
 </head>
-
 <body>
 
 <header>
-  <h1>栄養クイズラボ</h1>
-  <p>管理栄養士国家試験 × 暮らしに役立つ栄養学</p>
+  <h1>ひらのの栄養教室</h1>
+  <p>管理栄養士と学ぶ、食と健康のクイズ</p>
 </header>
 
 <main>
@@ -181,13 +169,11 @@ footer{
     </div>
     <div class="stat">
       <strong id="streak">0</strong>
-      <small>連続学習日</small>
+      <small>連続学習日数</small>
     </div>
   </div>
   <p id="xpText" class="muted"></p>
-  <div class="progress">
-    <div id="xpBar"></div>
-  </div>
+  <div class="progress"><div id="xpBar"></div></div>
   <p id="dueText" class="muted"></p>
 </div>
 
@@ -196,7 +182,7 @@ footer{
   <div class="grid">
     <button onclick="start('exam')">
       国家試験5択
-      <small>本試験形式に挑戦</small>
+      <small>公式過去問に挑戦</small>
     </button>
     <button onclick="start('ox')">
       選択肢○×
@@ -204,189 +190,117 @@ footer{
     </button>
     <button onclick="start('easy')">
       やさしい国試
-      <small>一般向け3択</small>
+      <small>一般向けの基礎問題</small>
     </button>
     <button onclick="start('life')">
       暮らしの栄養
-      <small>生活に役立つ知識</small>
+      <small>生活に役立つクイズ</small>
     </button>
     <button onclick="start('daily')">
       今日の5問
-      <small>日替わりチャレンジ</small>
+      <small>毎日の学習習慣</small>
     </button>
     <button onclick="start('review')">
       復習する
-      <small>間違い問題に再挑戦</small>
+      <small>復習予定の問題</small>
     </button>
   </div>
 </div>
 
 <div class="card">
   <h2>学習のポイント</h2>
-  <p>
-    問題を解く前に答えを見ず、
-    自分で考えてから解説を確認しましょう。
-  </p>
-  <p>
-    間違えた問題は復習リストに登録されます。
-    繰り返し挑戦して知識を定着させましょう。
-  </p>
+  <p>まず自分で答えを考え、解答後にすべての選択肢の解説を確認しましょう。</p>
+  <p>間違えた問題は復習リストに登録されます。</p>
 </div>
 
 <div class="card">
-  <button class="primary" style="width:100%"
-    onclick="show('manage')">
-    管理・バックアップ・X投稿メーカー
+  <h2>学習記録のバックアップ</h2>
+  <button onclick="backup()">バックアップ保存</button>
+  <button onclick="document.getElementById('restoreFile').click()">
+    バックアップ復元
   </button>
+  <input id="restoreFile" type="file" accept=".json"
+    class="hidden" onchange="restore(event)">
+  <p class="muted">
+    学習記録はこのブラウザに保存されます。
+    端末変更やデータ削除に備えて保存してください。
+  </p>
 </div>
 
 </section>
 
 <section id="quiz" class="hidden">
-
 <div class="card">
   <h2 id="quizTitle"></h2>
   <p id="counter" class="muted"></p>
-  <div class="progress">
-    <div id="quizBar"></div>
-  </div>
+  <div class="progress"><div id="quizBar"></div></div>
   <p><span id="category" class="tag"></span></p>
   <h3 id="questionText"></h3>
   <div id="choices"></div>
   <div id="result" class="hidden"></div>
   <div class="row">
     <button onclick="show('home')">ホーム</button>
-    <button id="answerBtn" class="primary"
-      onclick="answer()">解答する</button>
-    <button id="nextBtn" class="primary hidden"
-      onclick="next()">次へ</button>
+    <button id="answerBtn" class="primary" onclick="answer()" disabled>
+      解答する
+    </button>
+    <button id="nextBtn" class="primary hidden" onclick="next()">
+      次へ
+    </button>
   </div>
 </div>
-
-</section>
-
-<section id="manage" class="hidden">
-
-<div class="card">
-  <h2>学習記録</h2>
-  <button onclick="backup()">バックアップ保存</button>
-  <button onclick="document.getElementById('restoreFile').click()">
-    バックアップ復元
-  </button>
-  <input id="restoreFile" type="file"
-    accept=".json" class="hidden"
-    onchange="restore(event)">
-  <p class="muted">
-    記録はブラウザ内に保存されます。
-    端末変更やデータ削除に備えて保存してください。
-  </p>
-</div>
-
-<div class="card">
-  <h2>公式過去問の追加</h2>
-  <p class="muted">
-    公式原文・正答を照合したJSONを読み込みます。
-    読み込んだ問題は、この端末で利用できます。
-    全利用者に公開するにはサイトのコード更新が必要です。
-  </p>
-  <button onclick="document.getElementById('questionFile').click()">
-    問題JSONを読み込む
-  </button>
-  <input id="questionFile" type="file"
-    accept=".json" class="hidden"
-    onchange="importQuestions(event)">
-  <p id="questionCount" class="muted"></p>
-</div>
-
-<div class="card">
-  <h2>X投稿メーカー</h2>
-  <label>問題を選択</label>
-  <select id="postSelect" onchange="renderPost()"></select>
-  <label>画像の種類</label>
-  <select id="postType" onchange="renderPost()">
-    <option value="question">問題カード</option>
-    <option value="answer">解説カード</option>
-  </select>
-  <canvas id="canvas" width="1080" height="1350"></canvas>
-  <div class="row">
-    <button onclick="saveImage()">画像保存</button>
-    <button onclick="copyText()">投稿文コピー</button>
-  </div>
-  <textarea id="postText"></textarea>
-</div>
-
-<div class="card">
-  <button onclick="show('home')">ホームへ戻る</button>
-</div>
-
 </section>
 
 </main>
 
+<a href="admin.html" class="admin-link">管理者</a>
+
 <footer>
-  栄養クイズラボ｜学習・栄養教育用
+  ひらのの栄養教室
+  <p>学習・栄養教育を目的としたサイトです。</p>
 </footer>
 
 <script>
 "use strict";
 
-// ===================================
-// 1. 問題データ
-// ===================================
+const STORAGE="hiranoProgressV1";
+const QUESTION_URL="questions.json";
 
-// 公式過去問は原文・正答照合後に追加する。
-// type:
-// exam = 公式過去問
-// easy = やさしい国試
-// life = 暮らしの栄養
-
-const QUESTIONS = [
-
+const SAMPLE=[
 {
  id:"life001",
  type:"life",
  subject:"栄養素",
  question:"非ヘム鉄の吸収を助ける栄養素はどれ？",
- options:[
-  "ビタミンC",
-  "ビタミンD",
-  "ビタミンK"
- ],
+ options:["ビタミンC","ビタミンD","ビタミンK"],
  answer:0,
  explanations:[
   "○ ビタミンCは非ヘム鉄の吸収を助けます。",
   "× ビタミンDはカルシウムの吸収などに関係します。",
   "× ビタミンKは血液凝固などに関係します。"
  ],
- explanation:"野菜や果物に含まれるビタミンCを、非ヘム鉄を含む食品と組み合わせる工夫が役立ちます。",
+ explanation:"非ヘム鉄を含む食品と、ビタミンCを含む野菜や果物を組み合わせる工夫が役立ちます。",
  source:"一般向けオリジナル問題"
 },
-
 {
  id:"life002",
  type:"life",
  subject:"食品表示",
  question:"食塩相当量1gに相当するナトリウムは約何mg？",
- options:[
-  "100mg",
-  "400mg",
-  "1,000mg"
- ],
+ options:["100mg","400mg","1000mg"],
  answer:1,
  explanations:[
   "× 約100mgではありません。",
-  "○ 約393mgで、選択肢では400mgが最も近い値です。",
-  "× ナトリウム1,000mgは食塩相当量約2.54gです。"
+  "○ 約393mgで、400mgが最も近い値です。",
+  "× ナトリウム1000mgは食塩相当量約2.54gです。"
  ],
  explanation:"食塩相当量(g)＝ナトリウム(mg)×2.54÷1000で換算します。",
  source:"一般向けオリジナル問題"
 },
-
 {
  id:"life003",
  type:"life",
  subject:"食品衛生",
- question:"ノロウイルス対策で、汚染のおそれがある二枚貝の中心部を加熱する目安は？",
+ question:"ノロウイルス対策として、汚染のおそれがある二枚貝の中心部を加熱する目安は？",
  options:[
   "50℃で10秒",
   "65℃で30秒",
@@ -398,35 +312,14 @@ const QUESTIONS = [
   "× ノロウイルス対策としては不十分です。",
   "○ 中心部85〜90℃で90秒以上が目安です。"
  ],
- explanation:"手洗いや調理器具の洗浄・消毒も重要です。",
+ explanation:"手洗い、調理器具の洗浄・消毒も重要です。",
  source:"一般向けオリジナル問題"
 },
-
 {
  id:"life004",
  type:"life",
- subject:"食生活",
- question:"健康づくりで示される野菜摂取量の目標は、成人1日あたり約何g？",
- options:[
-  "100g",
-  "350g",
-  "700g"
- ],
- answer:1,
- explanations:[
-  "× 目標量より少ない量です。",
-  "○ 野菜摂取量350g/日が目標として示されています。",
-  "× 一般的な目標値ではありません。"
- ],
- explanation:"野菜料理を毎食取り入れると、摂取量を増やしやすくなります。",
- source:"一般向けオリジナル問題"
-},
-
-{
- id:"life005",
- type:"life",
  subject:"食品表示",
- question:"『糖類ゼロ』の食品について正しい説明は？",
+ question:"『糖類ゼロ』と表示された食品について正しいものは？",
  options:[
   "糖質も必ずゼロ",
   "エネルギーも必ずゼロ",
@@ -441,37 +334,27 @@ const QUESTIONS = [
  explanation:"『ゼロ』表示は、定められた基準値未満を意味する場合があります。",
  source:"一般向けオリジナル問題"
 },
-
 {
  id:"easy001",
  type:"easy",
  subject:"基礎栄養学",
  question:"1gあたり約9kcalのエネルギーを生み出す栄養素は？",
- options:[
-  "たんぱく質",
-  "脂質",
-  "炭水化物"
- ],
+ options:["たんぱく質","脂質","炭水化物"],
  answer:1,
  explanations:[
-  "× 一般的な換算係数は約4kcal/gです。",
+  "× たんぱく質は一般的に約4kcal/gです。",
   "○ 脂質は約9kcal/gです。",
-  "× 一般的な換算係数は約4kcal/gです。"
+  "× 利用可能炭水化物は一般的に約4kcal/gです。"
  ],
- explanation:"エネルギー換算係数は栄養学の基礎知識です。",
+ explanation:"エネルギー換算係数は栄養学の基本です。",
  source:"国家試験の学習範囲を参考にしたオリジナル問題"
 },
-
 {
  id:"easy002",
  type:"easy",
  subject:"人体の構造と機能",
  question:"血糖値を下げる方向に働くホルモンは？",
- options:[
-  "インスリン",
-  "グルカゴン",
-  "アドレナリン"
- ],
+ options:["インスリン","グルカゴン","アドレナリン"],
  answer:0,
  explanations:[
   "○ インスリンは血糖値を下げる方向に働きます。",
@@ -481,17 +364,11 @@ const QUESTIONS = [
  explanation:"インスリンは膵臓のβ細胞から分泌されます。",
  source:"国家試験の学習範囲を参考にしたオリジナル問題"
 }
-
 ];
 
-// ===================================
-// 2. データ保存
-// ===================================
+function $(id){return document.getElementById(id)}
 
-const STORAGE_KEY="nutritionQuizProgressV1";
-const EXTRA_KEY="nutritionQuizExtraV1";
-
-function loadJSON(key,fallback){
+function readJSON(key,fallback){
  try{
   return JSON.parse(localStorage.getItem(key)) ?? fallback;
  }catch{
@@ -499,99 +376,103 @@ function loadJSON(key,fallback){
  }
 }
 
-let progress=loadJSON(STORAGE_KEY,{
- history:[],
- due:{}
-});
-
+let progress=readJSON(STORAGE,{history:[],due:{}});
 if(!Array.isArray(progress.history))progress.history=[];
-if(!progress.due || typeof progress.due!=="object"){
- progress.due={};
+if(!progress.due || typeof progress.due!=="object")progress.due={};
+
+let questions=[...SAMPLE];
+let session=null;
+
+function validQuestion(q){
+ return q &&
+ typeof q.id==="string" &&
+ typeof q.type==="string" &&
+ typeof q.subject==="string" &&
+ typeof q.question==="string" &&
+ Array.isArray(q.options) &&
+ q.options.length>=2 &&
+ q.options.length<=5 &&
+ q.options.every(x=>typeof x==="string") &&
+ Number.isInteger(q.answer) &&
+ q.answer>=0 &&
+ q.answer<q.options.length &&
+ Array.isArray(q.explanations) &&
+ q.explanations.length===q.options.length &&
+ q.explanations.every(x=>typeof x==="string") &&
+ typeof q.explanation==="string" &&
+ typeof q.source==="string" &&
+ (
+  q.type!=="exam" ||
+  (q.options.length===5 && q.officialChecked===true)
+ );
 }
 
-let extra=loadJSON(EXTRA_KEY,[]);
-if(!Array.isArray(extra))extra=[];
-
-function allQuestions(){
- const map=new Map();
- QUESTIONS.concat(extra).forEach(q=>map.set(q.id,q));
- return [...map.values()];
-}
-
-function saveProgress(){
+async function loadQuestions(){
  try{
-  localStorage.setItem(STORAGE_KEY,JSON.stringify(progress));
+  const response=await fetch(QUESTION_URL,{cache:"no-store"});
+  if(!response.ok)return;
+  const data=await response.json();
+  if(!Array.isArray(data))return;
+
+  const map=new Map(SAMPLE.map(q=>[q.id,q]));
+  data.filter(validQuestion).forEach(q=>map.set(q.id,q));
+  questions=[...map.values()];
  }catch(e){
-  alert("学習記録を保存できませんでした。バックアップを確認してください。");
+  console.log("追加問題なし",e);
  }
 }
 
-function today(){
- const d=new Date();
- const y=d.getFullYear();
- const m=String(d.getMonth()+1).padStart(2,"0");
- const day=String(d.getDate()).padStart(2,"0");
- return `${y}-${m}-${day}`;
+function localDate(date=new Date()){
+ const y=date.getFullYear();
+ const m=String(date.getMonth()+1).padStart(2,"0");
+ const d=String(date.getDate()).padStart(2,"0");
+ return `${y}-${m}-${d}`;
 }
 
 function addDays(n){
  const d=new Date();
  d.setHours(12,0,0,0);
  d.setDate(d.getDate()+n);
- const y=d.getFullYear();
- const m=String(d.getMonth()+1).padStart(2,"0");
- const day=String(d.getDate()).padStart(2,"0");
- return `${y}-${m}-${day}`;
+ return localDate(d);
 }
 
-function $(id){
- return document.getElementById(id);
+function saveProgress(){
+ try{
+  localStorage.setItem(STORAGE,JSON.stringify(progress));
+ }catch{
+  alert("記録を保存できませんでした。");
+ }
 }
 
 function show(page){
- ["home","quiz","manage"].forEach(id=>{
+ ["home","quiz"].forEach(id=>{
   $(id).classList.toggle("hidden",id!==page);
  });
  if(page==="home")renderHome();
- if(page==="manage")renderManage();
  window.scrollTo(0,0);
 }
 
-// ===================================
-// 3. 学習ステータス
-// ===================================
-
 function renderHome(){
  const h=progress.history;
- const total=h.length;
  const correct=h.filter(x=>x.correct).length;
- const rate=total?Math.round(correct/total*100):0;
- const xp=correct*10+(total-correct)*3;
+ const xp=correct*10+(h.length-correct)*3;
  const level=Math.floor(xp/100)+1;
 
  $("level").textContent=level;
- $("rate").textContent=rate+"%";
+ $("rate").textContent=h.length
+  ?Math.round(correct/h.length*100)+"%"
+  :"0%";
  $("xpText").textContent=`経験値 ${xp} XP`;
  $("xpBar").style.width=(xp%100)+"%";
 
- const dates=[...new Set(h.map(x=>x.date))];
- const set=new Set(dates);
- let streak=0;
+ const dates=new Set(h.map(x=>x.date));
  let d=new Date();
  d.setHours(12,0,0,0);
+ let streak=0;
 
- const formatDate=x=>{
-  const y=x.getFullYear();
-  const m=String(x.getMonth()+1).padStart(2,"0");
-  const day=String(x.getDate()).padStart(2,"0");
-  return `${y}-${m}-${day}`;
- };
+ if(!dates.has(localDate(d)))d.setDate(d.getDate()-1);
 
- if(!set.has(formatDate(d))){
-  d.setDate(d.getDate()-1);
- }
-
- while(set.has(formatDate(d))){
+ while(dates.has(localDate(d))){
   streak++;
   d.setDate(d.getDate()-1);
  }
@@ -599,91 +480,84 @@ function renderHome(){
  $("streak").textContent=streak;
 
  const due=Object.values(progress.due)
-  .filter(x=>x.next<=today()).length;
+  .filter(x=>x.next<=localDate()).length;
 
  $("dueText").textContent=`復習予定：${due}問`;
 }
 
-// ===================================
-// 4. 出題処理
-// ===================================
-
-let session=null;
-
 function shuffle(arr){
- return [...arr].sort(()=>Math.random()-.5);
+ const result=[...arr];
+ for(let i=result.length-1;i>0;i--){
+  const j=Math.floor(Math.random()*(i+1));
+  [result[i],result[j]]=[result[j],result[i]];
+ }
+ return result;
 }
 
-function dailyQuestions(pool){
- const seed=Number(today().replaceAll("-",""));
- const sorted=[...pool].sort((a,b)=>a.id.localeCompare(b.id));
- return sorted
+function dailyPool(pool){
+ const day=Number(localDate().replaceAll("-",""));
+ return [...pool]
+  .sort((a,b)=>a.id.localeCompare(b.id))
   .map((q,i)=>({
    q,
-   score:(seed*1103515245+i*12345)>>>0
+   key:((day+i*7919)*2654435761)>>>0
   }))
-  .sort((a,b)=>a.score-b.score)
+  .sort((a,b)=>a.key-b.key)
   .slice(0,5)
   .map(x=>x.q);
 }
 
 function start(mode){
- const all=allQuestions();
  let pool=[];
  let title="";
  let ox=false;
 
  if(mode==="exam"){
-  pool=all.filter(q=>q.type==="exam");
+  pool=questions.filter(q=>q.type==="exam");
   title="国家試験5択";
  }
  if(mode==="ox"){
-  pool=all.filter(q=>q.type==="exam");
+  pool=questions.filter(q=>q.type==="exam");
   title="選択肢○×";
   ox=true;
  }
  if(mode==="easy"){
-  pool=all.filter(q=>q.type==="easy");
+  pool=questions.filter(q=>q.type==="easy");
   title="やさしい国試";
  }
  if(mode==="life"){
-  pool=all.filter(q=>q.type==="life");
+  pool=questions.filter(q=>q.type==="life");
   title="暮らしの栄養";
  }
  if(mode==="daily"){
-  pool=dailyQuestions(all);
+  pool=dailyPool(questions);
   title="今日の5問";
  }
  if(mode==="review"){
-  pool=all.filter(q=>
+  pool=questions.filter(q=>
    Object.entries(progress.due).some(
     ([key,v])=>
-     (key===q.id || key.startsWith(q.id+"#"))
-     && v.next<=today()
+     (key===q.id || key.startsWith(q.id+"#")) &&
+     v.next<=localDate()
    )
   );
   title="復習モード";
  }
 
  if(!pool.length){
-  alert("このコースにはまだ問題がありません。");
+  alert("現在、このコースに出題できる問題はありません。");
   return;
  }
 
  if(mode!=="daily")pool=shuffle(pool);
 
- let items=ox
+ const items=ox
   ?pool.flatMap(q=>q.options.map((_,i)=>({q,oxIndex:i})))
   :pool.map(q=>({q,oxIndex:-1}));
 
  session={
-  mode,
-  title,
-  items,
-  index:0,
-  selected:-1,
-  answered:false,
-  correct:0
+  mode,title,items,index:0,
+  selected:-1,answered:false,correct:0
  };
 
  show("quiz");
@@ -701,21 +575,20 @@ function renderQuestion(){
 
  $("quizTitle").textContent=s.title;
  $("counter").textContent=`${s.index+1} / ${s.items.length}問`;
- $("quizBar").style.width=(s.index/s.items.length*100)+"%";
+ $("quizBar").style.width=
+  (s.index/s.items.length*100)+"%";
+
  $("category").textContent=q.subject;
 
  $("questionText").textContent=isOX
   ?"次の記述は正しい？\n"+q.options[item.oxIndex]
   :q.question;
 
- const choices=isOX
-  ?["○ 正しい","× 誤り"]
-  :q.options;
-
+ const options=isOX?["○ 正しい","× 誤り"]:q.options;
  const area=$("choices");
  area.replaceChildren();
 
- choices.forEach((text,i)=>{
+ options.forEach((text,i)=>{
   const b=document.createElement("button");
   b.className="choice";
   b.textContent=isOX?text:`${i+1}. ${text}`;
@@ -723,18 +596,16 @@ function renderQuestion(){
   area.appendChild(b);
  });
 
- $("result").classList.add("hidden");
  $("result").replaceChildren();
+ $("result").classList.add("hidden");
  $("answerBtn").classList.remove("hidden");
  $("answerBtn").disabled=true;
  $("nextBtn").classList.add("hidden");
-
  window.scrollTo(0,0);
 }
 
 function selectChoice(i){
  if(session.answered)return;
-
  session.selected=i;
  $("answerBtn").disabled=false;
 
@@ -752,7 +623,9 @@ function answer(){
  const isOX=item.oxIndex>=0;
 
  const correctIndex=isOX
-  ?(item.oxIndex===q.answer?0:1)
+  ?(q.optionsCorrect
+    ?(q.optionsCorrect[item.oxIndex]?0:1)
+    :(item.oxIndex===q.answer?0:1))
   :q.answer;
 
  const ok=s.selected===correctIndex;
@@ -763,7 +636,7 @@ function answer(){
 
  progress.history.push({
   id:key,
-  date:today(),
+  date:localDate(),
   correct:ok,
   mode:s.mode
  });
@@ -771,7 +644,7 @@ function answer(){
  const old=progress.due[key]||{step:-1};
  const steps=[1,3,7,30];
  const step=ok
-  ?Math.min(old.step+1,steps.length-1)
+  ?Math.min(old.step+1,3)
   :0;
 
  progress.due[key]={
@@ -791,30 +664,29 @@ function answer(){
  const result=$("result");
  result.classList.remove("hidden");
 
- const h=document.createElement("h3");
- h.textContent=ok?"正解！":"不正解";
- result.appendChild(h);
+ const heading=document.createElement("h3");
+ heading.textContent=ok?"正解！":"不正解";
+ result.appendChild(heading);
 
  const box=document.createElement("div");
  box.className="explain";
 
- let explanation="";
+ let text="";
 
  if(isOX){
-  explanation=
-   `正答：${correctIndex===0?"○":"×"}\n\n`+
-   q.explanations[item.oxIndex];
+  text=`正答：${correctIndex===0?"○":"×"}\n\n`;
+  text+=q.explanations[item.oxIndex];
  }else{
-  explanation=`正答：${q.answer+1}\n\n`;
+  text=`正答：${q.answer+1}\n\n`;
   q.explanations.forEach((e,i)=>{
-   explanation+=`${i+1}. ${e}\n`;
+   text+=`${i+1}. ${e}\n`;
   });
  }
 
- explanation+=`\n補足：${q.explanation}`;
- explanation+=`\n出典：${q.source}`;
+ text+=`\n補足：${q.explanation}`;
+ text+=`\n出典：${q.source}`;
 
- box.textContent=explanation;
+ box.textContent=text;
  result.appendChild(box);
 
  $("answerBtn").classList.add("hidden");
@@ -832,20 +704,19 @@ function next(){
 
  if(session.index>=session.items.length){
   const s=session;
-
   $("questionText").textContent="チャレンジ終了";
   $("counter").textContent="";
   $("quizBar").style.width="100%";
   $("choices").replaceChildren();
-  $("result").classList.remove("hidden");
   $("result").replaceChildren();
+  $("result").classList.remove("hidden");
 
   const h=document.createElement("h2");
   h.textContent=`${s.correct} / ${s.items.length}問正解`;
   $("result").appendChild(h);
 
   const p=document.createElement("p");
-  p.textContent="間違えた問題は復習リストに登録されました。";
+  p.textContent="学習記録を保存しました。";
   $("result").appendChild(p);
 
   $("nextBtn").classList.add("hidden");
@@ -854,10 +725,6 @@ function next(){
 
  renderQuestion();
 }
-
-// ===================================
-// 5. バックアップ
-// ===================================
 
 function download(blob,name){
  const url=URL.createObjectURL(blob);
@@ -876,11 +743,12 @@ function backup(){
   progress,
   exportedAt:new Date().toISOString()
  };
+
  download(
   new Blob([JSON.stringify(data,null,2)],{
    type:"application/json"
   }),
-  "nutrition-backup-"+today()+".json"
+  "hirano-backup-"+localDate()+".json"
  );
 }
 
@@ -896,9 +764,7 @@ async function restore(event){
    !Array.isArray(data.progress.history) ||
    !data.progress.due ||
    typeof data.progress.due!=="object"
-  ){
-   throw new Error("バックアップ形式が不正です");
-  }
+  )throw new Error("形式が不正です");
 
   if(confirm("現在の学習記録を上書きしますか？")){
    progress=data.progress;
@@ -907,250 +773,13 @@ async function restore(event){
    alert("復元しました");
   }
  }catch(e){
-  alert("読み込みエラー："+e.message);
+  alert("復元エラー："+e.message);
  }
 
  event.target.value="";
 }
 
-// ===================================
-// 6. 公式問題の追加
-// ===================================
-
-function validQuestion(q){
- return q &&
-  typeof q.id==="string" &&
-  ["exam","easy","life"].includes(q.type) &&
-  typeof q.subject==="string" &&
-  typeof q.question==="string" &&
-  Array.isArray(q.options) &&
-  q.options.length>=2 &&
-  q.options.length<=5 &&
-  q.options.every(x=>typeof x==="string") &&
-  Array.isArray(q.explanations) &&
-  q.explanations.length===q.options.length &&
-  q.explanations.every(x=>typeof x==="string") &&
-  Number.isInteger(q.answer) &&
-  q.answer>=0 &&
-  q.answer<q.options.length &&
-  typeof q.explanation==="string" &&
-  typeof q.source==="string" &&
-  (
-   q.type!=="exam" ||
-   (
-    q.options.length===5 &&
-    q.officialChecked===true &&
-    Number.isInteger(q.examNumber) &&
-    Number.isInteger(q.questionNumber)
-   )
-  );
-}
-
-async function importQuestions(event){
- const file=event.target.files[0];
- if(!file)return;
-
- try{
-  const data=JSON.parse(await file.text());
-  const list=Array.isArray(data)?data:[data];
-
-  if(!list.length || !list.every(validQuestion)){
-   throw new Error("問題データ形式が不正です");
-  }
-
-  const map=new Map(extra.map(q=>[q.id,q]));
-  const builtinIds=new Set(QUESTIONS.map(q=>q.id));
-
-  list.forEach(q=>{
-   if(builtinIds.has(q.id)){
-    throw new Error("初期問題とIDが重複しています："+q.id);
-   }
-   map.set(q.id,q);
-  });
-
-  const updated=[...map.values()];
-  localStorage.setItem(EXTRA_KEY,JSON.stringify(updated));
-  extra=updated;
-
-  renderManage();
-  alert(list.length+"問を登録しました");
-
- }catch(e){
-  alert("登録エラー："+e.message);
- }
-
- event.target.value="";
-}
-
-// ===================================
-// 7. 管理画面
-// ===================================
-
-function renderManage(){
- $("questionCount").textContent=
-  `初期問題：${QUESTIONS.length}問 / 追加問題：${extra.length}問`;
-
- const select=$("postSelect");
- select.replaceChildren();
-
- allQuestions().forEach(q=>{
-  const option=document.createElement("option");
-  option.value=q.id;
-  option.textContent=q.id+"｜"+q.subject;
-  select.appendChild(option);
- });
-
- renderPost();
-}
-
-// ===================================
-// 8. X投稿画像
-// ===================================
-
-function drawLines(ctx,text,x,y,width,height,maxLines){
- let count=0;
- for(const paragraph of String(text).split("\n")){
-  let line="";
-
-  for(const char of paragraph){
-   if(ctx.measureText(line+char).width>width && line){
-    if(count>=maxLines)return y;
-    ctx.fillText(line,x,y);
-    y+=height;
-    count++;
-    line="";
-   }
-   line+=char;
-  }
-
-  if(count>=maxLines)return y;
-  ctx.fillText(line,x,y);
-  y+=height;
-  count++;
- }
- return y;
-}
-
-function renderPost(){
- const id=$("postSelect").value;
- const q=allQuestions().find(x=>x.id===id);
- if(!q)return;
-
- const kind=$("postType").value;
- const canvas=$("canvas");
- const ctx=canvas.getContext("2d");
-
- ctx.fillStyle="#f5f8f7";
- ctx.fillRect(0,0,1080,1350);
-
- ctx.fillStyle="#167568";
- ctx.fillRect(0,0,1080,160);
-
- ctx.fillStyle="white";
- ctx.font="bold 55px sans-serif";
- ctx.fillText("栄養クイズラボ",60,103);
-
- ctx.fillStyle="#263c38";
- ctx.font="bold 43px sans-serif";
-
- const title=q.type==="exam"
-  ?`第${q.examNumber}回・問${q.questionNumber}`
-  :q.type==="easy"
-   ?"やさしい国試"
-   :"暮らしの栄養クイズ";
-
- ctx.fillText(title,60,245);
-
- ctx.font="32px sans-serif";
- ctx.fillStyle="#657c75";
- ctx.fillText(q.subject,60,305);
-
- let y=380;
-
- if(kind==="question"){
-  ctx.fillStyle="#263c38";
-  ctx.font="bold 42px sans-serif";
-  y=drawLines(ctx,q.question,60,y,950,65,7)+25;
-
-  ctx.font="35px sans-serif";
-
-  q.options.forEach((option,i)=>{
-   if(y<1170){
-    y=drawLines(
-     ctx,
-     `${i+1}. ${option}`,
-     65,y,940,52,3
-    )+18;
-   }
-  });
- }else{
-  ctx.fillStyle="#167568";
-  ctx.font="bold 52px sans-serif";
-  ctx.fillText("正答："+(q.answer+1),60,y);
-  y+=90;
-
-  ctx.fillStyle="#263c38";
-  ctx.font="34px sans-serif";
-
-  q.explanations.forEach((text,i)=>{
-   if(y<1150){
-    y=drawLines(
-     ctx,
-     `${i+1}. ${text}`,
-     60,y,950,51,3
-    )+15;
-   }
-  });
- }
-
- ctx.fillStyle="#167568";
- ctx.fillRect(0,1250,1080,100);
-
- ctx.fillStyle="white";
- ctx.font="29px sans-serif";
- ctx.fillText("詳しい解説・復習は学習サイトへ",60,1310);
-
- const options=q.options
-  .map((x,i)=>`${i+1}. ${x}`).join("\n");
-
- $("postText").value=kind==="question"
-  ?`【${title}】\n${q.question}\n${options}\n\n出典：${q.source}`
-  :`【${title} 解説】\n正答：${q.answer+1}\n${q.explanations.join("\n")}\n\n${q.explanation}\n出典：${q.source}`;
-}
-
-function saveImage(){
- const canvas=$("canvas");
-
- canvas.toBlob(blob=>{
-  if(blob){
-   download(
-    blob,
-    "nutrition-"+$("postSelect").value+".png"
-   );
-  }
- },"image/png");
-}
-
-async function copyText(){
- const text=$("postText").value;
-
- try{
-  await navigator.clipboard.writeText(text);
-  alert("コピーしました");
- }catch{
-  $("postText").focus();
-  $("postText").select();
-  alert("文章を選択しました。コピーしてください。");
- }
-}
-
-// ===================================
-// 9. 起動
-// ===================================
-
-renderHome();
-
+loadQuestions().then(renderHome);
 </script>
-
 </body>
 </html>
