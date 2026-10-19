@@ -3,66 +3,69 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>ひらのの栄養教室</title>
 <style>
 :root{
-  --main:#167568;
+  --green:#167568;
+  --dark:#203a36;
   --bg:#f5f8f7;
-  --text:#263c38;
-  --light:#e9f5ef;
+  --line:#dce8e2;
 }
 *{box-sizing:border-box}
 body{
   margin:0;
-  font-family:-apple-system,"Hiragino Kaku Gothic ProN",sans-serif;
   background:var(--bg);
-  color:var(--text);
+  color:var(--dark);
+  font-family:-apple-system,BlinkMacSystemFont,
+  "Hiragino Kaku Gothic ProN",sans-serif;
 }
 header{
-  background:var(--main);
+  background:var(--green);
   color:white;
-  padding:24px 15px;
-  text-align:center;
+  padding:24px 16px;
 }
-header h1{margin:0;font-size:26px}
-header p{font-size:13px}
-main{max-width:760px;margin:auto;padding:16px}
+header h1{font-size:26px;margin:0}
+header p{margin:8px 0 0;font-size:14px}
+main{max-width:850px;margin:auto;padding:14px}
 .card{
   background:white;
-  padding:20px;
-  border-radius:18px;
-  margin-bottom:16px;
-  box-shadow:0 2px 8px #0000000a;
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:17px;
+  margin:12px 0;
 }
-h2{font-size:20px;margin-top:0}
+h2{font-size:20px;margin:0 0 12px}
+h3{font-size:17px}
 p{line-height:1.7}
 button{
   font:inherit;
-  border:1px solid #cbded6;
-  background:white;
-  color:var(--text);
-  padding:13px;
-  border-radius:11px;
   cursor:pointer;
-}
-button:disabled{opacity:.5}
-.primary{
-  background:var(--main);
+  border:1px solid var(--green);
+  background:var(--green);
   color:white;
-  border-color:var(--main);
+  border-radius:10px;
+  padding:12px;
+  font-weight:600;
 }
+button.secondary{
+  background:white;
+  color:var(--green);
+}
+button:disabled{opacity:.5;cursor:default}
 .grid{
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:repeat(2,1fr);
   gap:10px;
 }
-.grid button{text-align:left}
-.grid small{
+.mode{
+  min-height:90px;
+  text-align:left;
+}
+.mode small{
   display:block;
-  color:#728780;
-  font-size:12px;
-  margin-top:5px;
+  margin-top:6px;
+  font-weight:400;
 }
 .stats{
   display:grid;
@@ -70,60 +73,59 @@ button:disabled{opacity:.5}
   gap:8px;
 }
 .stat{
-  background:var(--light);
-  padding:12px 4px;
-  border-radius:12px;
   text-align:center;
-}
-.stat strong{display:block;font-size:25px}
-.stat small{font-size:11px}
-.progress{
-  background:#e1ebe6;
-  height:10px;
+  background:#eaf5f0;
   border-radius:10px;
+  padding:12px 6px;
+}
+.stat strong{display:block;font-size:22px}
+.stat span{font-size:12px}
+.progress{
+  height:10px;
+  border-radius:20px;
+  background:#e0ece6;
   overflow:hidden;
 }
 .progress div{
-  background:#29a48b;
   height:100%;
+  background:#167568;
+  width:0%;
 }
-.choice{
+.muted{color:#657d73;font-size:13px}
+.hidden{display:none!important}
+.option{
   display:block;
   width:100%;
   text-align:left;
+  background:white;
+  color:var(--dark);
+  border:1px solid #ccdcd4;
   margin:9px 0;
-  line-height:1.7;
+  font-weight:400;
 }
-.selected{
-  border:2px solid var(--main);
-  background:var(--light);
+.option.correct{
+  border-color:#258b62;
+  background:#e7f7eb;
 }
-.correct{
-  border:2px solid #289b61;
-  background:#e5f8ed;
-}
-.wrong{
-  border:2px solid #cf5555;
+.option.wrong{
+  border-color:#d27676;
   background:#fff0f0;
 }
+.option:disabled{opacity:1}
 .explain{
-  background:var(--light);
-  padding:15px;
-  border-radius:12px;
-  line-height:1.9;
-  white-space:pre-wrap;
+  background:#f1f8f5;
+  padding:12px;
+  border-radius:10px;
+  margin-top:10px;
 }
-.row{display:flex;gap:10px;margin-top:15px}
-.row button{flex:1}
-.hidden{display:none!important}
-.muted{color:#728780;font-size:13px}
-.tag{
-  display:inline-block;
-  background:var(--light);
-  color:var(--main);
-  padding:6px 12px;
-  border-radius:20px;
-  font-size:12px;
+.explain p{margin:7px 0}
+.quiz-image{
+  display:block;
+  width:100%;
+  max-width:650px;
+  margin:15px auto;
+  border-radius:12px;
+  border:1px solid var(--line);
 }
 .admin-link{
   position:fixed;
@@ -131,25 +133,36 @@ button:disabled{opacity:.5}
   bottom:calc(9px + env(safe-area-inset-bottom));
   font-size:10px;
   color:#8da29a;
-  background:#ffffffd9;
+  background:#ffffffeb;
   padding:5px 8px;
   border-radius:7px;
   text-decoration:none;
   z-index:10;
 }
-footer{
-  text-align:center;
-  padding:30px 10px 55px;
-  color:#728780;
-  font-size:12px;
+textarea{
+  width:100%;
+  min-height:110px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:10px;
+  font:inherit;
+}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.row>*{flex:1}
+a{color:var(--green)}
+@media(max-width:500px){
+  .stats{gap:5px}
+  .stat strong{font-size:19px}
 }
 </style>
 </head>
-<body>
 
+<body>
 <header>
-  <h1>ひらのの栄養教室</h1>
-  <p>管理栄養士と学ぶ、食と健康のクイズ</p>
+<div style="max-width:850px;margin:auto">
+<h1>ひらのの栄養教室</h1>
+<p>管理栄養士と学ぶ、食と健康のクイズ</p>
+</div>
 </header>
 
 <main>
@@ -157,96 +170,125 @@ footer{
 <section id="home">
 
 <div class="card">
-  <h2>学習ステータス</h2>
-  <div class="stats">
-    <div class="stat">
-      <strong id="level">1</strong>
-      <small>レベル</small>
-    </div>
-    <div class="stat">
-      <strong id="rate">0%</strong>
-      <small>正答率</small>
-    </div>
-    <div class="stat">
-      <strong id="streak">0</strong>
-      <small>連続学習日数</small>
-    </div>
-  </div>
-  <p id="xpText" class="muted"></p>
-  <div class="progress"><div id="xpBar"></div></div>
-  <p id="dueText" class="muted"></p>
+<h2>学習記録</h2>
+<div class="stats">
+<div class="stat">
+<strong id="level">1</strong>
+<span>レベル</span>
+</div>
+<div class="stat">
+<strong id="accuracy">0%</strong>
+<span>正答率</span>
+</div>
+<div class="stat">
+<strong id="streak">0日</strong>
+<span>連続学習</span>
+</div>
+</div>
+
+<p class="muted" id="xpText"></p>
+<div class="progress"><div id="xpBar"></div></div>
+<p class="muted" id="dueText"></p>
 </div>
 
 <div class="card">
-  <h2>学習コース</h2>
-  <div class="grid">
-    <button onclick="start('exam')">
-      国家試験5択
-      <small>公式過去問に挑戦</small>
-    </button>
-    <button onclick="start('ox')">
-      選択肢○×
-      <small>各選択肢を判定</small>
-    </button>
-    <button onclick="start('easy')">
-      やさしい国試
-      <small>一般向けの基礎問題</small>
-    </button>
-    <button onclick="start('life')">
-      暮らしの栄養
-      <small>生活に役立つクイズ</small>
-    </button>
-    <button onclick="start('daily')">
-      今日の5問
-      <small>毎日の学習習慣</small>
-    </button>
-    <button onclick="start('review')">
-      復習する
-      <small>復習予定の問題</small>
-    </button>
-  </div>
+<h2>学習コース</h2>
+<div class="grid">
+<button class="mode" onclick="startMode('exam')">
+国家試験5択
+<small>第40回から順番に学習</small>
+</button>
+<button class="mode" onclick="startMode('ox')">
+選択肢○×
+<small>1つずつ正誤を判断</small>
+</button>
+<button class="mode" onclick="startMode('easy')">
+やさしい国試
+<small>一般向けの3択クイズ</small>
+</button>
+<button class="mode" onclick="startMode('life')">
+暮らしの栄養
+<small>食生活に役立つ問題</small>
+</button>
+<button class="mode" onclick="startMode('daily')">
+今日の5問
+<small>短時間で復習</small>
+</button>
+<button class="mode" onclick="startMode('review')">
+復習する
+<small>間違えた問題・復習期限</small>
+</button>
+</div>
 </div>
 
 <div class="card">
-  <h2>学習のポイント</h2>
-  <p>まず自分で答えを考え、解答後にすべての選択肢の解説を確認しましょう。</p>
-  <p>間違えた問題は復習リストに登録されます。</p>
+<h2>学習のポイント</h2>
+<p>
+正解だけを覚えるのではなく、
+各選択肢がなぜ正しいか、なぜ誤りかを
+確認しましょう。
+</p>
+<p>
+間違えた問題は復習対象に追加され、
+1日後・3日後・7日後・30日後を目安に
+繰り返し学習できます。
+</p>
+<p class="muted" id="loadedText">
+問題データを読み込み中です。
+</p>
 </div>
 
 <div class="card">
-  <h2>学習記録のバックアップ</h2>
-  <button onclick="backup()">バックアップ保存</button>
-  <button onclick="document.getElementById('restoreFile').click()">
-    バックアップ復元
-  </button>
-  <input id="restoreFile" type="file" accept=".json"
-    class="hidden" onchange="restore(event)">
-  <p class="muted">
-    学習記録はこのブラウザに保存されます。
-    端末変更やデータ削除に備えて保存してください。
-  </p>
+<h2>学習記録のバックアップ</h2>
+<p class="muted">
+学習履歴はこの端末のブラウザ内に保存されます。
+定期的にバックアップしてください。
+</p>
+<div class="row">
+<button onclick="exportProgress()">記録を書き出す</button>
+<button class="secondary"
+onclick="document.getElementById('backupFile').click()">
+記録を読み込む
+</button>
+</div>
+<input id="backupFile" type="file"
+accept=".json,application/json"
+class="hidden"
+onchange="importProgress(event)">
 </div>
 
 </section>
 
 <section id="quiz" class="hidden">
 <div class="card">
-  <h2 id="quizTitle"></h2>
-  <p id="counter" class="muted"></p>
-  <div class="progress"><div id="quizBar"></div></div>
-  <p><span id="category" class="tag"></span></p>
-  <h3 id="questionText"></h3>
-  <div id="choices"></div>
-  <div id="result" class="hidden"></div>
-  <div class="row">
-    <button onclick="show('home')">ホーム</button>
-    <button id="answerBtn" class="primary" onclick="answer()" disabled>
-      解答する
-    </button>
-    <button id="nextBtn" class="primary hidden" onclick="next()">
-      次へ
-    </button>
-  </div>
+<div class="row">
+<button class="secondary" onclick="goHome()">
+ホームに戻る
+</button>
+<span class="muted" id="counter"></span>
+</div>
+
+<p class="muted" id="quizSubject"></p>
+<h2 id="quizTitle"></h2>
+<p id="quizQuestion"></p>
+
+<div id="questionImageArea"></div>
+<div id="options"></div>
+
+<div id="result" class="hidden">
+<div class="explain">
+<h3 id="resultTitle"></h3>
+<div id="explanations"></div>
+<p id="generalExplanation"></p>
+<div id="explanationImageArea"></div>
+</div>
+</div>
+
+<button id="nextButton" class="hidden"
+onclick="nextQuestion()"
+style="width:100%;margin-top:15px">
+次の問題へ
+</button>
 </div>
 </section>
 
@@ -254,532 +296,539 @@ footer{
 
 <a href="admin.html" class="admin-link">管理者</a>
 
-<footer>
-  ひらのの栄養教室
-  <p>学習・栄養教育を目的としたサイトです。</p>
-</footer>
-
 <script>
 "use strict";
 
-const STORAGE="hiranoProgressV1";
-const QUESTION_URL="questions.json";
+const PROGRESS_KEY="hiranoProgressV1";
 
-const SAMPLE=[
+const SAMPLE_QUESTIONS=[
 {
  id:"life001",
  type:"life",
- subject:"栄養素",
- question:"非ヘム鉄の吸収を助ける栄養素はどれ？",
+ title:"鉄の吸収",
+ question:"植物性食品に含まれる非ヘム鉄の吸収を助ける栄養素はどれ？",
  options:["ビタミンC","ビタミンD","ビタミンK"],
  answer:0,
  explanations:[
-  "○ ビタミンCは非ヘム鉄の吸収を助けます。",
-  "× ビタミンDはカルシウムの吸収などに関係します。",
-  "× ビタミンKは血液凝固などに関係します。"
+ "○ ビタミンCは非ヘム鉄の吸収を助けます。",
+ "× ビタミンDは主にカルシウム代謝に関係します。",
+ "× ビタミンKは血液凝固などに関係します。"
  ],
- explanation:"非ヘム鉄を含む食品と、ビタミンCを含む野菜や果物を組み合わせる工夫が役立ちます。",
- source:"一般向けオリジナル問題"
+ explanation:"鉄を含む食品とビタミンCを含む食品を組み合わせましょう。"
 },
 {
  id:"life002",
  type:"life",
- subject:"食品表示",
- question:"食塩相当量1gに相当するナトリウムは約何mg？",
- options:["100mg","400mg","1000mg"],
+ title:"食塩とナトリウム",
+ question:"食塩相当量1gに含まれるナトリウム量は約何mg？",
+ options:["約100mg","約400mg","約1000mg"],
  answer:1,
  explanations:[
-  "× 約100mgではありません。",
-  "○ 約393mgで、400mgが最も近い値です。",
-  "× ナトリウム1000mgは食塩相当量約2.54gです。"
+ "× 約100mgではありません。",
+ "○ 約393mgです。",
+ "× 約1000mgではありません。"
  ],
- explanation:"食塩相当量(g)＝ナトリウム(mg)×2.54÷1000で換算します。",
- source:"一般向けオリジナル問題"
+ explanation:"食塩相当量(g)=ナトリウム(mg)×2.54÷1000。"
 },
 {
  id:"life003",
  type:"life",
- subject:"食品衛生",
- question:"ノロウイルス対策として、汚染のおそれがある二枚貝の中心部を加熱する目安は？",
+ title:"ノロウイルス対策",
+ question:"二枚貝などのノロウイルス対策で重要な加熱条件は？",
  options:[
-  "50℃で10秒",
-  "65℃で30秒",
-  "85〜90℃で90秒以上"
+ "中心温度60℃で10秒",
+ "中心温度75℃で10秒",
+ "中心温度85〜90℃で90秒以上"
  ],
  answer:2,
  explanations:[
-  "× 十分な加熱条件ではありません。",
-  "× ノロウイルス対策としては不十分です。",
-  "○ 中心部85〜90℃で90秒以上が目安です。"
+ "× 十分な加熱条件ではありません。",
+ "× ノロウイルス対策としては不十分です。",
+ "○ 厚生労働省が示す加熱の目安です。"
  ],
- explanation:"手洗い、調理器具の洗浄・消毒も重要です。",
- source:"一般向けオリジナル問題"
-},
-{
- id:"life004",
- type:"life",
- subject:"食品表示",
- question:"『糖類ゼロ』と表示された食品について正しいものは？",
- options:[
-  "糖質も必ずゼロ",
-  "エネルギーも必ずゼロ",
-  "糖質がゼロとは限らない"
- ],
- answer:2,
- explanations:[
-  "× 糖類以外の糖質を含む場合があります。",
-  "× エネルギーがゼロとは限りません。",
-  "○ 糖類と糖質は同じ意味ではありません。"
- ],
- explanation:"『ゼロ』表示は、定められた基準値未満を意味する場合があります。",
- source:"一般向けオリジナル問題"
+ explanation:"食品の中心部まで十分に加熱することが重要です。"
 },
 {
  id:"easy001",
  type:"easy",
- subject:"基礎栄養学",
- question:"1gあたり約9kcalのエネルギーを生み出す栄養素は？",
- options:["たんぱく質","脂質","炭水化物"],
- answer:1,
+ title:"エネルギー",
+ question:"脂質1gが持つエネルギーは約何kcal？",
+ options:["4kcal","7kcal","9kcal"],
+ answer:2,
  explanations:[
-  "× たんぱく質は一般的に約4kcal/gです。",
-  "○ 脂質は約9kcal/gです。",
-  "× 利用可能炭水化物は一般的に約4kcal/gです。"
+ "× 4kcalは一般的な糖質・たんぱく質の目安です。",
+ "× 7kcalはアルコールの目安です。",
+ "○ 脂質は約9kcal/gです。"
  ],
- explanation:"エネルギー換算係数は栄養学の基本です。",
- source:"国家試験の学習範囲を参考にしたオリジナル問題"
+ explanation:"栄養素によってエネルギー量は異なります。"
 },
 {
  id:"easy002",
  type:"easy",
- subject:"人体の構造と機能",
- question:"血糖値を下げる方向に働くホルモンは？",
- options:["インスリン","グルカゴン","アドレナリン"],
- answer:0,
+ title:"血糖調節",
+ question:"血糖値を下げる作用があるホルモンは？",
+ options:["グルカゴン","インスリン","アドレナリン"],
+ answer:1,
  explanations:[
-  "○ インスリンは血糖値を下げる方向に働きます。",
-  "× グルカゴンは主に血糖値を上げます。",
-  "× アドレナリンは血糖値を上げる方向に働きます。"
+ "× グルカゴンは血糖値を上げる方向に働きます。",
+ "○ インスリンは血糖値を下げます。",
+ "× アドレナリンは血糖値を上げる方向に働きます。"
  ],
- explanation:"インスリンは膵臓のβ細胞から分泌されます。",
- source:"国家試験の学習範囲を参考にしたオリジナル問題"
+ explanation:"インスリンは膵臓のβ細胞から分泌されます。"
 }
 ];
 
-function $(id){return document.getElementById(id)}
+let questions=[...SAMPLE_QUESTIONS];
+let queue=[];
+let position=0;
+let mode="";
+let answered=false;
 
-function readJSON(key,fallback){
+let progress=loadProgress();
+
+function $(id){
+ return document.getElementById(id);
+}
+
+function loadProgress(){
  try{
-  return JSON.parse(localStorage.getItem(key)) ?? fallback;
+  const p=JSON.parse(
+   localStorage.getItem(PROGRESS_KEY)||"{}"
+  );
+  return {
+   xp:Number(p.xp)||0,
+   history:Array.isArray(p.history)?p.history:[],
+   due:p.due&&typeof p.due==="object"?p.due:{},
+   lastDay:p.lastDay||"",
+   streak:Number(p.streak)||0
+  };
  }catch{
-  return fallback;
+  return {xp:0,history:[],due:{},lastDay:"",streak:0};
  }
 }
 
-let progress=readJSON(STORAGE,{history:[],due:{}});
-if(!Array.isArray(progress.history))progress.history=[];
-if(!progress.due || typeof progress.due!=="object")progress.due={};
-
-let questions=[...SAMPLE];
-let session=null;
-
-function validQuestion(q){
- return q &&
- typeof q.id==="string" &&
- typeof q.type==="string" &&
- typeof q.subject==="string" &&
- typeof q.question==="string" &&
- Array.isArray(q.options) &&
- q.options.length>=2 &&
- q.options.length<=5 &&
- q.options.every(x=>typeof x==="string") &&
- Number.isInteger(q.answer) &&
- q.answer>=0 &&
- q.answer<q.options.length &&
- Array.isArray(q.explanations) &&
- q.explanations.length===q.options.length &&
- q.explanations.every(x=>typeof x==="string") &&
- typeof q.explanation==="string" &&
- typeof q.source==="string" &&
- (
-  q.type!=="exam" ||
-  (q.options.length===5 && q.officialChecked===true)
+function saveProgress(){
+ localStorage.setItem(
+  PROGRESS_KEY,
+  JSON.stringify(progress)
  );
 }
 
-async function loadQuestions(){
- try{
-  const response=await fetch(QUESTION_URL,{cache:"no-store"});
-  if(!response.ok)return;
-  const data=await response.json();
-  if(!Array.isArray(data))return;
-
-  const map=new Map(SAMPLE.map(q=>[q.id,q]));
-  data.filter(validQuestion).forEach(q=>map.set(q.id,q));
-  questions=[...map.values()];
- }catch(e){
-  console.log("追加問題なし",e);
- }
-}
-
-function localDate(date=new Date()){
+function dayKey(date=new Date()){
  const y=date.getFullYear();
  const m=String(date.getMonth()+1).padStart(2,"0");
  const d=String(date.getDate()).padStart(2,"0");
  return `${y}-${m}-${d}`;
 }
 
-function addDays(n){
+function nextDate(days){
  const d=new Date();
- d.setHours(12,0,0,0);
- d.setDate(d.getDate()+n);
- return localDate(d);
+ d.setDate(d.getDate()+days);
+ return dayKey(d);
 }
 
-function saveProgress(){
- try{
-  localStorage.setItem(STORAGE,JSON.stringify(progress));
- }catch{
-  alert("記録を保存できませんでした。");
+function getCorrectIndex(q){
+ if(Number.isInteger(q.answer)){
+  if(q.answerBase===1)return q.answer-1;
+  if(q.answerBase===0)return q.answer;
+  if(q.reviewStatus!==undefined)return q.answer-1;
+  return q.answer;
  }
+ return -1;
 }
 
-function show(page){
- ["home","quiz"].forEach(id=>{
-  $(id).classList.toggle("hidden",id!==page);
- });
- if(page==="home")renderHome();
- window.scrollTo(0,0);
+function normalize(q){
+ if(!q||typeof q!=="object")return null;
+
+ const opts=Array.isArray(q.options)
+  ?q.options.map(o=>typeof o==="string"
+    ?o
+    :o&&typeof o.text==="string"?o.text:"")
+  :[];
+
+ const explanations=Array.isArray(q.explanations)
+  ?q.explanations
+  :Array.isArray(q.options)
+   ?q.options.map(o=>
+     typeof o==="object"&&o
+     ?o.explanation||"":"")
+   :[];
+
+ const correct=getCorrectIndex(q);
+
+ if(!q.id||!q.question||
+    ![3,5].includes(opts.length)||
+    correct<0||correct>=opts.length)return null;
+
+ return {
+  ...q,
+  type:q.type||"exam",
+  options:opts,
+  explanations,
+  answer:correct,
+  optionsCorrect:Array.isArray(q.optionsCorrect)
+   ?q.optionsCorrect
+   :opts.map((_,i)=>i===correct),
+  image:q.figurePath||q.questionImage||q.image||"",
+  explanationImages:Array.isArray(q.explanationImages)
+   ?q.explanationImages:[],
+  subject:q.subject||"",
+  title:q.title||"",
+  explanation:q.explanation||""
+ };
+}
+
+async function loadQuestions(){
+ try{
+  const res=await fetch(
+   "questions.json?time="+Date.now(),
+   {cache:"no-store"}
+  );
+
+  if(!res.ok)throw Error("データなし");
+
+  const raw=await res.json();
+  const arr=Array.isArray(raw)
+   ?raw
+   :Array.isArray(raw.questions)?raw.questions:[];
+
+  const valid=arr.map(normalize).filter(Boolean);
+  const ids=new Set(valid.map(q=>q.id));
+
+  questions=[
+   ...valid,
+   ...SAMPLE_QUESTIONS.filter(q=>!ids.has(q.id))
+  ];
+
+  $("loadedText").textContent=
+   `公開問題 ${valid.length}問を読み込みました。`;
+
+ }catch{
+  $("loadedText").textContent=
+   "公開用questions.jsonは未登録です。現在はサンプル問題で学習できます。";
+ }
+
+ renderHome();
+}
+
+function examSort(a,b){
+ return (b.examNumber||0)-(a.examNumber||0)||
+        (a.questionNumber||0)-(b.questionNumber||0);
 }
 
 function renderHome(){
  const h=progress.history;
  const correct=h.filter(x=>x.correct).length;
- const xp=correct*10+(h.length-correct)*3;
- const level=Math.floor(xp/100)+1;
+ const accuracy=h.length
+  ?Math.round(correct/h.length*100):0;
+
+ const level=Math.floor(progress.xp/100)+1;
+ const within=progress.xp%100;
 
  $("level").textContent=level;
- $("rate").textContent=h.length
-  ?Math.round(correct/h.length*100)+"%"
-  :"0%";
- $("xpText").textContent=`経験値 ${xp} XP`;
- $("xpBar").style.width=(xp%100)+"%";
+ $("accuracy").textContent=accuracy+"%";
+ $("streak").textContent=progress.streak+"日";
+ $("xpText").textContent=
+  `経験値 ${progress.xp} XP｜次のレベルまで ${100-within} XP`;
+ $("xpBar").style.width=within+"%";
 
- const dates=new Set(h.map(x=>x.date));
- let d=new Date();
- d.setHours(12,0,0,0);
- let streak=0;
+ const today=dayKey();
+ const due=Object.entries(progress.due)
+  .filter(([id,d])=>d.next<=today).length;
 
- if(!dates.has(localDate(d)))d.setDate(d.getDate()-1);
-
- while(dates.has(localDate(d))){
-  streak++;
-  d.setDate(d.getDate()-1);
- }
-
- $("streak").textContent=streak;
-
- const due=Object.values(progress.due)
-  .filter(x=>x.next<=localDate()).length;
-
- $("dueText").textContent=`復習予定：${due}問`;
+ $("dueText").textContent=
+  `復習期限に達した問題：${due}問`;
 }
 
-function shuffle(arr){
- const result=[...arr];
- for(let i=result.length-1;i>0;i--){
-  const j=Math.floor(Math.random()*(i+1));
-  [result[i],result[j]]=[result[j],result[i]];
- }
- return result;
-}
+function startMode(selected){
+ mode=selected;
+ position=0;
 
-function dailyPool(pool){
- const day=Number(localDate().replaceAll("-",""));
- return [...pool]
-  .sort((a,b)=>a.id.localeCompare(b.id))
-  .map((q,i)=>({
-   q,
-   key:((day+i*7919)*2654435761)>>>0
-  }))
-  .sort((a,b)=>a.key-b.key)
-  .slice(0,5)
-  .map(x=>x.q);
-}
+ const exam=questions
+  .filter(q=>q.type==="exam")
+  .sort(examSort);
 
-function start(mode){
- let pool=[];
- let title="";
- let ox=false;
-
- if(mode==="exam"){
-  pool=questions.filter(q=>q.type==="exam");
-  title="国家試験5択";
- }
- if(mode==="ox"){
-  pool=questions.filter(q=>q.type==="exam");
-  title="選択肢○×";
-  ox=true;
- }
- if(mode==="easy"){
-  pool=questions.filter(q=>q.type==="easy");
-  title="やさしい国試";
- }
- if(mode==="life"){
-  pool=questions.filter(q=>q.type==="life");
-  title="暮らしの栄養";
- }
- if(mode==="daily"){
-  pool=dailyPool(questions);
-  title="今日の5問";
- }
- if(mode==="review"){
-  pool=questions.filter(q=>
-   Object.entries(progress.due).some(
-    ([key,v])=>
-     (key===q.id || key.startsWith(q.id+"#")) &&
-     v.next<=localDate()
-   )
+ if(selected==="exam"){
+  queue=exam;
+ }else if(selected==="ox"){
+  queue=exam.flatMap(q=>
+   q.options.map((_,i)=>({
+    ...q,
+    oxIndex:i,
+    id:q.id+"-ox-"+i
+   }))
   );
-  title="復習モード";
+ }else if(selected==="easy"){
+  queue=questions.filter(q=>q.type==="easy");
+ }else if(selected==="life"){
+  queue=questions.filter(q=>q.type==="life");
+ }else if(selected==="daily"){
+  const today=dayKey();
+  const all=[...questions].sort((a,b)=>
+   String(a.id+today).localeCompare(String(b.id+today))
+  );
+  queue=all.slice(0,5);
+ }else if(selected==="review"){
+  const today=dayKey();
+  const dueIds=new Set(
+   Object.entries(progress.due)
+    .filter(([id,d])=>d.next<=today)
+    .map(([id])=>id)
+  );
+  queue=questions.filter(q=>dueIds.has(q.id));
  }
 
- if(!pool.length){
-  alert("現在、このコースに出題できる問題はありません。");
+ if(!queue.length){
+  alert("このコースには現在、出題できる問題がありません。");
   return;
  }
 
- if(mode!=="daily")pool=shuffle(pool);
-
- const items=ox
-  ?pool.flatMap(q=>q.options.map((_,i)=>({q,oxIndex:i})))
-  :pool.map(q=>({q,oxIndex:-1}));
-
- session={
-  mode,title,items,index:0,
-  selected:-1,answered:false,correct:0
- };
-
- show("quiz");
- renderQuestion();
+ $("home").classList.add("hidden");
+ $("quiz").classList.remove("hidden");
+ showQuestion();
 }
 
-function renderQuestion(){
- const s=session;
- const item=s.items[s.index];
- const q=item.q;
- const isOX=item.oxIndex>=0;
+function showQuestion(){
+ answered=false;
 
- s.selected=-1;
- s.answered=false;
+ const q=queue[position];
+ const isOx=mode==="ox";
 
- $("quizTitle").textContent=s.title;
- $("counter").textContent=`${s.index+1} / ${s.items.length}問`;
- $("quizBar").style.width=
-  (s.index/s.items.length*100)+"%";
+ $("counter").textContent=
+  `${position+1} / ${queue.length}`;
 
- $("category").textContent=q.subject;
+ $("quizSubject").textContent=
+  q.subject||q.title||"栄養クイズ";
 
- $("questionText").textContent=isOX
-  ?"次の記述は正しい？\n"+q.options[item.oxIndex]
+ $("quizTitle").textContent=isOx
+  ?"選択肢の○×判定"
+  :q.title||
+   (q.examNumber
+    ?`第${q.examNumber}回・問${q.questionNumber}`
+    :"栄養クイズ");
+
+ $("quizQuestion").textContent=isOx
+  ?`${q.question}\n\n「${q.options[q.oxIndex]}」は正しい？`
   :q.question;
 
- const options=isOX?["○ 正しい","× 誤り"]:q.options;
- const area=$("choices");
+ $("quizQuestion").style.whiteSpace="pre-wrap";
+
+ $("result").classList.add("hidden");
+ $("nextButton").classList.add("hidden");
+
+ renderImages(q);
+
+ const area=$("options");
  area.replaceChildren();
 
- options.forEach((text,i)=>{
-  const b=document.createElement("button");
-  b.className="choice";
-  b.textContent=isOX?text:`${i+1}. ${text}`;
-  b.onclick=()=>selectChoice(i);
-  area.appendChild(b);
- });
+ const opts=isOx?["○ 正しい","× 誤り"]:q.options;
 
- $("result").replaceChildren();
- $("result").classList.add("hidden");
- $("answerBtn").classList.remove("hidden");
- $("answerBtn").disabled=true;
- $("nextBtn").classList.add("hidden");
- window.scrollTo(0,0);
-}
-
-function selectChoice(i){
- if(session.answered)return;
- session.selected=i;
- $("answerBtn").disabled=false;
-
- document.querySelectorAll(".choice").forEach((b,j)=>{
-  b.classList.toggle("selected",i===j);
+ opts.forEach((text,i)=>{
+  const btn=document.createElement("button");
+  btn.className="option";
+  btn.textContent=text;
+  btn.onclick=()=>answerQuestion(i);
+  area.appendChild(btn);
  });
 }
 
-function answer(){
- const s=session;
- if(!s || s.answered || s.selected<0)return;
+function renderImages(q){
+ const area=$("questionImageArea");
+ const expArea=$("explanationImageArea");
 
- const item=s.items[s.index];
- const q=item.q;
- const isOX=item.oxIndex>=0;
+ area.replaceChildren();
+ expArea.replaceChildren();
 
- const correctIndex=isOX
-  ?(q.optionsCorrect
-    ?(q.optionsCorrect[item.oxIndex]?0:1)
-    :(item.oxIndex===q.answer?0:1))
+ function addImage(container,path){
+  if(!path)return;
+
+  const img=document.createElement("img");
+  img.src=path;
+  img.alt=q.imageAlt||"学習用図解";
+  img.className="quiz-image";
+  img.loading="lazy";
+
+  img.onclick=()=>window.open(path,"_blank");
+  container.appendChild(img);
+ }
+
+ addImage(area,q.image);
+
+ q.explanationImages.forEach(path=>
+  addImage(expArea,path)
+ );
+}
+
+function answerQuestion(selected){
+ if(answered)return;
+ answered=true;
+
+ const q=queue[position];
+ const isOx=mode==="ox";
+
+ const correctIndex=isOx
+  ?(q.optionsCorrect[q.oxIndex]?0:1)
   :q.answer;
 
- const ok=s.selected===correctIndex;
- s.answered=true;
- if(ok)s.correct++;
+ const correct=selected===correctIndex;
 
- const key=isOX?q.id+"#"+item.oxIndex:q.id;
+ const buttons=[...$("options").children];
 
- progress.history.push({
-  id:key,
-  date:localDate(),
-  correct:ok,
-  mode:s.mode
- });
-
- const old=progress.due[key]||{step:-1};
- const steps=[1,3,7,30];
- const step=ok
-  ?Math.min(old.step+1,3)
-  :0;
-
- progress.due[key]={
-  step,
-  next:addDays(steps[step])
- };
-
- saveProgress();
-
- document.querySelectorAll(".choice").forEach((b,i)=>{
+ buttons.forEach((b,i)=>{
   b.disabled=true;
-  b.classList.remove("selected");
   if(i===correctIndex)b.classList.add("correct");
-  if(i===s.selected&&!ok)b.classList.add("wrong");
+  if(i===selected&&!correct)b.classList.add("wrong");
  });
 
- const result=$("result");
- result.classList.remove("hidden");
+ $("resultTitle").textContent=
+  correct?"正解です":"不正解です";
 
- const heading=document.createElement("h3");
- heading.textContent=ok?"正解！":"不正解";
- result.appendChild(heading);
+ const area=$("explanations");
+ area.replaceChildren();
 
- const box=document.createElement("div");
- box.className="explain";
-
- let text="";
-
- if(isOX){
-  text=`正答：${correctIndex===0?"○":"×"}\n\n`;
-  text+=q.explanations[item.oxIndex];
+ if(isOx){
+  const p=document.createElement("p");
+  p.textContent=
+   q.explanations[q.oxIndex]||
+   "選択肢の内容を確認しましょう。";
+  area.appendChild(p);
  }else{
-  text=`正答：${q.answer+1}\n\n`;
-  q.explanations.forEach((e,i)=>{
-   text+=`${i+1}. ${e}\n`;
+  q.options.forEach((o,i)=>{
+   const p=document.createElement("p");
+   const mark=i===q.answer?"【正答】":"";
+   p.textContent=
+    `${i+1}. ${mark} ${q.explanations[i]||""}`;
+   area.appendChild(p);
   });
  }
 
- text+=`\n補足：${q.explanation}`;
- text+=`\n出典：${q.source}`;
+ $("generalExplanation").textContent=q.explanation;
+ $("result").classList.remove("hidden");
+ $("nextButton").classList.remove("hidden");
 
- box.textContent=text;
- result.appendChild(box);
+ recordAnswer(q.id,correct);
+}
 
- $("answerBtn").classList.add("hidden");
- $("nextBtn").classList.remove("hidden");
- $("nextBtn").textContent=
-  s.index===s.items.length-1?"結果を見る":"次の問題";
+function recordAnswer(id,correct){
+ const today=dayKey();
+ const last=progress.lastDay;
 
+ if(last!==today){
+  const yesterday=new Date();
+  yesterday.setDate(yesterday.getDate()-1);
+
+  progress.streak=
+   last===dayKey(yesterday)
+   ?progress.streak+1:1;
+
+  progress.lastDay=today;
+ }
+
+ progress.xp+=correct?10:3;
+
+ progress.history.push({
+  id,correct,date:today
+ });
+
+ if(progress.history.length>5000){
+  progress.history=progress.history.slice(-5000);
+ }
+
+ const old=progress.due[id];
+ const stage=correct
+  ?Math.min((old?.stage||0)+1,4)
+  :0;
+
+ const intervals=[1,1,3,7,30];
+
+ progress.due[id]={
+  stage,
+  next:nextDate(intervals[stage])
+ };
+
+ saveProgress();
  renderHome();
 }
 
-function next(){
- if(!session || !session.answered)return;
+function nextQuestion(){
+ position++;
 
- session.index++;
-
- if(session.index>=session.items.length){
-  const s=session;
-  $("questionText").textContent="チャレンジ終了";
-  $("counter").textContent="";
-  $("quizBar").style.width="100%";
-  $("choices").replaceChildren();
-  $("result").replaceChildren();
-  $("result").classList.remove("hidden");
-
-  const h=document.createElement("h2");
-  h.textContent=`${s.correct} / ${s.items.length}問正解`;
-  $("result").appendChild(h);
-
-  const p=document.createElement("p");
-  p.textContent="学習記録を保存しました。";
-  $("result").appendChild(p);
-
-  $("nextBtn").classList.add("hidden");
+ if(position>=queue.length){
+  alert("このコースの学習が終了しました。");
+  goHome();
   return;
  }
 
- renderQuestion();
+ showQuestion();
+ window.scrollTo({top:0,behavior:"smooth"});
 }
 
-function download(blob,name){
+function goHome(){
+ $("quiz").classList.add("hidden");
+ $("home").classList.remove("hidden");
+ renderHome();
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function downloadJSON(data,name){
+ const blob=new Blob(
+  [JSON.stringify(data,null,2)],
+  {type:"application/json"}
+ );
+
  const url=URL.createObjectURL(blob);
  const a=document.createElement("a");
+
  a.href=url;
  a.download=name;
  document.body.appendChild(a);
  a.click();
  a.remove();
+
  setTimeout(()=>URL.revokeObjectURL(url),30000);
 }
 
-function backup(){
- const data={
-  version:1,
-  progress,
-  exportedAt:new Date().toISOString()
- };
-
- download(
-  new Blob([JSON.stringify(data,null,2)],{
-   type:"application/json"
-  }),
-  "hirano-backup-"+localDate()+".json"
- );
+function exportProgress(){
+ downloadJSON(progress,"hirano-learning-backup.json");
 }
 
-async function restore(event){
- const file=event.target.files[0];
+async function importProgress(event){
+ const file=event.target.files?.[0];
  if(!file)return;
 
  try{
   const data=JSON.parse(await file.text());
 
-  if(
-   !data.progress ||
-   !Array.isArray(data.progress.history) ||
-   !data.progress.due ||
-   typeof data.progress.due!=="object"
-  )throw new Error("形式が不正です");
-
-  if(confirm("現在の学習記録を上書きしますか？")){
-   progress=data.progress;
-   saveProgress();
-   renderHome();
-   alert("復元しました");
+  if(!data||!Array.isArray(data.history)){
+   throw Error("学習記録ではありません");
   }
+
+  if(!confirm("現在の学習記録を上書きしますか？")){
+   return;
+  }
+
+  progress={
+   xp:Number(data.xp)||0,
+   history:data.history,
+   due:data.due&&typeof data.due==="object"
+    ?data.due:{},
+   streak:Number(data.streak)||0,
+   lastDay:data.lastDay||""
+  };
+
+  saveProgress();
+  renderHome();
+
+  alert("学習記録を読み込みました。");
  }catch(e){
-  alert("復元エラー："+e.message);
+  alert("読み込み失敗："+e.message);
  }
 
  event.target.value="";
 }
 
-loadQuestions().then(renderHome);
+renderHome();
+loadQuestions();
 </script>
 </body>
 </html>
