@@ -3,523 +3,764 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>管理者｜ひらのの栄養教室</title>
 <style>
-:root{
- --main:#167568;
- --bg:#f5f8f7;
- --text:#263c38;
-}
 *{box-sizing:border-box}
 body{
- margin:0;
- background:var(--bg);
- color:var(--text);
- font-family:-apple-system,"Hiragino Kaku Gothic ProN",sans-serif;
+  margin:0;
+  background:#f5f8f7;
+  color:#203a36;
+  font-family:-apple-system,BlinkMacSystemFont,
+  "Hiragino Kaku Gothic ProN",sans-serif;
 }
 header{
- background:var(--main);
- color:white;
- text-align:center;
- padding:22px;
+  background:#116e67;
+  color:white;
+  padding:20px 16px;
 }
 header h1{margin:0;font-size:23px}
-main{max-width:760px;margin:auto;padding:16px}
+header p{margin:6px 0 0;font-size:13px}
+main{max-width:850px;margin:auto;padding:14px}
 .card{
- background:white;
- padding:20px;
- border-radius:17px;
- margin-bottom:16px;
- box-shadow:0 2px 8px #0000000a;
+  background:white;
+  border:1px solid #dce7e3;
+  border-radius:16px;
+  padding:17px;
+  margin:12px 0;
+  box-shadow:0 2px 8px #0000000a;
 }
-h2{font-size:20px;margin-top:0}
+h2{font-size:19px;margin:0 0 12px}
 p{line-height:1.7}
+.muted{font-size:13px;color:#607970}
 button,input,select,textarea{
- font:inherit;
- border:1px solid #cbded6;
- border-radius:10px;
- padding:12px;
+  font:inherit;
+  border-radius:9px;
+  padding:11px;
+  max-width:100%;
 }
 button{
- background:white;
- cursor:pointer;
- color:var(--text);
+  border:1px solid #116e67;
+  background:#116e67;
+  color:white;
+  font-weight:600;
+  cursor:pointer;
 }
-.primary{
- background:var(--main);
- color:white;
- border-color:var(--main);
+button.secondary{
+  background:white;
+  color:#116e67;
 }
 input,select,textarea{
- width:100%;
- margin:8px 0;
+  border:1px solid #c5d6d0;
+  background:white;
+  color:#203a36;
 }
-textarea{min-height:170px}
+input[type=password],select,textarea{width:100%}
+textarea{min-height:150px}
+label{display:block;font-weight:600;margin:12px 0 6px}
+a{color:#116e67}
+.row{display:flex;gap:9px;flex-wrap:wrap}
+.row>*{flex:1}
 .hidden{display:none!important}
-.muted{color:#71857e;font-size:13px}
-.row{display:flex;gap:10px;margin-top:12px}
-.row button{flex:1}
+.warning{
+  background:#fff8e7;
+  padding:12px;
+  border-radius:10px;
+  font-size:13px;
+}
+.primary-link{
+  display:block;
+  background:#116e67;
+  color:white;
+  text-align:center;
+  padding:15px;
+  border-radius:12px;
+  text-decoration:none;
+  font-weight:700;
+}
 canvas{
- width:100%;
- height:auto;
- border:1px solid #ddd;
- border-radius:12px;
+  width:100%;
+  max-width:500px;
+  height:auto;
+  border:1px solid #d8e5df;
+  border-radius:12px;
 }
-.notice{
- background:#fff7e7;
- padding:13px;
- border-radius:10px;
- font-size:13px;
+#login{max-width:450px;margin:10vh auto}
+#app{display:none}
+#toast{
+  display:none;
+  position:fixed;
+  left:50%;
+  bottom:30px;
+  transform:translateX(-50%);
+  background:#203a36;
+  color:white;
+  padding:12px 20px;
+  border-radius:20px;
+  z-index:100;
 }
-a{color:var(--main)}
+.bulk-admin-link{
+  position:fixed;
+  right:12px;
+  bottom:calc(16px + env(safe-area-inset-bottom));
+  z-index:1000;
+  background:#116e67;
+  color:white;
+  padding:12px 16px;
+  border-radius:12px;
+  text-decoration:none;
+  font-size:14px;
+  font-weight:bold;
+  box-shadow:0 3px 12px #0002;
+}
+@media(max-width:500px){
+  .row{flex-direction:column}
+}
 </style>
 </head>
 
 <body>
-
 <header>
+<div style="max-width:850px;margin:auto">
 <h1>ひらのの栄養教室</h1>
-<p>管理者画面</p>
+<p>管理者専用メニュー</p>
+</div>
 </header>
 
 <main>
 
-<section id="login">
-<div class="card">
+<section id="login" class="card">
 <h2>管理者ログイン</h2>
-<p>パスワードを入力してください。</p>
-<form onsubmit="login(event)">
-<input id="password" type="password"
- placeholder="パスワード"
- inputmode="numeric"
- autocomplete="off" required>
-<button class="primary" type="submit"
- style="width:100%">ログイン</button>
+<form id="loginForm">
+<label for="password">パスワード</label>
+<input
+  id="password"
+  type="password"
+  inputmode="numeric"
+  autocomplete="off"
+  required
+>
+<p><button type="submit" style="width:100%">
+ログイン
+</button></p>
 </form>
-<p id="loginError" style="color:#b43d3d"></p>
+<p id="loginError" class="muted"></p>
+<p><a href="index.html">学習サイトへ戻る</a></p>
+<div class="warning">
+このログインは簡易的な画面ロックです。
+GitHub Pagesではソースコードを閲覧できるため、
+機密情報や個人情報を保存しないでください。
 </div>
 </section>
 
-<section id="admin" class="hidden">
+<section id="app">
 
 <div class="card">
-<h2>管理メニュー</h2>
-<p>公式過去問の登録とX投稿画像の作成ができます。</p>
-<button onclick="logout()">ログアウト</button>
-<a href="index.html">一般公開画面へ</a>
+<h2>管理者メニュー</h2>
+<div class="row">
+<a href="index.html">一般公開サイトへ</a>
+<button class="secondary" onclick="logout()">
+ログアウト
+</button>
+</div>
 </div>
 
 <div class="card">
-<h2>公式過去問の追加</h2>
-
+<h2>第40回・200問一括管理</h2>
 <p>
-公式原文・正答・各選択肢の正誤を確認した問題データを登録します。
+問題の一括登録、公式正答の照合状況、
+解説の校閲、図表の制作状況を管理します。
+</p>
+<a class="primary-link" href="bulk.html">
+200問一括管理を開く →
+</a>
+<p class="muted">
+第40回の問1〜問200を管理できます。
+公開可能な問題だけをJSONに書き出します。
+</p>
+</div>
+
+<div class="card">
+<h2>問題データの追加</h2>
+<p>
+完成した問題JSONを読み込むと、
+この管理画面のX投稿メーカーで利用できます。
 </p>
 
-<div class="notice">
-登録した問題を一般利用者に公開するには、
-下の「公開用JSONを保存」で出力した
-<strong>questions.json</strong> をGitHubにアップロードしてください。
-</div>
+<input
+  id="questionFile"
+  type="file"
+  accept=".json,application/json"
+>
 
-<p id="questionCount" class="muted"></p>
-
-<button onclick="document.getElementById('questionFile').click()">
+<div class="row" style="margin-top:12px">
+<button onclick="importQuestions()">
 問題JSONを読み込む
 </button>
-
-<input id="questionFile" type="file"
- accept=".json" class="hidden"
- onchange="importQuestions(event)">
-
-<div class="row">
-<button class="primary" onclick="exportQuestions()">
-公開用JSONを保存
+<button class="secondary" onclick="exportQuestions()">
+登録問題を保存
 </button>
-<button onclick="clearQuestions()">追加問題を削除</button>
 </div>
 
+<p class="muted" id="questionCount"></p>
 <p class="muted">
-問題データは一時的にこのブラウザへ保存されます。
-公開前にJSONを必ず書き出してください。
+この画面への読み込みだけでは一般公開されません。
+公開する場合は、GitHubに
+questions.json をアップロードしてください。
 </p>
 </div>
 
 <div class="card">
 <h2>X投稿メーカー</h2>
 
-<label>問題を選択</label>
-<select id="postSelect" onchange="renderPost()"></select>
+<p>
+登録済みの問題から、X投稿用の文章と
+画像カードを作成できます。
+</p>
 
-<label>画像の種類</label>
-<select id="postType" onchange="renderPost()">
-<option value="question">問題カード</option>
-<option value="answer">解説カード</option>
+<label for="postQuestion">問題を選択</label>
+<select id="postQuestion" onchange="renderPost()">
 </select>
 
-<canvas id="canvas" width="1080" height="1350"></canvas>
+<label for="postKind">カードの種類</label>
+<select id="postKind" onchange="renderPost()">
+<option value="question">問題カード</option>
+<option value="answer">解答・解説カード</option>
+</select>
 
-<div class="row">
-<button class="primary" onclick="saveImage()">画像保存</button>
-<button onclick="copyText()">投稿文コピー</button>
+<div style="text-align:center;margin:16px 0">
+<canvas id="postCanvas" width="1080" height="1350">
+</canvas>
 </div>
 
-<label>投稿文</label>
+<div class="row">
+<button onclick="downloadCard()">
+画像を保存
+</button>
+<button class="secondary" onclick="copyPost()">
+投稿文をコピー
+</button>
+</div>
+
+<label for="postText">X投稿文</label>
 <textarea id="postText"></textarea>
 
 <p class="muted">
-画像内の文章が長い場合は、一部が収まりきらないことがあります。
-投稿前に画像を確認してください。
+長い設問文や解説は画像内で省略される場合があります。
+公開前に文章・正答・図表の内容を確認してください。
+</p>
+</div>
+
+<div class="card">
+<h2>公開用データ</h2>
+<p>
+この画面で読み込んだ問題を
+公開用 questions.json として保存できます。
+</p>
+<button onclick="exportPublicQuestions()">
+公開用 questions.json を保存
+</button>
+<p class="muted">
+第40回の校閲状態による公開判定は
+「200問一括管理」画面で行ってください。
+このボタンは既に検証済みの問題データを
+再出力するためのものです。
 </p>
 </div>
 
 </section>
-
 </main>
+
+<div id="toast"></div>
+
+<a href="bulk.html"
+   class="bulk-admin-link"
+   id="bulkLink"
+   style="display:none">
+200問一括管理
+</a>
 
 <script>
 "use strict";
 
+/* =========================
+   基本設定
+========================= */
+
 const PASSWORD="0907";
-const STORAGE="hiranoAdminQuestionsV1";
-const QUESTION_URL="questions.json";
+const LOGIN_KEY="hirano-admin-session";
+const DATA_KEY="hiranoAdminQuestionsV1";
+
+let questions=loadQuestions();
 
 function $(id){
- return document.getElementById(id);
+  return document.getElementById(id);
 }
 
-function login(event){
- event.preventDefault();
-
- if($("password").value===PASSWORD){
-  sessionStorage.setItem("hiranoAdminLogin","yes");
-  showAdmin();
- }else{
-  $("loginError").textContent="パスワードが違います。";
- }
+function notify(message){
+  const t=$("toast");
+  t.textContent=message;
+  t.style.display="block";
+  setTimeout(()=>{
+    t.style.display="none";
+  },2500);
 }
 
-function showAdmin(){
- $("login").classList.add("hidden");
- $("admin").classList.remove("hidden");
- renderManage();
+/* =========================
+   ログイン
+========================= */
+
+function unlock(){
+  $("login").style.display="none";
+  $("app").style.display="block";
+  $("bulkLink").style.display="block";
+  renderManage();
 }
 
 function logout(){
- sessionStorage.removeItem("hiranoAdminLogin");
- $("admin").classList.add("hidden");
- $("login").classList.remove("hidden");
- $("password").value="";
+  sessionStorage.removeItem(LOGIN_KEY);
+  location.reload();
 }
 
-if(sessionStorage.getItem("hiranoAdminLogin")==="yes"){
- showAdmin();
+$("loginForm").addEventListener("submit",e=>{
+  e.preventDefault();
+
+  if($("password").value===PASSWORD){
+    sessionStorage.setItem(LOGIN_KEY,"yes");
+    unlock();
+  }else{
+    $("loginError").textContent=
+      "パスワードが違います。";
+  }
+});
+
+if(sessionStorage.getItem(LOGIN_KEY)==="yes"){
+  unlock();
 }
 
-function readJSON(key,fallback){
- try{
-  return JSON.parse(localStorage.getItem(key)) ?? fallback;
- }catch{
-  return fallback;
- }
+/* =========================
+   問題データ
+========================= */
+
+function loadQuestions(){
+  try{
+    const data=JSON.parse(
+      localStorage.getItem(DATA_KEY)||"[]"
+    );
+    return Array.isArray(data)?data:[];
+  }catch{
+    return [];
+  }
 }
 
-let questions=readJSON(STORAGE,[]);
-if(!Array.isArray(questions))questions=[];
-
-function validQuestion(q){
- return q &&
- typeof q.id==="string" &&
- typeof q.type==="string" &&
- ["exam","easy","life"].includes(q.type) &&
- typeof q.subject==="string" &&
- typeof q.question==="string" &&
- Array.isArray(q.options) &&
- q.options.length>=2 &&
- q.options.length<=5 &&
- q.options.every(x=>typeof x==="string") &&
- Number.isInteger(q.answer) &&
- q.answer>=0 &&
- q.answer<q.options.length &&
- Array.isArray(q.explanations) &&
- q.explanations.length===q.options.length &&
- q.explanations.every(x=>typeof x==="string") &&
- typeof q.explanation==="string" &&
- typeof q.source==="string" &&
- (
-  q.type!=="exam" ||
-  (
-   q.options.length===5 &&
-   q.officialChecked===true &&
-   Number.isInteger(q.examNumber) &&
-   Number.isInteger(q.questionNumber)
-  )
- );
-}
-
-async function importQuestions(event){
- const file=event.target.files[0];
- if(!file)return;
-
- try{
-  const data=JSON.parse(await file.text());
-  const list=Array.isArray(data)?data:[data];
-
-  if(!list.length || !list.every(validQuestion)){
-   throw new Error("問題データ形式が不正です");
+function normalizeQuestion(q){
+  if(!q||typeof q!=="object"){
+    throw Error("問題データが不正です");
   }
 
-  const map=new Map(questions.map(q=>[q.id,q]));
-  list.forEach(q=>map.set(q.id,q));
+  const result={...q};
 
-  const updated=[...map.values()];
+  if(!Array.isArray(result.options)){
+    throw Error("選択肢がありません");
+  }
 
-  localStorage.setItem(STORAGE,JSON.stringify(updated));
-  questions=updated;
+  result.options=result.options.map((o,i)=>{
+    if(typeof o==="string"){
+      return {
+        text:o,
+        explanation:Array.isArray(result.explanations)
+          ?result.explanations[i]||""
+          :""
+      };
+    }
 
-  renderManage();
-  alert(list.length+"問を登録しました。");
+    if(!o||typeof o.text!=="string"){
+      throw Error("選択肢の形式が不正です");
+    }
 
- }catch(e){
-  alert("登録エラー："+e.message);
- }
+    return {
+      text:o.text,
+      explanation:o.explanation||""
+    };
+  });
 
- event.target.value="";
+  if(!result.id){
+    if(
+      Number.isInteger(result.examNumber)&&
+      Number.isInteger(result.questionNumber)
+    ){
+      result.id=
+        `${result.examNumber}-`+
+        String(result.questionNumber).padStart(3,"0");
+    }else{
+      throw Error("問題IDがありません");
+    }
+  }
+
+  if(
+    !Number.isInteger(result.answer)||
+    result.answer<1||
+    result.answer>result.options.length
+  ){
+    throw Error(
+      `${result.id} の正答番号が不正です。1始まりで指定してください`
+    );
+  }
+
+  result.question=String(result.question||"");
+  result.subject=String(result.subject||"");
+  result.title=String(result.title||"");
+  result.explanation=String(result.explanation||"");
+  result.source=String(result.source||"");
+  result.type=result.type||"exam";
+
+  if(!result.question.trim()){
+    throw Error(`${result.id} の問題文がありません`);
+  }
+
+  return result;
 }
 
-function renderManage(){
- $("questionCount").textContent=
-  `登録済み：${questions.length}問`;
+async function importQuestions(){
+  const file=$("questionFile").files?.[0];
 
- const select=$("postSelect");
- select.replaceChildren();
+  if(!file){
+    alert("JSONファイルを選択してください");
+    return;
+  }
 
- questions.forEach(q=>{
-  const option=document.createElement("option");
-  option.value=q.id;
-  option.textContent=q.id+"｜"+q.subject;
-  select.appendChild(option);
- });
+  try{
+    const data=JSON.parse(await file.text());
 
- if(!questions.length){
-  const option=document.createElement("option");
-  option.textContent="問題を登録してください";
-  select.appendChild(option);
- }
+    const list=Array.isArray(data)
+      ?data
+      :Array.isArray(data.questions)
+        ?data.questions
+        :[data];
 
- renderPost();
+    if(!list.length){
+      throw Error("問題がありません");
+    }
+
+    const normalized=list.map(normalizeQuestion);
+
+    const map=new Map(
+      questions.map(q=>[q.id,q])
+    );
+
+    normalized.forEach(q=>{
+      map.set(q.id,q);
+    });
+
+    questions=[...map.values()];
+
+    localStorage.setItem(
+      DATA_KEY,
+      JSON.stringify(questions)
+    );
+
+    renderManage();
+
+    notify(`${normalized.length}問を読み込みました`);
+
+  }catch(e){
+    alert("読み込みに失敗しました："+e.message);
+  }
+
+  $("questionFile").value="";
 }
 
-function download(blob,name){
- const url=URL.createObjectURL(blob);
- const a=document.createElement("a");
- a.href=url;
- a.download=name;
- document.body.appendChild(a);
- a.click();
- a.remove();
- setTimeout(()=>URL.revokeObjectURL(url),30000);
+function downloadJson(data,filename){
+  const blob=new Blob(
+    [JSON.stringify(data,null,2)],
+    {type:"application/json"}
+  );
+
+  downloadBlob(blob,filename);
+}
+
+function downloadBlob(blob,filename){
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+
+  a.href=url;
+  a.download=filename;
+
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+
+  setTimeout(()=>{
+    URL.revokeObjectURL(url);
+  },30000);
 }
 
 function exportQuestions(){
- if(!questions.length){
-  alert("問題が登録されていません。");
-  return;
- }
-
- download(
-  new Blob([JSON.stringify(questions,null,2)],{
-   type:"application/json"
-  }),
-  "questions.json"
- );
-}
-
-function clearQuestions(){
- if(!confirm("追加した問題をすべて削除しますか？"))return;
-
- questions=[];
- localStorage.removeItem(STORAGE);
- renderManage();
-}
-
-function drawLines(ctx,text,x,y,width,lineHeight,maxLines){
- let count=0;
-
- for(const paragraph of String(text).split("\n")){
-  let line="";
-
-  for(const char of paragraph){
-   if(ctx.measureText(line+char).width>width && line){
-    if(count>=maxLines)return y;
-    ctx.fillText(line,x,y);
-    y+=lineHeight;
-    count++;
-    line="";
-   }
-   line+=char;
+  if(!questions.length){
+    alert("登録済みの問題がありません");
+    return;
   }
 
-  if(count>=maxLines)return y;
-  ctx.fillText(line,x,y);
-  y+=lineHeight;
-  count++;
- }
+  downloadJson(
+    questions,
+    "hirano-admin-questions-backup.json"
+  );
+}
 
- return y;
+function exportPublicQuestions(){
+  const ready=questions.filter(q=>
+    q.verified===true &&
+    (
+      q.type!=="exam"||
+      q.officialChecked===true
+    ) &&
+    q.reviewStatus!=="draft" &&
+    q.reviewStatus!=="review" &&
+    q.reviewStatus!=="figure"
+  );
+
+  if(!ready.length){
+    alert("公開条件を満たす問題がありません");
+    return;
+  }
+
+  downloadJson(ready,"questions.json");
+
+  notify(`${ready.length}問を出力しました`);
+}
+
+function renderManage(){
+  $("questionCount").textContent=
+    `登録済み：${questions.length}問`;
+
+  const select=$("postQuestion");
+  const previous=select.value;
+
+  select.replaceChildren();
+
+  questions.forEach(q=>{
+    const option=document.createElement("option");
+
+    option.value=q.id;
+    option.textContent=
+      `${q.id}｜${q.title||q.subject||"問題"}`;
+
+    select.appendChild(option);
+  });
+
+  if(questions.some(q=>q.id===previous)){
+    select.value=previous;
+  }
+
+  if(questions.length){
+    renderPost();
+  }else{
+    $("postText").value=
+      "問題JSONを読み込むと、投稿文が表示されます。";
+
+    const canvas=$("postCanvas");
+    const ctx=canvas.getContext("2d");
+
+    ctx.fillStyle="#f5f8f7";
+    ctx.fillRect(0,0,1080,1350);
+
+    ctx.fillStyle="#116e67";
+    ctx.font="bold 54px sans-serif";
+    ctx.fillText("ひらのの栄養教室",70,120);
+
+    ctx.fillStyle="#203a36";
+    ctx.font="38px sans-serif";
+    ctx.fillText("問題を読み込んでください",70,250);
+  }
+}
+
+/* =========================
+   X投稿メーカー
+========================= */
+
+function wrapText(
+  ctx,text,x,y,maxWidth,lineHeight,maxLines
+){
+  let lines=0;
+
+  for(const paragraph of String(text).split("\n")){
+    let line="";
+
+    for(const char of paragraph){
+      if(
+        ctx.measureText(line+char).width>maxWidth &&
+        line
+      ){
+        if(lines>=maxLines)return y;
+
+        ctx.fillText(line,x,y);
+        y+=lineHeight;
+        lines++;
+        line="";
+      }
+
+      line+=char;
+    }
+
+    if(lines>=maxLines)return y;
+
+    ctx.fillText(line,x,y);
+    y+=lineHeight;
+    lines++;
+  }
+
+  return y;
 }
 
 function renderPost(){
- const id=$("postSelect").value;
- const q=questions.find(x=>x.id===id);
-
- const canvas=$("canvas");
- const ctx=canvas.getContext("2d");
-
- ctx.fillStyle="#f5f8f7";
- ctx.fillRect(0,0,1080,1350);
-
- ctx.fillStyle="#167568";
- ctx.fillRect(0,0,1080,160);
-
- ctx.fillStyle="white";
- ctx.font="bold 55px sans-serif";
- ctx.fillText("ひらのの栄養教室",60,105);
-
- if(!q){
-  $("postText").value="";
-  ctx.fillStyle="#263c38";
-  ctx.font="35px sans-serif";
-  ctx.fillText("問題を登録してください",60,300);
-  return;
- }
-
- const title=q.type==="exam"
-  ?`第${q.examNumber}回・問${q.questionNumber}`
-  :q.type==="easy"
-   ?"やさしい国家試験"
-   :"暮らしの栄養クイズ";
-
- ctx.fillStyle="#263c38";
- ctx.font="bold 45px sans-serif";
- ctx.fillText(title,60,245);
-
- ctx.fillStyle="#71857e";
- ctx.font="32px sans-serif";
- ctx.fillText(q.subject,60,310);
-
- const kind=$("postType").value;
- let y=390;
-
- if(kind==="question"){
-  ctx.fillStyle="#263c38";
-  ctx.font="bold 42px sans-serif";
-
-  y=drawLines(ctx,q.question,60,y,950,65,7)+30;
-
-  ctx.font="35px sans-serif";
-
-  q.options.forEach((option,i)=>{
-   if(y<1170){
-    y=drawLines(
-     ctx,
-     `${i+1}. ${option}`,
-     60,y,950,52,3
-    )+18;
-   }
-  });
-
- }else{
-  ctx.fillStyle="#167568";
-  ctx.font="bold 52px sans-serif";
-  ctx.fillText("正答："+(q.answer+1),60,y);
-
-  y+=90;
-  ctx.fillStyle="#263c38";
-  ctx.font="34px sans-serif";
-
-  q.explanations.forEach((text,i)=>{
-   if(y<1150){
-    y=drawLines(
-     ctx,
-     `${i+1}. ${text}`,
-     60,y,950,51,3
-    )+15;
-   }
-  });
- }
-
- ctx.fillStyle="#167568";
- ctx.fillRect(0,1250,1080,100);
-
- ctx.fillStyle="white";
- ctx.font="30px sans-serif";
- ctx.fillText("ひらのの栄養教室で復習しよう",60,1310);
-
- const options=q.options
-  .map((x,i)=>`${i+1}. ${x}`)
-  .join("\n");
-
- $("postText").value=kind==="question"
-  ?`【${title}】\n${q.question}\n${options}\n\n出典：${q.source}`
-  :`【${title} 解説】\n正答：${q.answer+1}\n${q.explanations.join("\n")}\n\n${q.explanation}\n出典：${q.source}`;
-}
-
-function saveImage(){
- const canvas=$("canvas");
-
- canvas.toBlob(blob=>{
-  if(blob){
-   download(
-    blob,
-    "hirano-"+$("postSelect").value+".png"
-   );
-  }
- },"image/png");
-}
-
-async function copyText(){
- const text=$("postText").value;
-
- try{
-  await navigator.clipboard.writeText(text);
-  alert("コピーしました。");
- }catch{
-  $("postText").focus();
-  $("postText").select();
-  alert("文章を選択しました。コピーしてください。");
- }
-}
-
-// 既存の公開用questions.jsonを読み込む
-async function loadPublishedQuestions(){
- try{
-  const response=await fetch(QUESTION_URL,{cache:"no-store"});
-  if(!response.ok)return;
-
-  const data=await response.json();
-  if(!Array.isArray(data))return;
-
-  const map=new Map(
-   data.filter(validQuestion).map(q=>[q.id,q])
+  const q=questions.find(
+    x=>x.id===$("postQuestion").value
   );
 
-  questions.forEach(q=>map.set(q.id,q));
-  questions=[...map.values()];
+  if(!q)return;
 
-  localStorage.setItem(STORAGE,JSON.stringify(questions));
-  if(sessionStorage.getItem("hiranoAdminLogin")==="yes"){
-   renderManage();
+  const kind=$("postKind").value;
+  const canvas=$("postCanvas");
+  const ctx=canvas.getContext("2d");
+
+  ctx.fillStyle="#f5f8f7";
+  ctx.fillRect(0,0,1080,1350);
+
+  ctx.fillStyle="#116e67";
+  ctx.fillRect(0,0,1080,160);
+
+  ctx.fillStyle="white";
+  ctx.font="bold 55px sans-serif";
+  ctx.fillText("ひらのの栄養教室",65,105);
+
+  ctx.fillStyle="#116e67";
+  ctx.font="bold 39px sans-serif";
+
+  const title=q.type==="exam"
+    ?`第${q.examNumber}回・問${q.questionNumber}`
+    :q.title||"栄養クイズ";
+
+  ctx.fillText(title,65,245);
+
+  ctx.fillStyle="#607970";
+  ctx.font="30px sans-serif";
+  ctx.fillText(q.subject||"",65,305);
+
+  let y=380;
+
+  if(kind==="question"){
+    ctx.fillStyle="#203a36";
+    ctx.font="bold 40px sans-serif";
+
+    y=wrapText(
+      ctx,q.question,65,y,950,62,7
+    )+35;
+
+    ctx.font="34px sans-serif";
+
+    q.options.forEach((o,i)=>{
+      if(y<1150){
+        y=wrapText(
+          ctx,
+          `${i+1}. ${o.text}`,
+          70,y,940,49,3
+        )+18;
+      }
+    });
+
+  }else{
+    ctx.fillStyle="#116e67";
+    ctx.font="bold 50px sans-serif";
+    ctx.fillText(`正解：${q.answer}`,65,y);
+
+    y+=95;
+    ctx.fillStyle="#203a36";
+    ctx.font="32px sans-serif";
+
+    q.options.forEach((o,i)=>{
+      if(y<1120){
+        const mark=i+1===q.answer?"○":"×";
+
+        y=wrapText(
+          ctx,
+          `${i+1} ${mark} ${o.explanation}`,
+          65,y,950,48,3
+        )+15;
+      }
+    });
   }
- }catch(e){
-  console.log("公開問題ファイル未登録",e);
- }
+
+  ctx.fillStyle="#116e67";
+  ctx.fillRect(0,1250,1080,100);
+
+  ctx.fillStyle="white";
+  ctx.font="30px sans-serif";
+  ctx.fillText(
+    "管理栄養士と学ぶ、食と健康のクイズ",
+    65,1310
+  );
+
+  const options=q.options.map(
+    (o,i)=>`${i+1}. ${o.text}`
+  ).join("\n");
+
+  if(kind==="question"){
+    $("postText").value=
+      `【${title}】\n`+
+      `${q.question}\n\n`+
+      `${options}\n\n`+
+      `正解はどれでしょう？\n`+
+      `出典：${q.source}`;
+  }else{
+    $("postText").value=
+      `【${title}｜解答・解説】\n`+
+      `正答：${q.answer}\n\n`+
+      q.options.map(
+        (o,i)=>
+          `${i+1} ${i+1===q.answer?"○":"×"} `+
+          o.explanation
+      ).join("\n")+
+      `\n\n補足：${q.explanation}\n`+
+      `出典：${q.source}`;
+  }
 }
 
-loadPublishedQuestions();
-</script>
+function downloadCard(){
+  if(!questions.length){
+    alert("問題を読み込んでください");
+    return;
+  }
 
+  const canvas=$("postCanvas");
+
+  canvas.toBlob(blob=>{
+    if(!blob)return;
+
+    downloadBlob(
+      blob,
+      `hirano-${$("postQuestion").value}-`+
+      `${$("postKind").value}.png`
+    );
+  },"image/png");
+}
+
+async function copyPost(){
+  const text=$("postText").value;
+
+  if(!questions.length){
+    alert("問題を読み込んでください");
+    return;
+  }
+
+  try{
+    await navigator.clipboard.writeText(text);
+    notify("投稿文をコピーしました");
+  }catch{
+    $("postText").focus();
+    $("postText").select();
+    notify("文章を選択しました。コピーしてください");
+  }
+}
+</script>
 </body>
 </html>
-
