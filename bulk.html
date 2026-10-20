@@ -3,149 +3,373 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>200問一括管理｜ひらのの栄養教室</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>全回共通・過去問管理｜ひらのの栄養教室</title>
 <style>
+:root{
+  --main:#116e67;
+  --bg:#f5f8f7;
+  --text:#203a36;
+  --line:#d7e5df;
+}
 *{box-sizing:border-box}
-body{margin:0;background:#f5f8f7;color:#203a36;font-family:-apple-system,"Hiragino Kaku Gothic ProN",sans-serif}
-header{background:#116e67;color:white;padding:18px}
-main{max-width:900px;margin:auto;padding:14px}
-.card{background:white;border-radius:14px;padding:16px;margin:12px 0;box-shadow:0 1px 8px #0001}
-button,input,select,textarea{font:inherit;padding:10px;border:1px solid #c7d7d0;border-radius:8px;max-width:100%}
-button{background:#116e67;color:white;cursor:pointer}
-button.secondary{background:white;color:#116e67}
-textarea{width:100%;min-height:75px}
-label{display:block;margin:12px 0 4px;font-weight:600}
-input[type=text],input[type=number],input[type=password],select{width:100%}
-.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,
+  "Hiragino Kaku Gothic ProN",sans-serif;
+}
+header{
+  background:var(--main);
+  color:white;
+  padding:20px 15px;
+}
+header h1{font-size:21px;margin:0}
+header p{font-size:13px;margin:7px 0 0}
+main{max-width:950px;margin:auto;padding:12px}
+.card{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:16px;
+  margin:12px 0;
+}
+h2{font-size:19px;margin:0 0 12px}
+h3{font-size:16px}
+p{line-height:1.6}
+button,input,select,textarea{
+  font:inherit;
+  border-radius:9px;
+  padding:11px;
+}
+button{
+  border:1px solid var(--main);
+  background:var(--main);
+  color:white;
+  cursor:pointer;
+}
+button.secondary{
+  background:white;
+  color:var(--main);
+}
+button.danger{
+  background:#a63b3b;
+  border-color:#a63b3b;
+}
+button:disabled{opacity:.5}
+input,select,textarea{
+  border:1px solid #c8d9d1;
+  background:white;
+}
+input[type=text],
+input[type=number],
+input[type=password],
+select,textarea{
+  width:100%;
+}
+textarea{min-height:95px;resize:vertical}
+label{
+  display:block;
+  margin:13px 0 5px;
+  font-weight:600;
+}
+label.check{
+  display:flex;
+  align-items:flex-start;
+  gap:9px;
+  font-weight:400;
+}
+label.check input{
+  margin-top:4px;
+  flex-shrink:0;
+}
+.row{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  align-items:center;
+}
 .row>*{flex:1}
-.muted{color:#607a70;font-size:13px;line-height:1.6}
-.hidden{display:none}
-.item{padding:12px;border:1px solid #d9e5df;border-radius:10px;margin:9px 0}
-.tag{display:inline-block;border-radius:30px;padding:4px 8px;background:#eaf5f0;font-size:12px}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
-.stat{background:#eaf5f0;text-align:center;border-radius:9px;padding:10px}
-.stat b{display:block;font-size:22px}
-a{color:#116e67}
-.option-card{border:1px solid #d9e5df;border-radius:10px;padding:12px;margin:10px 0}
-.warning{background:#fff7e7;padding:12px;border-radius:10px;font-size:13px;line-height:1.6}
-.success{background:#eaf5f0;padding:12px;border-radius:10px}
-@media(max-width:600px){.grid{grid-template-columns:repeat(2,1fr)}.row{flex-direction:column;align-items:stretch}}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+}
+.stat{
+  background:#eaf5f0;
+  border-radius:10px;
+  padding:12px 6px;
+  text-align:center;
+}
+.stat b{display:block;font-size:23px}
+.stat span{font-size:12px}
+.muted{
+  color:#627b70;
+  font-size:13px;
+  line-height:1.65;
+}
+.hidden{display:none!important}
+.item{
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:12px;
+  margin:8px 0;
+}
+.item strong{display:block;margin-bottom:6px}
+.tag{
+  display:inline-block;
+  background:#eaf5f0;
+  padding:4px 8px;
+  border-radius:20px;
+  font-size:12px;
+  margin:3px 5px 3px 0;
+}
+.warning{
+  background:#fff5df;
+  border:1px solid #efd9a5;
+  border-radius:10px;
+  padding:12px;
+  font-size:13px;
+  line-height:1.7;
+}
+.success{
+  background:#eaf7ee;
+  border-radius:10px;
+  padding:12px;
+}
+.option-card{
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:12px;
+  margin:12px 0;
+}
+.option-card h3{margin:0 0 8px}
+a{color:var(--main)}
+small{font-size:12px}
+@media(max-width:600px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .row{flex-direction:column;align-items:stretch}
+}
 </style>
 </head>
-<body>
 
+<body>
 <header>
-<b>ひらのの栄養教室</b>
-<div>第40回・200問 一括登録／校閲管理</div>
+<div style="max-width:950px;margin:auto">
+<h1>ひらのの栄養教室</h1>
+<p>管理栄養士国家試験・全回共通問題管理</p>
+</div>
 </header>
 
 <main>
+
 <section class="card" id="login">
-<h2>管理者ログイン</h2>
+<h2>管理画面</h2>
 <form id="loginForm">
-<input id="pass" type="password" inputmode="numeric" placeholder="パスワード" required>
-<p><button>ログイン</button></p>
+<label for="password">管理用パスワード</label>
+<input id="password" type="password" required>
+<p><button type="submit">開く</button></p>
 </form>
-<p class="muted">このログインは簡易的な画面ロックであり、安全な認証ではありません。</p>
+<p class="muted">
+この画面ロックは簡易表示制御です。
+公開GitHub Pagesでは安全な認証になりません。
+機密情報は保存しないでください。
+</p>
 </section>
 
 <section id="app" class="hidden">
 
 <div class="card">
 <div class="row">
-<a href="admin.html">管理者メニューへ</a>
-<a href="index.html">一般公開画面へ</a>
-<button class="secondary" onclick="logout()">ログアウト</button>
+<a href="admin.html">管理者メニュー</a>
+<a href="index.html">公開サイト</a>
+<button class="secondary" onclick="logout()">画面を閉じる</button>
 </div>
-<p class="muted">編集データはこの端末に保存されます。作業用JSONを定期的に書き出してください。</p>
 </div>
 
 <div class="card">
-<h2>進捗</h2>
+<h2>管理する試験回</h2>
+<label for="examSelect">試験回を選択</label>
+<select id="examSelect" onchange="changeExam()"></select>
+<p class="muted">
+第40回から第1回まで切り替えられます。
+実際の出題数は各回の公式資料を確認して設定してください。
+</p>
+
+<label for="totalQuestions">この回の問題数</label>
+<input id="totalQuestions" type="number" min="1" max="300">
+<p>
+<button class="secondary" onclick="saveExamSettings()">
+問題数を保存
+</button>
+</p>
+</div>
+
+<div class="card">
+<h2>登録状況</h2>
 <div class="grid" id="stats"></div>
-<p class="muted" id="message"></p>
+<p class="muted" id="summary"></p>
 </div>
 
 <div class="card">
-<h2>一括取り込み・書き出し</h2>
-<input id="file" type="file" accept=".json,application/json">
-<div class="row" style="margin-top:10px">
-<button onclick="importFile()">JSON一括取込</button>
-<button class="secondary" onclick="exportAll()">作業用全件バックアップ</button>
-<button onclick="exportPublished()">公開用 questions.json</button>
+<h2>バックアップ・一括登録</h2>
+
+<div class="warning">
+最初に「全回バックアップ」を保存してください。
+ブラウザのデータを消去すると、未出力の編集内容は失われます。
 </div>
-<p class="muted">公開用ファイルには、公開条件を満たす問題だけを収録します。</p>
+
+<p>
+<button onclick="exportBackup()">
+全回バックアップJSON
+</button>
+</p>
+
+<label for="importFile">JSONファイルを選択</label>
+<input id="importFile" type="file"
+accept=".json,application/json">
+
+<div class="row" style="margin-top:10px">
+<button onclick="importJSON()">JSONを取り込む</button>
+<button class="secondary" onclick="exportCurrent()">
+選択中の回を書き出す
+</button>
+</div>
+
+<p>
+<button onclick="exportPublished()">
+公開候補データを書き出す
+</button>
+</p>
+
+<p class="muted">
+公開候補は全回から抽出します。
+現時点では公開サイトに直接投入せず、
+次工程の公開形式変換・検証に使用してください。
+</p>
 </div>
 
 <div class="card">
 <h2>問題一覧</h2>
-<div class="row">
-<select id="filter" onchange="render()">
-<option value="all">全ステータス</option>
+
+<label for="statusFilter">状態で絞り込み</label>
+<select id="statusFilter" onchange="renderList()">
+<option value="all">すべて</option>
 <option value="draft">未確認</option>
 <option value="review">校閲中</option>
 <option value="figure">図表待ち</option>
 <option value="ready">公開可能</option>
+<option value="excluded">除外</option>
+<option value="hold">掲載保留</option>
 </select>
-<input id="search" type="text" placeholder="問番号・科目・キーワード" oninput="render()">
-</div>
-<div id="list"></div>
+
+<label for="search">検索</label>
+<input id="search" type="text"
+placeholder="問番号・科目・キーワード"
+oninput="renderList()">
+
+<div id="questionList"></div>
 </div>
 
 <div class="card" id="editor">
-<h2>問題を編集</h2>
+<h2>問題編集</h2>
 
-<label>問番号（1〜200）</label>
-<input id="number" type="number" min="1" max="200">
+<label for="questionNumber">問番号</label>
+<input id="questionNumber" type="number" min="1">
 
-<label>科目</label>
+<label for="subject">科目</label>
 <input id="subject" type="text">
 
-<label>問題の題名</label>
+<label for="title">問題タイトル</label>
 <input id="title" type="text">
 
-<label>設問文</label>
+<label for="question">問題文</label>
 <textarea id="question"></textarea>
+
+<label for="selectionCount">選ぶべき選択肢の数</label>
+<select id="selectionCount">
+<option value="1">1つ選べ</option>
+<option value="2">2つ選べ</option>
+<option value="3">3つ選べ</option>
+<option value="4">4つ選べ</option>
+<option value="5">5つ選べ</option>
+</select>
 
 <div id="optionInputs"></div>
 
-<label>公式正答番号（1〜5）</label>
-<input id="answer" type="number" min="1" max="5">
+<label for="answerSets">公式に認められた正答の組合せ</label>
+<input id="answerSets" type="text"
+placeholder="例：3 または 1,4">
 
 <div class="warning">
-正答番号は「どの選択肢を選べば得点になるか」です。<br>
-選択肢○×は「その選択肢の文章が正しいか」です。<br>
-「誤っているものを選べ」では両者が一致しないことがあります。
+入力例：<br>
+「3」＝3番のみ正答<br>
+「2,5」＝2番と5番を両方選んで正答<br>
+「1 または 4」＝1番でも4番でも正答<br>
+「1,3 または 2,5」＝2通りの組合せを許容
 </div>
 
-<label>総合解説</label>
+<label for="explanation">総合解説</label>
 <textarea id="explanation"></textarea>
 
-<label>出典</label>
+<label for="source">出典</label>
 <input id="source" type="text">
 
-<label>公開状態</label>
-<select id="status">
+<label for="scoringStatus">公式の採点上の扱い</label>
+<select id="scoringStatus" onchange="updateScoringInfo()">
+<option value="normal">通常採点</option>
+<option value="multipleAccepted">複数正答の特別措置</option>
+<option value="allCorrect">全員正解</option>
+<option value="excluded">採点除外</option>
+<option value="pending">採点措置の確認待ち</option>
+</select>
+
+<label for="exclusionReason">不適切問題・特別措置の理由</label>
+<textarea id="exclusionReason"></textarea>
+
+<label for="officialNoticeUrl">公式資料URL</label>
+<input id="officialNoticeUrl" type="text"
+placeholder="https://www.mhlw.go.jp/...">
+
+<label for="reviewStatus">編集・公開状態</label>
+<select id="reviewStatus">
 <option value="draft">未確認</option>
 <option value="review">校閲中</option>
 <option value="figure">図表待ち</option>
 <option value="ready">公開可能</option>
+<option value="hold">掲載保留</option>
+<option value="excluded">除外</option>
 </select>
 
-<label><input id="official" type="checkbox"> 公式問題・正答を照合済み</label>
-<label><input id="checked" type="checkbox"> 5肢の解説を校閲済み</label>
-<label><input id="needsFigure" type="checkbox"> 解答に図表が必要</label>
+<label class="check">
+<input id="officialChecked" type="checkbox">
+公式問題文・正答・採点措置を照合済み
+</label>
 
-<label>自作図のパス</label>
-<input id="figurePath" type="text" placeholder="images/questions/40-001.webp">
+<label class="check">
+<input id="verified" type="checkbox">
+選択肢と解説の内容を校閲済み
+</label>
 
-<div class="row" style="margin-top:14px">
-<button onclick="saveItem()">変更を保存</button>
-<button class="secondary" onclick="openNumber()">指定した問番号を開く</button>
+<label class="check">
+<input id="needsFigure" type="checkbox">
+問題を解くために図表が必要
+</label>
+
+<label for="figurePath">自作図のファイルパス</label>
+<input id="figurePath" type="text"
+placeholder="images/questions/40-001.webp">
+
+<div class="row" style="margin-top:15px">
+<button onclick="saveQuestion()">この問題を保存</button>
+<button class="secondary" onclick="openNumber()">
+問番号を指定して開く
+</button>
 </div>
+
+<div id="validation" style="margin-top:12px"></div>
 <p class="muted" id="editInfo"></p>
-<div id="validation"></div>
 </div>
 
 </section>
@@ -154,41 +378,98 @@ a{color:#116e67}
 <script>
 "use strict";
 
-const KEY="hirano-bulk-v1";
-const PASS="0907";
+const STORAGE_KEY="hirano-all-exams-v2";
+const LEGACY_KEY="hirano-bulk-v1";
+const PASSWORD="0907";
 
-let records=load();
-let current=1;
+let db=loadDatabase();
+let selectedExam=40;
+let currentQuestion=1;
 
-function $(id){return document.getElementById(id)}
+function $(id){
+ return document.getElementById(id);
+}
 
-function load(){
+function defaultDatabase(){
+ return {
+  version:2,
+  exams:{}
+ };
+}
+
+function loadDatabase(){
  try{
-  const x=JSON.parse(localStorage.getItem(KEY)||"{}");
-  return x&&typeof x==="object"&&!Array.isArray(x)?x:{};
- }catch{return {}}
+  const raw=JSON.parse(
+   localStorage.getItem(STORAGE_KEY)||"null"
+  );
+
+  if(
+   raw&&
+   raw.version===2&&
+   raw.exams&&
+   typeof raw.exams==="object"
+  ){
+   return raw;
+  }
+ }catch{}
+
+ return defaultDatabase();
 }
 
 function persist(){
- try{localStorage.setItem(KEY,JSON.stringify(records))}
- catch{alert("保存できません。作業用JSONを出力してください。")}
+ try{
+  localStorage.setItem(
+   STORAGE_KEY,
+   JSON.stringify(db)
+  );
+  return true;
+ }catch{
+  alert(
+   "保存できませんでした。容量不足の可能性があります。"
+  );
+  return false;
+ }
 }
 
-function base(n){
+function examData(exam){
+ const key=String(exam);
+
+ if(!db.exams[key]){
+  db.exams[key]={
+   examNumber:exam,
+   totalQuestions:200,
+   questions:{}
+  };
+ }
+
+ return db.exams[key];
+}
+
+function questionId(exam,n){
+ return `${exam}-${String(n).padStart(3,"0")}`;
+}
+
+function baseQuestion(exam,n){
  return {
-  id:`40-${String(n).padStart(3,"0")}`,
+  id:questionId(exam,n),
   type:"exam",
-  examNumber:40,
+  examNumber:exam,
   questionNumber:n,
-  answerBase:1,
   subject:"",
   title:"",
   question:"",
-  options:Array.from({length:5},()=>({text:"",explanation:""})),
+  selectionCount:1,
+  options:Array.from(
+   {length:5},
+   ()=>({text:"",explanation:""})
+  ),
   optionsCorrect:[null,null,null,null,null],
-  answer:1,
+  answerSets:[],
   explanation:"",
-  source:"厚生労働省 第40回管理栄養士国家試験",
+  source:"",
+  scoringStatus:"pending",
+  exclusionReason:"",
+  officialNoticeUrl:"",
   officialChecked:false,
   verified:false,
   reviewStatus:"draft",
@@ -197,102 +478,207 @@ function base(n){
  };
 }
 
-function normalizeIncoming(item){
- if(!item||typeof item!=="object")throw Error("問題形式が不正です");
+function normalizeQuestion(item,exam,n){
+ const q={
+  ...baseQuestion(exam,n),
+  ...item
+ };
 
- const n=Number(item.questionNumber);
- if(!Number.isInteger(n)||n<1||n>200)throw Error("問番号は1〜200です");
- if(Number(item.examNumber)!==40)throw Error(`問${n}：第40回ではありません`);
+ q.id=questionId(exam,n);
+ q.examNumber=exam;
+ q.questionNumber=n;
+ q.type="exam";
 
- const q={...base(n),...item};
+ q.options=Array.from({length:5},(_,i)=>{
+  const old=Array.isArray(item.options)
+   ?item.options[i]:null;
 
- if(!Array.isArray(q.options)||q.options.length!==5){
-  throw Error(`問${n}：選択肢は5件必要です`);
+  return {
+   text:typeof old==="string"
+    ?old:String(old?.text||""),
+   explanation:typeof old==="object"&&old
+    ?String(old.explanation||"")
+    :Array.isArray(item.explanations)
+     ?String(item.explanations[i]||""):""
+  };
+ });
+
+ q.optionsCorrect=
+  Array.isArray(item.optionsCorrect)&&
+  item.optionsCorrect.length===5
+   ?item.optionsCorrect.map(v=>
+      typeof v==="boolean"?v:null)
+   :[null,null,null,null,null];
+
+ if(Array.isArray(item.answerSets)){
+  q.answerSets=item.answerSets
+   .filter(s=>Array.isArray(s))
+   .map(s=>s.map(Number));
+ }else{
+  // 旧版bulk.htmlの正答は1始まり。
+  // 0始まりと明示されたデータのみ変換する。
+  const oldAnswer=Number(item.answer);
+
+  if(Number.isInteger(oldAnswer)){
+   const base=item.answerBase===0?0:1;
+   const converted=oldAnswer+(base===0?1:0);
+
+   q.answerSets=converted>=1&&converted<=5
+    ?[[converted]]:[];
+  }else{
+   q.answerSets=[];
+  }
  }
 
- q.options=q.options.map((o,i)=>typeof o==="string"
-  ?{text:o,explanation:Array.isArray(q.explanations)?q.explanations[i]||"":""}
-  :{text:String(o?.text||""),explanation:String(o?.explanation||"")});
+ q.selectionCount=Number.isInteger(
+  Number(item.selectionCount)
+ )
+  ?Number(item.selectionCount):1;
 
- if(q.answerBase===0){
-  q.answer=Number(q.answer)+1;
-  q.answerBase=1;
- }else if(q.answerBase===undefined){
-  // 旧bulk.htmlのデータは1始まり
-  q.answerBase=1;
+ if(q.selectionCount<1||q.selectionCount>5){
+  q.selectionCount=1;
  }
 
- if(!Number.isInteger(q.answer)||q.answer<1||q.answer>5){
-  throw Error(`問${n}：正答番号が不正です`);
+ const statuses=[
+  "normal",
+  "multipleAccepted",
+  "allCorrect",
+  "excluded",
+  "pending"
+ ];
+
+ // 旧データは公式採点措置の確認が未実施。
+ if(!statuses.includes(item.scoringStatus)){
+  q.scoringStatus="pending";
  }
 
- if(!Array.isArray(q.optionsCorrect)||q.optionsCorrect.length!==5){
-  q.optionsCorrect=[null,null,null,null,null];
- }
+ q.reviewStatus=[
+  "draft","review","figure",
+  "ready","hold","excluded"
+ ].includes(item.reviewStatus)
+  ?item.reviewStatus:"draft";
 
- q.optionsCorrect=q.optionsCorrect.map(v=>
-  typeof v==="boolean"?v:null
- );
-
- q.reviewStatus=["draft","review","figure","ready"].includes(q.reviewStatus)
-  ?q.reviewStatus:"draft";
-
- q.officialChecked=q.officialChecked===true;
- q.verified=q.verified===true;
- q.needsFigure=q.needsFigure===true;
+ q.officialChecked=item.officialChecked===true;
+ q.verified=item.verified===true;
+ q.needsFigure=item.needsFigure===true;
 
  return q;
 }
 
-function get(n){
- try{
-  return records[n]?normalizeIncoming(records[n]):base(n);
- }catch{
-  return base(n);
+function getQuestion(exam,n){
+ const data=examData(exam);
+ const old=data.questions[String(n)];
+
+ return old
+  ?normalizeQuestion(old,exam,n)
+  :baseQuestion(exam,n);
+}
+
+function hasContent(q){
+ return Boolean(
+  q.question.trim()||
+  q.options.some(o=>o.text.trim())||
+  q.exclusionReason.trim()||
+  q.officialNoticeUrl.trim()
+ );
+}
+
+function validAnswerSets(q){
+ if(!Array.isArray(q.answerSets)||
+    !q.answerSets.length)return false;
+
+ const seen=new Set();
+
+ for(const set of q.answerSets){
+  if(!Array.isArray(set)||
+     set.length!==q.selectionCount)return false;
+
+  const unique=new Set(set);
+
+  if(unique.size!==set.length)return false;
+
+  if(set.some(n=>
+   !Number.isInteger(n)||n<1||n>5
+  ))return false;
+
+  const key=[...set].sort((a,b)=>a-b).join(",");
+  if(seen.has(key))return false;
+  seen.add(key);
  }
+
+ return true;
 }
 
 function issues(q){
  const errors=[];
 
- if(!q.question.trim())errors.push("問題文がありません");
- if(!q.subject.trim())errors.push("科目がありません");
- if(!q.source.trim())errors.push("出典がありません");
+ if(["allCorrect","excluded"].includes(q.scoringStatus)){
+  errors.push("全員正解・採点除外のため公開対象外");
+  return errors;
+ }
 
- if(!Number.isInteger(q.answer)||q.answer<1||q.answer>5){
-  errors.push("正答番号が不正です");
+ if(q.scoringStatus==="pending"){
+  errors.push("公式採点措置が未確認");
+ }
+
+ if(q.scoringStatus==="multipleAccepted"&&
+    q.answerSets.length<2){
+  errors.push("特別措置として許容される複数の正答が未登録");
+ }
+
+ if(!q.question.trim()){
+  errors.push("問題文が未登録");
+ }
+
+ if(!q.subject.trim()){
+  errors.push("科目が未登録");
  }
 
  if(q.options.some(o=>!o.text.trim())){
-  errors.push("未入力の選択肢があります");
+  errors.push("選択肢に未入力あり");
  }
 
  if(q.options.some(o=>!o.explanation.trim())){
-  errors.push("未入力の選択肢解説があります");
+  errors.push("選択肢の解説に未入力あり");
+ }
+
+ if(!validAnswerSets(q)){
+  errors.push("正答の組合せが不正または未登録");
+ }
+
+ if(!q.optionsCorrect.every(v=>
+  typeof v==="boolean"
+ )){
+  errors.push("選択肢○×が未判定");
  }
 
  if(!q.explanation.trim()){
-  errors.push("総合解説がありません");
+  errors.push("総合解説が未入力");
  }
 
- if(!q.optionsCorrect.every(v=>typeof v==="boolean")){
-  errors.push("各選択肢の○×判定が未完了です");
+ if(!q.source.trim()){
+  errors.push("出典が未登録");
  }
 
  if(!q.officialChecked){
-  errors.push("公式問題・正答が未照合です");
+  errors.push("公式資料の照合が未完了");
  }
 
  if(!q.verified){
-  errors.push("解説が未校閲です");
+  errors.push("解説の校閲が未完了");
  }
 
  if(q.needsFigure&&!q.figurePath.trim()){
-  errors.push("必要な図表が未登録です");
+  errors.push("必要な図表が未登録");
+ }
+
+ if(q.scoringStatus==="multipleAccepted"&&
+    !q.officialNoticeUrl.trim()){
+  errors.push("特別措置の公式資料URLが未登録");
  }
 
  if(q.reviewStatus!=="ready"){
-  errors.push("公開状態が「公開可能」ではありません");
+  errors.push("公開状態が「公開可能」ではない");
  }
 
  return errors;
@@ -302,78 +688,220 @@ function canPublish(q){
  return issues(q).length===0;
 }
 
-function render(){
- const counts={draft:0,review:0,figure:0,ready:0};
- let publishable=0;
+function initExamSelector(){
+ const select=$("examSelect");
+ select.replaceChildren();
 
- for(let n=1;n<=200;n++){
-  const q=get(n);
-  counts[q.reviewStatus]++;
-  if(canPublish(q))publishable++;
+ for(let n=40;n>=1;n--){
+  const option=document.createElement("option");
+  option.value=n;
+  option.textContent=`第${n}回`;
+  select.appendChild(option);
  }
 
- $("stats").innerHTML=`
-  <div class="stat"><b>${counts.draft}</b>未確認</div>
-  <div class="stat"><b>${counts.review}</b>校閲中</div>
-  <div class="stat"><b>${counts.figure}</b>図表待ち</div>
-  <div class="stat"><b>${publishable}</b>公開条件達成</div>
- `;
+ select.value=selectedExam;
+}
 
- $("message").textContent=`第40回200問中、公開条件を満たす問題：${publishable}問`;
+function changeExam(){
+ selectedExam=Number($("examSelect").value);
+ currentQuestion=1;
+ $("totalQuestions").value=
+  examData(selectedExam).totalQuestions;
+ render();
+ editQuestion(1);
+}
 
- const filter=$("filter").value;
- const term=$("search").value.toLowerCase();
- const list=$("list");
+function saveExamSettings(){
+ const count=Number($("totalQuestions").value);
+
+ if(!Number.isInteger(count)||
+    count<1||count>300){
+  alert("問題数は1〜300で入力してください");
+  return;
+ }
+
+ const data=examData(selectedExam);
+
+ const existing=Object.keys(data.questions)
+  .map(Number)
+  .filter(n=>n>count);
+
+ if(existing.length){
+  alert(
+   "設定した問題数を超える登録済み問題があります。"+
+   "データ保護のため変更を中止しました。"
+  );
+  return;
+ }
+
+ data.totalQuestions=count;
+
+ if(persist()){
+  render();
+  alert("問題数を保存しました。");
+ }
+}
+
+function render(){
+ const data=examData(selectedExam);
+ const counts={
+  registered:0,
+  ready:0,
+  excluded:0,
+  hold:0
+ };
+
+ for(let n=1;n<=data.totalQuestions;n++){
+  const q=getQuestion(selectedExam,n);
+
+  if(hasContent(q))counts.registered++;
+  if(canPublish(q))counts.ready++;
+
+  if(["allCorrect","excluded"].includes(q.scoringStatus)){
+   counts.excluded++;
+  }else if(
+   q.reviewStatus==="hold"||
+   q.scoringStatus==="multipleAccepted"||
+   q.scoringStatus==="pending"
+  ){
+   if(hasContent(q))counts.hold++;
+  }
+ }
+
+ const items=[
+  [data.totalQuestions,"管理枠"],
+  [counts.registered,"登録済み"],
+  [counts.ready,"公開条件達成"],
+  [counts.excluded,"除外対象"]
+ ];
+
+ const area=$("stats");
+ area.replaceChildren();
+
+ items.forEach(([value,label])=>{
+  const div=document.createElement("div");
+  div.className="stat";
+
+  const b=document.createElement("b");
+  b.textContent=value;
+
+  const span=document.createElement("span");
+  span.textContent=label;
+
+  div.append(b,span);
+  area.appendChild(div);
+ });
+
+ $("summary").textContent=
+  `第${selectedExam}回｜保留・要確認：${counts.hold}問。`+
+  "登録済みは公開済みを意味しません。";
+
+ renderList();
+}
+
+function renderList(){
+ const data=examData(selectedExam);
+ const filter=$("statusFilter").value;
+ const term=$("search").value.trim().toLowerCase();
+ const list=$("questionList");
+
  list.replaceChildren();
 
- for(let n=1;n<=200;n++){
-  const q=get(n);
-  if(filter!=="all"&&q.reviewStatus!==filter)continue;
+ for(let n=1;n<=data.totalQuestions;n++){
+  const q=getQuestion(selectedExam,n);
 
-  if(term&&!`${n} ${q.subject} ${q.title} ${q.question}`.toLowerCase().includes(term)){
-   continue;
-  }
+  const excluded=["allCorrect","excluded"]
+   .includes(q.scoringStatus);
+
+  const hold=q.reviewStatus==="hold"||
+   q.scoringStatus==="pending"||
+   q.scoringStatus==="multipleAccepted";
+
+  if(filter==="excluded"&&!excluded)continue;
+  if(filter==="hold"&&!hold)continue;
+
+  if(
+   !["all","excluded","hold"].includes(filter)&&
+   q.reviewStatus!==filter
+  )continue;
+
+  const searchable=[
+   n,q.subject,q.title,q.question
+  ].join(" ").toLowerCase();
+
+  if(term&&!searchable.includes(term))continue;
 
   const div=document.createElement("div");
   div.className="item";
 
-  const label=document.createElement("div");
-  label.textContent=`問${n}｜${q.subject||"科目未設定"}｜${q.title||"未登録"}`;
+  const title=document.createElement("strong");
+  title.textContent=
+   `問${n}｜${q.subject||"科目未設定"}｜${q.title||"未登録"}`;
 
   const tag=document.createElement("span");
   tag.className="tag";
-  tag.textContent=({
-   draft:"未確認",
-   review:"校閲中",
-   figure:"図表待ち",
-   ready:"公開可能"
-  }[q.reviewStatus])+(canPublish(q)?" ✓":"");
+  tag.textContent=excluded
+   ?"除外対象"
+   :canPublish(q)?"公開条件達成"
+   :q.reviewStatus==="ready"?"公開前の確認不足"
+   :q.reviewStatus;
 
   const btn=document.createElement("button");
   btn.className="secondary";
-  btn.style.marginLeft="8px";
   btn.textContent="編集";
-  btn.onclick=()=>edit(n);
+  btn.onclick=()=>editQuestion(n);
 
-  div.append(label,tag,btn);
+  div.append(title,tag,btn);
   list.appendChild(div);
  }
 }
 
-function edit(n){
- current=n;
- const q=get(n);
+function formatAnswerSets(sets){
+ return sets.map(set=>set.join(",")).join(" または ");
+}
 
- $("number").value=n;
+function parseAnswerSets(text){
+ const value=text.trim();
+ if(!value)return [];
+
+ const parts=value.split(/\s*(?:または|or|OR|\/|／)\s*/);
+
+ const sets=parts.map(part=>{
+  if(!/^[1-5](?:\s*[,、]\s*[1-5])*$/.test(part.trim())){
+   throw Error(
+    "正答は「3」「2,5」「1 または 4」の形式で入力してください"
+   );
+  }
+
+  return part.split(/[,、]/).map(x=>Number(x.trim()));
+ });
+
+ return sets;
+}
+
+function editQuestion(n){
+ const data=examData(selectedExam);
+
+ if(n<1||n>data.totalQuestions)return;
+
+ currentQuestion=n;
+ const q=getQuestion(selectedExam,n);
+
+ $("questionNumber").value=n;
+ $("questionNumber").max=data.totalQuestions;
  $("subject").value=q.subject;
  $("title").value=q.title;
  $("question").value=q.question;
- $("answer").value=q.answer;
+ $("selectionCount").value=q.selectionCount;
+ $("answerSets").value=formatAnswerSets(q.answerSets);
  $("explanation").value=q.explanation;
  $("source").value=q.source;
- $("status").value=q.reviewStatus;
- $("official").checked=q.officialChecked;
- $("checked").checked=q.verified;
+ $("scoringStatus").value=q.scoringStatus;
+ $("exclusionReason").value=q.exclusionReason;
+ $("officialNoticeUrl").value=q.officialNoticeUrl;
+ $("reviewStatus").value=q.reviewStatus;
+ $("officialChecked").checked=q.officialChecked;
+ $("verified").checked=q.verified;
  $("needsFigure").checked=q.needsFigure;
  $("figurePath").value=q.figurePath;
 
@@ -384,32 +912,33 @@ function edit(n){
   const section=document.createElement("div");
   section.className="option-card";
 
-  const heading=document.createElement("h3");
-  heading.textContent=`選択肢 ${i+1}`;
+  const h=document.createElement("h3");
+  h.textContent=`選択肢${i+1}`;
 
-  const text=document.createElement("textarea");
-  text.id=`opt${i}`;
-  text.value=q.options[i].text;
-  text.placeholder="選択肢の文章";
+  const input=document.createElement("textarea");
+  input.id=`option${i}`;
+  input.value=q.options[i].text;
+  input.placeholder="選択肢の文章";
 
   const label=document.createElement("label");
-  label.textContent="文章自体の正誤";
+  label.textContent="選択肢の文章自体の正誤";
 
   const select=document.createElement("select");
-  select.id=`correct${i}`;
+  select.id=`ox${i}`;
 
   [
    ["","未判定"],
    ["true","○ 正しい"],
    ["false","× 誤り"]
-  ].forEach(([value,title])=>{
-   const option=document.createElement("option");
-   option.value=value;
-   option.textContent=title;
-   select.appendChild(option);
+  ].forEach(([value,text])=>{
+   const opt=document.createElement("option");
+   opt.value=value;
+   opt.textContent=text;
+   select.appendChild(opt);
   });
 
-  select.value=q.optionsCorrect[i]===null?"":String(q.optionsCorrect[i]);
+  select.value=q.optionsCorrect[i]===null
+   ?"":String(q.optionsCorrect[i]);
 
   const expLabel=document.createElement("label");
   expLabel.textContent="選択肢の解説";
@@ -417,101 +946,290 @@ function edit(n){
   const exp=document.createElement("textarea");
   exp.id=`exp${i}`;
   exp.value=q.options[i].explanation;
-  exp.placeholder="正誤の根拠を入力";
 
-  section.append(heading,text,label,select,expLabel,exp);
+  section.append(h,input,label,select,expLabel,exp);
   area.appendChild(section);
  }
 
  showValidation(q);
- $("editInfo").textContent=`第40回 問${n}を編集中`;
+
+ $("editInfo").textContent=
+  `第${selectedExam}回・問${n}を編集中`;
+
  $("editor").scrollIntoView({behavior:"smooth"});
 }
 
 function readEditor(){
- const n=Number($("number").value);
- if(!Number.isInteger(n)||n<1||n>200)throw Error("問番号は1〜200です");
+ const n=Number($("questionNumber").value);
+ const data=examData(selectedExam);
 
- return {
-  ...base(n),
-  subject:$("subject").value.trim(),
-  title:$("title").value.trim(),
-  question:$("question").value.trim(),
-  options:Array.from({length:5},(_,i)=>({
-   text:$(`opt${i}`).value.trim(),
-   explanation:$(`exp${i}`).value.trim()
-  })),
-  optionsCorrect:Array.from({length:5},(_,i)=>{
-   const v=$(`correct${i}`).value;
-   return v===""?null:v==="true";
-  }),
-  answer:Number($("answer").value),
-  explanation:$("explanation").value.trim(),
-  source:$("source").value.trim(),
-  reviewStatus:$("status").value,
-  officialChecked:$("official").checked,
-  verified:$("checked").checked,
-  needsFigure:$("needsFigure").checked,
-  figurePath:$("figurePath").value.trim()
- };
+ if(!Number.isInteger(n)||
+    n<1||n>data.totalQuestions){
+  throw Error("問番号が管理範囲外です");
+ }
+
+ const q=baseQuestion(selectedExam,n);
+
+ q.subject=$("subject").value.trim();
+ q.title=$("title").value.trim();
+ q.question=$("question").value.trim();
+ q.selectionCount=Number($("selectionCount").value);
+
+ q.options=Array.from({length:5},(_,i)=>({
+  text:$(`option${i}`).value.trim(),
+  explanation:$(`exp${i}`).value.trim()
+ }));
+
+ q.optionsCorrect=Array.from({length:5},(_,i)=>{
+  const value=$(`ox${i}`).value;
+  return value===""?null:value==="true";
+ });
+
+ q.answerSets=parseAnswerSets(
+  $("answerSets").value
+ );
+
+ q.explanation=$("explanation").value.trim();
+ q.source=$("source").value.trim();
+ q.scoringStatus=$("scoringStatus").value;
+ q.exclusionReason=$("exclusionReason").value.trim();
+ q.officialNoticeUrl=$("officialNoticeUrl").value.trim();
+ q.reviewStatus=$("reviewStatus").value;
+ q.officialChecked=$("officialChecked").checked;
+ q.verified=$("verified").checked;
+ q.needsFigure=$("needsFigure").checked;
+ q.figurePath=$("figurePath").value.trim();
+
+ return q;
+}
+
+function updateScoringInfo(){
+ const status=$("scoringStatus").value;
+
+ if(["allCorrect","excluded"].includes(status)){
+  $("reviewStatus").value="excluded";
+ }else if(
+  status==="pending"||
+  status==="multipleAccepted"
+ ){
+  if($("reviewStatus").value==="ready"){
+   $("reviewStatus").value="hold";
+  }
+ }
 }
 
 function showValidation(q){
- const errors=issues(q);
  const area=$("validation");
  area.replaceChildren();
 
- const div=document.createElement("div");
- div.className=errors.length?"warning":"success";
+ const errors=issues(q);
+ const box=document.createElement("div");
 
- if(errors.length){
-  const title=document.createElement("strong");
-  title.textContent=`公開前の確認事項：${errors.length}件`;
-  div.appendChild(title);
+ box.className=errors.length?"warning":"success";
+
+ if(!errors.length){
+  box.textContent="公開条件を満たしています。";
+ }else{
+  const strong=document.createElement("strong");
+  strong.textContent=`公開前の確認事項：${errors.length}件`;
 
   const ul=document.createElement("ul");
+
   errors.forEach(message=>{
    const li=document.createElement("li");
    li.textContent=message;
    ul.appendChild(li);
   });
-  div.appendChild(ul);
- }else{
-  div.textContent="公開条件を満たしています。";
+
+  box.append(strong,ul);
  }
 
- area.appendChild(div);
+ area.appendChild(box);
 }
 
-function saveItem(){
+function saveQuestion(){
  try{
   const q=readEditor();
 
-  if(!Number.isInteger(q.answer)||q.answer<1||q.answer>5){
-   throw Error("正答番号は1〜5です");
+  if(q.answerSets.length&&!validAnswerSets(q)){
+   throw Error(
+    "正答の組合せと選択数が一致しません"
+   );
   }
 
-  records[q.questionNumber]=q;
-  persist();
+  const data=examData(selectedExam);
+  const target=q.questionNumber;
+
+  if(target!==currentQuestion&&
+     data.questions[String(target)]){
+   if(!confirm(
+    `問${target}の既存データを上書きしますか？`
+   ))return;
+  }
+
+  data.questions[String(target)]=q;
+
+  if(!persist())return;
+
+  currentQuestion=target;
   render();
   showValidation(q);
-  $("editInfo").textContent=`問${q.questionNumber}を保存しました。`;
+
+  $("editInfo").textContent=
+   `第${selectedExam}回・問${target}を保存しました。`;
+
  }catch(e){
   alert("保存失敗："+e.message);
  }
 }
 
 function openNumber(){
- const n=Number($("number").value);
- if(Number.isInteger(n)&&n>=1&&n<=200){
-  edit(n);
- }else{
-  alert("問番号は1〜200です");
- }
+ const n=Number($("questionNumber").value);
+ editQuestion(n);
 }
 
-async function importFile(){
- const file=$("file").files?.[0];
+function downloadJSON(data,name){
+ const blob=new Blob(
+  [JSON.stringify(data,null,2)],
+  {type:"application/json"}
+ );
+
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement("a");
+
+ a.href=url;
+ a.download=name;
+ document.body.appendChild(a);
+ a.click();
+ a.remove();
+
+ setTimeout(()=>URL.revokeObjectURL(url),30000);
+}
+
+function exportBackup(){
+ downloadJSON(
+  db,
+  "hirano-all-exams-backup.json"
+ );
+}
+
+function exportCurrent(){
+ const data=examData(selectedExam);
+
+ const questions=Object.keys(data.questions)
+  .map(Number)
+  .sort((a,b)=>a-b)
+  .map(n=>getQuestion(selectedExam,n));
+
+ downloadJSON({
+  version:2,
+  examNumber:selectedExam,
+  totalQuestions:data.totalQuestions,
+  questions
+ },`hirano-exam-${selectedExam}-working.json`);
+}
+
+function allQuestions(){
+ const result=[];
+
+ Object.keys(db.exams)
+  .map(Number)
+  .sort((a,b)=>b-a)
+  .forEach(exam=>{
+   const data=examData(exam);
+
+   Object.keys(data.questions)
+    .map(Number)
+    .sort((a,b)=>a-b)
+    .forEach(n=>{
+     result.push(getQuestion(exam,n));
+    });
+  });
+
+ return result;
+}
+
+function exportPublished(){
+ const published=allQuestions()
+  .filter(canPublish);
+
+ if(!published.length){
+  alert("公開条件を満たす問題がありません。");
+  return;
+ }
+
+ const data={
+  schemaVersion:2,
+  status:"review-export",
+  questions:published
+ };
+
+ downloadJSON(
+  data,
+  "hirano-public-candidates-v2.json"
+ );
+
+ alert(
+  `${published.length}問を書き出しました。`+
+  "これは公開候補です。公開サイトへの直接投入はまだ行わないでください。"
+ );
+}
+
+function mergeImported(questions){
+ const incoming=new Map();
+
+ questions.forEach(item=>{
+  const exam=Number(item.examNumber);
+  const n=Number(item.questionNumber);
+
+  if(!Number.isInteger(exam)||exam<1||exam>40){
+   throw Error("試験回が不正です");
+  }
+
+  if(!Number.isInteger(n)||n<1||n>300){
+   throw Error("問番号が不正です");
+  }
+
+  const id=questionId(exam,n);
+
+  if(incoming.has(id)){
+   throw Error(`${id}が重複しています`);
+  }
+
+  incoming.set(
+   id,
+   normalizeQuestion(item,exam,n)
+  );
+ });
+
+ const collisions=[...incoming.values()]
+  .filter(q=>Boolean(
+   db.exams[String(q.examNumber)]?.questions?.[
+    String(q.questionNumber)
+   ]
+  ));
+
+ const msg=
+  `${incoming.size}問を取り込みます。\n`+
+  `既存データとの重複：${collisions.length}問\n`+
+  "重複した問題は上書きされます。続行しますか？";
+
+ if(!confirm(msg))return false;
+
+ incoming.forEach(q=>{
+  const data=examData(q.examNumber);
+  data.totalQuestions=Math.max(
+   data.totalQuestions,q.questionNumber
+  );
+  data.questions[String(q.questionNumber)]=q;
+ });
+
+ return persist();
+}
+
+async function importJSON(){
+ const file=$("importFile").files?.[0];
+
  if(!file){
   alert("JSONファイルを選択してください");
   return;
@@ -519,92 +1237,189 @@ async function importFile(){
 
  try{
   const raw=JSON.parse(await file.text());
-  const arr=Array.isArray(raw)?raw:Array.isArray(raw.questions)?raw.questions:null;
-  if(!arr||!arr.length)throw Error("問題配列がありません");
 
-  const incoming={};
+  // 全回バックアップの復元
+  if(
+   raw.version===2&&
+   raw.exams&&
+   typeof raw.exams==="object"
+  ){
+   if(!confirm(
+    "全回バックアップで現在の全データを置き換えますか？"
+   ))return;
 
-  for(const item of arr){
-   const q=normalizeIncoming(item);
-   if(incoming[q.questionNumber])throw Error(`問${q.questionNumber}が重複しています`);
-   incoming[q.questionNumber]=q;
+   const rebuilt=defaultDatabase();
+
+   for(const [key,data] of Object.entries(raw.exams)){
+    const exam=Number(key);
+
+    if(!Number.isInteger(exam)||exam<1||exam>40){
+     throw Error("バックアップ内の試験回が不正です");
+    }
+
+    const count=Number(data.totalQuestions);
+    if(!Number.isInteger(count)||count<1||count>300){
+     throw Error("問題数の設定が不正です");
+    }
+
+    rebuilt.exams[key]={
+     examNumber:exam,
+     totalQuestions:count,
+     questions:{}
+    };
+
+    for(const [nString,item] of Object.entries(
+     data.questions||{}
+    )){
+     const n=Number(nString);
+
+     if(!Number.isInteger(n)||n<1||n>count){
+      throw Error("バックアップ内の問番号が不正です");
+     }
+
+     rebuilt.exams[key].questions[nString]=
+      normalizeQuestion(item,exam,n);
+    }
+   }
+
+   db=rebuilt;
+   if(!persist())return;
+
+  }else{
+   const items=Array.isArray(raw)
+    ?raw:Array.isArray(raw.questions)
+     ?raw.questions:null;
+
+   if(!items||!items.length){
+    throw Error("問題配列がありません");
+   }
+
+   const examHint=Number(raw.examNumber)||selectedExam;
+
+   const prepared=items.map(item=>({
+    ...item,
+    examNumber:item.examNumber??examHint,
+    questionNumber:item.questionNumber
+   }));
+
+   if(!mergeImported(prepared))return;
   }
 
-  const count=Object.keys(incoming).length;
-
-  if(!confirm(`${count}問を取り込みます。同じ問番号は上書きされます。よろしいですか？`)){
-   return;
-  }
-
-  Object.assign(records,incoming);
-  persist();
   render();
-  edit(1);
-  alert(`${count}問を取り込みました。`);
+  editQuestion(1);
+  alert("取り込みが完了しました。");
+
  }catch(e){
-  alert("取込失敗："+e.message);
+  alert("取り込み失敗："+e.message);
+ }finally{
+  $("importFile").value="";
+ }
+}
+
+function migrateLegacy(){
+ const already=localStorage.getItem(
+  "hirano-legacy-migrated-v2"
+ );
+
+ if(already)return;
+
+ const raw=localStorage.getItem(LEGACY_KEY);
+ if(!raw)return;
+
+ let old;
+
+ try{
+  old=JSON.parse(raw);
+ }catch{return}
+
+ if(!old||typeof old!=="object")return;
+
+ const entries=Object.entries(old)
+  .filter(([key,item])=>
+   Number.isInteger(Number(key))&&
+   item&&typeof item==="object"
+  );
+
+ if(!entries.length)return;
+
+ const existing=examData(40).questions;
+
+ if(!confirm(
+  `旧第40回データ${entries.length}件を検出しました。`+
+  "新管理画面へコピーしますか？"+
+  "旧データは削除しません。"
+ ))return;
+
+ let copied=0;
+
+ for(const [key,item] of entries){
+  const n=Number(key);
+
+  if(n<1||n>300)continue;
+
+  // 新形式の既存問題は上書きしない
+  if(existing[String(n)])continue;
+
+  const q=normalizeQuestion(item,40,n);
+
+  // 旧データの採点措置は未確認扱い
+  q.scoringStatus="pending";
+  q.reviewStatus="review";
+  q.officialChecked=false;
+
+  existing[String(n)]=q;
+  copied++;
  }
 
- $("file").value="";
-}
+ if(persist()){
+  localStorage.setItem(
+   "hirano-legacy-migrated-v2","yes"
+  );
 
-function download(data,name){
- const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
- const url=URL.createObjectURL(blob);
- const a=document.createElement("a");
- a.href=url;
- a.download=name;
- document.body.appendChild(a);
- a.click();
- a.remove();
- setTimeout(()=>URL.revokeObjectURL(url),30000);
-}
-
-function exportAll(){
- download(Array.from({length:200},(_,i)=>get(i+1)),"hirano-40-working-all.json");
-}
-
-function exportPublished(){
- const arr=Array.from({length:200},(_,i)=>get(i+1))
-  .filter(canPublish)
-  .map(q=>({
-   ...q,
-   answerBase:1,
-   questionImage:q.figurePath||""
-  }));
-
- if(!arr.length){
-  alert("公開可能な問題がありません。");
-  return;
+  alert(
+   `${copied}問をコピーしました。`+
+   "公式正答と採点措置を再確認してください。"
+  );
  }
-
- download(arr,"questions.json");
- alert(`${arr.length}問を出力しました。GitHubにアップロードしてください。`);
 }
 
 function logout(){
- sessionStorage.removeItem("hirano-bulk-login");
+ sessionStorage.removeItem(
+  "hirano-bulk-login"
+ );
  location.reload();
 }
 
 function unlock(){
  $("login").classList.add("hidden");
  $("app").classList.remove("hidden");
+
+ initExamSelector();
+ migrateLegacy();
+
+ $("totalQuestions").value=
+  examData(selectedExam).totalQuestions;
+
  render();
- edit(1);
+ editQuestion(1);
 }
 
 $("loginForm").addEventListener("submit",e=>{
  e.preventDefault();
- if($("pass").value===PASS){
-  sessionStorage.setItem("hirano-bulk-login","yes");
+
+ if($("password").value===PASSWORD){
+  sessionStorage.setItem(
+   "hirano-bulk-login","yes"
+  );
   unlock();
  }else{
   alert("パスワードが違います");
  }
 });
 
-if(sessionStorage.getItem("hirano-bulk-login")==="yes"){
+if(
+ sessionStorage.getItem("hirano-bulk-login")==="yes"
+){
  unlock();
 }
 </script>
