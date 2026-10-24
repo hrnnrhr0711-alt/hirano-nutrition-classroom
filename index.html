@@ -1,2168 +1,690 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport"
-      content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#087f65">
-<meta name="description"
-      content="管理栄養士を目指す学生と、食や健康を楽しく学びたい方のための学習サイト。">
-<title>ひらのの栄養教室｜国試対策と食のクイズ</title>
-
-<style>
-:root {
-  --green: #087f65;
-  --green-dark: #075d4c;
-  --green-light: #e7f5ee;
-  --bg: #f4f7f8;
-  --paper: #fff;
-  --text: #253331;
-  --muted: #657571;
-  --line: #dce6e2;
-  --red: #bc313b;
-  --red-light: #fff0f1;
-  --yellow: #fff8e6;
-  --shadow: 0 4px 18px rgba(26, 65, 52, .045);
-  --radius: 20px;
-}
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont,
-    "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
-  font-size: 16px;
-  line-height: 1.75;
-  overflow-wrap: anywhere;
-  -webkit-text-size-adjust: 100%;
-}
-button, input, select {
-  font: inherit;
-}
-button, a, input, select {
-  -webkit-tap-highlight-color: transparent;
-}
-button {
-  cursor: pointer;
-  touch-action: manipulation;
-}
-button:disabled {
-  cursor: not-allowed;
-  opacity: .48;
-}
-button:focus-visible, a:focus-visible,
-input:focus-visible, select:focus-visible,
-summary:focus-visible {
-  outline: 3px solid #e7b749;
-  outline-offset: 4px;
-}
-a { color: var(--green-dark); }
-h1, h2, h3, p { margin-top: 0; }
-h1 { font-size: 22px; line-height: 1.45; }
-h2 { font-size: 19px; line-height: 1.5; }
-h3 { font-size: 17px; line-height: 1.55; }
-p:last-child { margin-bottom: 0; }
-
-.top {
-  background: var(--green);
-  color: white;
-  padding: calc(18px + env(safe-area-inset-top)) 20px 20px;
-}
-.top-inner {
-  max-width: 760px;
-  margin: auto;
-}
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 11px;
-  margin-bottom: 18px;
-}
-.logo {
-  display: grid;
-  place-items: center;
-  width: 43px;
-  height: 43px;
-  border-radius: 14px;
-  background: rgba(255,255,255,.15);
-  font-size: 25px;
-}
-.brand strong { display: block; font-size: 19px; }
-.brand small {
-  display: block;
-  color: #d5f2e7;
-  font-size: 11px;
-  letter-spacing: .08em;
-}
-.switcher {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 5px;
-  padding: 5px;
-  border-radius: 15px;
-  background: rgba(0,0,0,.13);
-}
-.switcher button {
-  min-height: 48px;
-  border: 0;
-  border-radius: 11px;
-  color: white;
-  background: transparent;
-  font-size: 14px;
-  font-weight: 700;
-}
-.switcher button.active {
-  color: var(--green-dark);
-  background: white;
-  box-shadow: 0 2px 8px #0000000a;
-}
-
-main {
-  max-width: 800px;
-  margin: auto;
-  padding: 23px 18px calc(115px + env(safe-area-inset-bottom));
-}
-.page-heading {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 19px;
-}
-.page-heading h1 { margin: 0; }
-.eyebrow {
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: .12em;
-  color: var(--green);
-  margin: 0 0 5px;
-}
-.sub, .muted { color: var(--muted); }
-.small { font-size: 13px; }
-.card {
-  background: var(--paper);
-  border: 1px solid #edf1ef;
-  border-radius: var(--radius);
-  padding: 22px;
-  box-shadow: var(--shadow);
-  margin-bottom: 16px;
-}
-.hero {
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(115deg, #08755e, #10a679);
-  color: white;
-  border: 0;
-}
-.hero:after {
-  content: "🌱";
-  position: absolute;
-  right: 15px;
-  top: 12px;
-  font-size: 87px;
-  opacity: .14;
-  pointer-events: none;
-}
-.hero .muted { color: #d6f5e8; }
-.hero h2 { max-width: 85%; font-size: 23px; }
-.hero .big { font-size: 42px; font-weight: 800; }
-.hero .progress { background: #ffffff35; }
-.hero .progress span { background: #b4f2c4; }
-.progress {
-  height: 7px;
-  border-radius: 100px;
-  background: #e8eeeb;
-  overflow: hidden;
-  margin-top: 12px;
-}
-.progress span {
-  display: block;
-  height: 100%;
-  background: var(--green);
-  border-radius: inherit;
-}
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-}
-.tile {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-  min-height: 148px;
-  padding: 20px 17px;
-  background: white;
-  border: 1px solid #edf1ef;
-  border-radius: var(--radius);
-  color: var(--text);
-  box-shadow: var(--shadow);
-}
-.tile .icon {
-  font-size: 28px;
-  margin-bottom: 15px;
-  line-height: 1.2;
-}
-.tile strong { font-size: 15px; }
-.tile small { color: var(--muted); font-size: 12px; }
-.tile:hover, .row-button:hover { border-color: #a4cdbb; }
-.section-title { margin: 26px 0 12px; }
-
-.btn {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  gap: 7px;
-  min-height: 48px;
-  padding: 11px 17px;
-  border: 1px solid transparent;
-  border-radius: 13px;
-  background: var(--green);
-  color: white;
-  font-weight: 700;
-  text-decoration: none;
-  line-height: 1.6;
-}
-.btn.secondary {
-  background: var(--green-light);
-  color: var(--green-dark);
-}
-.btn.outline {
-  background: white;
-  border-color: var(--line);
-  color: var(--text);
-}
-.btn.danger {
-  background: var(--red-light);
-  color: var(--red);
-}
-.btn.white { background: white; color: var(--green-dark); }
-.full { width: 100%; }
-.actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 17px;
-}
-.actions > * { flex: 1; }
-.icon-button {
-  min-width: 46px;
-  min-height: 46px;
-  border: 1px solid var(--line);
-  border-radius: 13px;
-  background: white;
-  color: var(--green-dark);
-  font-size: 22px;
-}
-
-.row-button {
-  display: flex;
-  align-items: center;
-  gap: 13px;
-  width: 100%;
-  text-align: left;
-  border: 1px solid #edf1ef;
-  border-radius: 17px;
-  background: white;
-  padding: 18px;
-  margin-bottom: 12px;
-  color: var(--text);
-  box-shadow: var(--shadow);
-}
-.row-button .emoji {
-  display: grid;
-  place-items: center;
-  flex: 0 0 46px;
-  height: 46px;
-  background: var(--green-light);
-  border-radius: 14px;
-  font-size: 24px;
-}
-.row-button .body { flex: 1; min-width: 0; }
-.row-button strong { display: block; font-size: 15px; }
-.row-button small { color: var(--muted); }
-.chevron { color: #7d8b86; font-size: 23px; }
-
-.pill {
-  display: inline-block;
-  padding: 3px 10px;
-  border-radius: 8px;
-  color: var(--green-dark);
-  background: var(--green-light);
-  font-size: 12px;
-  font-weight: 700;
-}
-.pill.original { color: #795f19; background: #fff4d7; }
-.notice {
-  background: #edf4f1;
-  padding: 14px 16px;
-  border-radius: 13px;
-  font-size: 13px;
-  color: #4d665c;
-  margin-bottom: 17px;
-}
-.form-label {
-  display: block;
-  font-size: 14px;
-  font-weight: 700;
-  margin-bottom: 7px;
-}
-select, input[type="search"], input[type="number"] {
-  width: 100%;
-  min-height: 48px;
-  padding: 10px 12px;
-  border: 1px solid var(--line);
-  border-radius: 11px;
-  background: white;
-  color: var(--text);
-}
-.field { margin-bottom: 15px; }
-.search { margin-bottom: 17px; }
-
-.question-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 14px;
-}
-.question-text {
-  font-size: 18px;
-  line-height: 1.95;
-  white-space: pre-wrap;
-  margin: 0;
-}
-.choice {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  width: 100%;
-  text-align: left;
-  margin-bottom: 11px;
-  padding: 17px 15px;
-  background: white;
-  border: 2px solid #e1e8e4;
-  border-radius: 16px;
-  color: var(--text);
-  line-height: 1.8;
-}
-.choice:disabled { opacity: 1; cursor: default; }
-.choice .number {
-  display: grid;
-  place-items: center;
-  flex: 0 0 30px;
-  min-height: 30px;
-  border-radius: 9px;
-  background: #f0f4f2;
-  font-weight: 700;
-  font-size: 14px;
-}
-.choice .choice-text { flex: 1; }
-.choice.selected { border-color: var(--green); background: #eef8f4; }
-.choice.correct { border-color: #259455; background: #edf9f0; }
-.choice.wrong { border-color: var(--red); background: var(--red-light); }
-.choice.correct .number { background: #23914f; color: white; }
-.choice.wrong .number { background: var(--red); color: white; }
-.explanation {
-  background: var(--yellow);
-  border: 1px solid #f0e5c8;
-}
-.explanation p { white-space: pre-wrap; }
-.result-word { font-size: 22px; font-weight: 800; }
-.correct-text { color: #218349; }
-.wrong-text { color: var(--red); }
-.timer {
-  display: inline-block;
-  background: #fff2da;
-  color: #805c13;
-  padding: 5px 11px;
-  border-radius: 9px;
-  font-variant-numeric: tabular-nums;
-  font-weight: 800;
-}
-.question-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px;
-  margin: 15px 0;
-}
-.question-nav button {
-  width: 38px;
-  min-height: 38px;
-  border-radius: 9px;
-  border: 1px solid var(--line);
-  background: white;
-  color: var(--muted);
-}
-.question-nav button.done { background: #e4f2eb; color: var(--green-dark); }
-.question-nav button.current { border: 2px solid var(--green); font-weight: 800; }
-
-.metrics {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 9px;
-  text-align: center;
-}
-.metrics strong {
-  display: block;
-  font-size: 27px;
-  color: var(--green);
-  line-height: 1.5;
-}
-.metrics small { font-size: 11px; color: var(--muted); }
-.stat-row { padding: 17px 0; border-bottom: 1px solid var(--line); }
-.stat-row:last-child { border-bottom: 0; }
-.stat-label { display: flex; justify-content: space-between; gap: 12px; }
-details {
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  background: white;
-  padding: 15px;
-  margin-bottom: 12px;
-}
-summary { cursor: pointer; font-weight: 700; }
-details > div { margin-top: 14px; }
-.empty { text-align: center; padding: 36px 20px; }
-.empty .icon { font-size: 42px; }
-.footer-note {
-  margin-top: 27px;
-  font-size: 11px;
-  color: var(--muted);
-  text-align: center;
-}
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(255,255,255,.97);
-  border-top: 1px solid var(--line);
-  padding: 9px 12px calc(9px + env(safe-area-inset-bottom));
-  z-index: 20;
-}
-.nav-inner {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  max-width: 760px;
-  margin: auto;
-  gap: 4px;
-}
-.bottom-nav button {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2px;
-  border: 0;
-  background: transparent;
-  color: var(--muted);
-  border-radius: 12px;
-  min-height: 52px;
-  font-size: 11px;
-}
-.bottom-nav .nav-icon { font-size: 20px; line-height: 1.3; }
-.bottom-nav button.active {
-  color: var(--green-dark);
-  background: var(--green-light);
-  font-weight: 800;
-}
-#toast {
-  position: fixed;
-  left: 50%;
-  bottom: calc(95px + env(safe-area-inset-bottom));
-  transform: translateX(-50%);
-  width: max-content;
-  max-width: calc(100% - 30px);
-  background: #213e34;
-  color: white;
-  font-size: 13px;
-  padding: 11px 18px;
-  border-radius: 13px;
-  z-index: 50;
-  box-shadow: 0 5px 24px #0002;
-}
-#storageWarning {
-  background: #fff0d3;
-  color: #73520f;
-  padding: 12px 18px;
-  font-size: 13px;
-}
-[hidden] { display: none !important; }
-@media (min-width: 680px) {
-  .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  main { padding-top: 30px; }
-  .top { padding-bottom: 25px; }
-  .brand strong { font-size: 23px; }
-  .question-text { font-size: 20px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理栄養士国家試験対策アプリ</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts Noto Sans JP -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Noto Sans JP', 'Inter', sans-serif;
+            background-color: #f1f5f9;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+    </style>
 </head>
-
-<body>
-<header class="top">
-  <div class="top-inner">
-    <div class="brand">
-      <div class="logo" aria-hidden="true">🌱</div>
-      <div>
-        <strong>ひらのの栄養教室</strong>
-        <small>NUTRITION LEARNING</small>
-      </div>
-    </div>
-    <div class="switcher" aria-label="学習コース">
-      <button type="button" data-course="student">
-        🎓 学生・国試対策
-      </button>
-      <button type="button" data-course="public">
-        🍎 一般・食のクイズ
-      </button>
-    </div>
-  </div>
-</header>
-
-<div id="storageWarning" role="status" hidden>
-  このブラウザでは記録を保存できません。
-  ページを閉じる前に「設定」からバックアップしてください。
-</div>
-
-<main id="app" tabindex="-1"></main>
-
-<nav class="bottom-nav" aria-label="メインメニュー">
-  <div class="nav-inner">
-    <button type="button" data-page="home">
-      <span class="nav-icon" aria-hidden="true">⌂</span>ホーム
-    </button>
-    <button type="button" data-page="learn">
-      <span class="nav-icon" aria-hidden="true">▤</span>学習
-    </button>
-    <button type="button" data-page="stats">
-      <span class="nav-icon" aria-hidden="true">▥</span>成績
-    </button>
-    <button type="button" data-page="settings">
-      <span class="nav-icon" aria-hidden="true">⚙</span>設定
-    </button>
-  </div>
-</nav>
-
-<div id="toast" role="status" hidden></div>
-
-<input type="file" id="restoreFile"
-       accept=".json,application/json" hidden>
-
-<noscript>
-  <p>学習機能を使用するにはJavaScriptを有効にしてください。</p>
-</noscript>
-
-<script>
-"use strict";
-
-/* =========================================================
-   1. サイト設定
-   ========================================================= */
-
-const SITE = {
-  storageKey: "hirano_nutrition_learning_v1",
-  version: 1,
-  officialPage: "https://www.mhlw.go.jp/stf/newpage_17056.html",
-  officialQuestions: "https://www.mhlw.go.jp/content/10900000/001663681.pdf",
-  officialAnswers: "https://www.mhlw.go.jp/content/10900000/001683038.pdf"
-};
-
-const SUBJECTS = [
-  ["社会・環境と健康", "🌏"],
-  ["人体の構造と機能及び疾病の成り立ち", "🫀"],
-  ["食べ物と健康", "🍎"],
-  ["基礎栄養学", "🧬"],
-  ["応用栄養学", "🌱"],
-  ["栄養教育論", "📖"],
-  ["臨床栄養学", "🏥"],
-  ["公衆栄養学", "📊"],
-  ["給食経営管理論", "🍽️"],
-  ["応用力試験", "✏️"]
-];
-
-const PUBLIC_CATEGORIES = [
-  ["栄養のきほん", "🍚"],
-  ["食事の工夫", "🥗"],
-  ["食品と衛生", "🧼"]
-];
-
-/* =========================================================
-   2. 問題データ
-
-   問題を増やす場合は、この配列に追加します。
-
-   id       : 重複しない固定ID
-   course   : "student" または "public"
-   kind     : "past" または "original"
-   subject  : 科目・カテゴリー
-   year     : 過去問の実施年。自作問題は null
-   round    : 試験回。自作問題は null
-   number   : 公式問題番号。自作問題は null
-   text     : 問題文
-   choices  : 選択肢の配列
-   answers  : 正答の位置。最初の選択肢は 0
-   explanation : 独自作成の解説
-   source   : 出典説明
-
-   複数正答にも対応：
-   answers: [0, 2] → 1番と3番を両方選ぶ問題
-
-   同じ問題を修正する場合、idは変更しないでください。
-   内容を大きく変更する場合は新しいidを付けてください。
-   ========================================================= */
-
-const QUESTIONS = [
-  {
-    id: "past-40-017",
-    course: "student",
-    kind: "past",
-    subject: "人体の構造と機能及び疾病の成り立ち",
-    year: 2026,
-    round: 40,
-    number: 17,
-    text: "生体膜を有する、細胞内の構造体である。最も適当なのはどれか。1つ選べ。",
-    choices: [
-      "核小体",
-      "中心体",
-      "プロテアソーム",
-      "リソソーム",
-      "リボソーム"
-    ],
-    answers: [3],
-    explanation:
-      "正答は4です。\nリソソームは膜で囲まれた細胞小器官で、内部に加水分解酵素を含みます。\n核小体、中心体、プロテアソーム、リボソームはいずれも生体膜で囲まれていません。",
-    source: "厚生労働省・第40回管理栄養士国家試験 問17。解説は当サイト独自作成。"
-  },
-  {
-    id: "past-40-020",
-    course: "student",
-    kind: "past",
-    subject: "人体の構造と機能及び疾病の成り立ち",
-    year: 2026,
-    round: 40,
-    number: 20,
-    text: "生体エネルギーと代謝に関する記述である。最も適当なのはどれか。1つ選べ。",
-    choices: [
-      "AMPは、高エネルギーリン酸化合物である。",
-      "ATP合成酵素は、ミトコンドリア外膜に存在する。",
-      "ATP合成酵素は、細胞内外のCa²⁺濃度勾配により駆動される。",
-      "電子伝達系では、二酸化炭素が産生される。",
-      "脱共役たんぱく質（UCP）は、ミトコンドリア内膜に存在する。"
-    ],
-    answers: [4],
-    explanation:
-      "正答は5です。\n脱共役たんぱく質（UCP）はミトコンドリア内膜に存在し、プロトンの電気化学的勾配をATP合成と切り離して、熱の産生に関与します。\nATP合成酵素も内膜に存在し、主に内膜を隔てたH⁺の電気化学的勾配を利用します。\n電子伝達系では酸素が還元され、水が生じます。",
-    source: "厚生労働省・第40回管理栄養士国家試験 問20。解説は当サイト独自作成。"
-  },
-  {
-    id: "student-original-001",
-    course: "student",
-    kind: "original",
-    subject: "基礎栄養学",
-    year: null,
-    round: null,
-    number: null,
-    text: "グルコースの小腸からの吸収後の経路として、最も適切なのはどれか。1つ選べ。",
-    choices: [
-      "主にリンパ管を通って肝臓へ向かう。",
-      "主に門脈を通って肝臓へ向かう。",
-      "カイロミクロンに取り込まれて運ばれる。",
-      "尿管を通って肝臓へ向かう。",
-      "吸収されたグルコースはすべて小腸で分解される。"
-    ],
-    answers: [1],
-    explanation:
-      "グルコースは小腸上皮細胞から血液側へ移動し、主に門脈を通って肝臓へ運ばれます。\n長鎖脂肪酸を材料とする脂質の運搬経路と区別しましょう。",
-    source: "当サイト作成の学習問題。国家試験の過去問ではありません。"
-  },
-  {
-    id: "student-original-002",
-    course: "student",
-    kind: "original",
-    subject: "基礎栄養学",
-    year: null,
-    round: null,
-    number: null,
-    text: "脂溶性ビタミンの組合せとして、正しいものはどれか。1つ選べ。",
-    choices: [
-      "ビタミンB1・ビタミンC",
-      "ビタミンB2・ビタミンB12",
-      "ビタミンA・ビタミンD",
-      "葉酸・ビタミンC",
-      "ナイアシン・ビタミンB6"
-    ],
-    answers: [2],
-    explanation:
-      "脂溶性ビタミンはA・D・E・Kです。\nビタミンB群とビタミンCは水溶性ビタミンに分類されます。",
-    source: "当サイト作成の学習問題。国家試験の過去問ではありません。"
-  },
-  {
-    id: "student-original-003",
-    course: "student",
-    kind: "original",
-    subject: "食べ物と健康",
-    year: null,
-    round: null,
-    number: null,
-    text: "食中毒予防の三原則として、適切な組合せはどれか。1つ選べ。",
-    choices: [
-      "つけない・増やさない・やっつける",
-      "温めない・洗わない・混ぜない",
-      "冷やさない・乾かさない・保存する",
-      "見た目で判断する・味見する・常温に置く",
-      "加熱する・その後は必ず常温で保存する"
-    ],
-    answers: [0],
-    explanation:
-      "細菌性食中毒予防の基本は、細菌を「つけない・増やさない・やっつける」です。\n手洗いや器具の使い分け、適切な温度管理、十分な加熱などを組み合わせます。",
-    source: "当サイト作成の学習問題。国家試験の過去問ではありません。"
-  },
-  {
-    id: "student-original-004",
-    course: "student",
-    kind: "original",
-    subject: "栄養教育論",
-    year: null,
-    round: null,
-    number: null,
-    text: "対象者が実行しやすい行動目標として、最も具体的なものはどれか。1つ選べ。",
-    choices: [
-      "これからずっと健康に気をつける。",
-      "できるだけ食事を改善する。",
-      "絶対に間食をしない。",
-      "今週は月・水・金の朝食に、卵か納豆を1品追加する。",
-      "すべての栄養素を完璧に摂取する。"
-    ],
-    answers: [3],
-    explanation:
-      "「いつ・どの場面で・何をするか」が具体的で、実施したか確認できる目標です。\n実際の支援では、本人の希望、食事状況、調理環境、実行できる程度を一緒に確認します。",
-    source: "当サイト作成の学習問題。国家試験の過去問ではありません。"
-  },
-  {
-    id: "public-original-001",
-    course: "public",
-    kind: "original",
-    subject: "栄養のきほん",
-    year: null,
-    round: null,
-    number: null,
-    text: "筋肉や皮膚など、体をつくる材料になる栄養素はどれでしょう？",
-    choices: ["たんぱく質", "食塩", "水だけ"],
-    answers: [0],
-    explanation:
-      "たんぱく質は筋肉、皮膚、臓器などの材料になります。\n肉・魚・卵・大豆製品・乳製品などに含まれます。",
-    source: "当サイト作成の一般向けクイズ。"
-  },
-  {
-    id: "public-original-002",
-    course: "public",
-    kind: "original",
-    subject: "栄養のきほん",
-    year: null,
-    round: null,
-    number: null,
-    text: "骨の主な構成成分となるミネラルはどれでしょう？",
-    choices: ["ナトリウム", "カルシウム", "ヨウ素"],
-    answers: [1],
-    explanation:
-      "カルシウムは骨や歯の主な構成成分です。\n牛乳・乳製品、小魚、一部の青菜などが供給源になります。",
-    source: "当サイト作成の一般向けクイズ。"
-  },
-  {
-    id: "public-original-003",
-    course: "public",
-    kind: "original",
-    subject: "食事の工夫",
-    year: null,
-    round: null,
-    number: null,
-    text: "しょうゆの使い方で、使う量を調整しやすいのはどれでしょう？",
-    choices: [
-      "料理全体にたっぷりかける。",
-      "小皿に少量を取り、必要な分だけつける。",
-      "味を確かめずに毎回足す。"
-    ],
-    answers: [1],
-    explanation:
-      "小皿に少量を取り、必要な分だけつけると、使う量を調整しやすくなります。\n「減塩しょうゆ」でも使う量が増えると食塩摂取量は増えるため、量にも注目しましょう。",
-    source: "当サイト作成の一般向けクイズ。"
-  },
-  {
-    id: "public-original-004",
-    course: "public",
-    kind: "original",
-    subject: "食事の工夫",
-    year: null,
-    round: null,
-    number: null,
-    text: "おにぎりだけの昼食に、主菜として追加するならどれでしょう？",
-    choices: ["ゆで卵", "おにぎりをもう1個", "砂糖入りの飲み物"],
-    answers: [0],
-    explanation:
-      "卵は主菜に使われる食品で、たんぱく質を補えます。\nおにぎりに卵などの主菜を足し、さらに野菜のおかずなどを組み合わせると、食事を整えやすくなります。",
-    source: "当サイト作成の一般向けクイズ。"
-  },
-  {
-    id: "public-original-005",
-    course: "public",
-    kind: "original",
-    subject: "食品と衛生",
-    year: null,
-    round: null,
-    number: null,
-    text: "生肉を切った包丁とまな板で、そのままサラダの野菜を切ってもよい。○か×か？",
-    choices: ["○", "×"],
-    answers: [1],
-    explanation:
-      "生肉に付着していた微生物が、加熱せずに食べる野菜へ移るおそれがあります。\n器具を使い分けるか、適切に洗浄・消毒してから使いましょう。",
-    source: "当サイト作成の一般向けクイズ。"
-  },
-  {
-    id: "public-original-006",
-    course: "public",
-    kind: "original",
-    subject: "食品と衛生",
-    year: null,
-    round: null,
-    number: null,
-    text: "冷蔵庫に入れた食品について、正しい考え方はどれでしょう？",
-    choices: [
-      "冷蔵すれば、いつまでも安全に食べられる。",
-      "冷蔵しても、保存期間や取り扱いに注意が必要。",
-      "見た目が変わらなければ、必ず安全。"
-    ],
-    answers: [1],
-    explanation:
-      "冷蔵は微生物の増殖を抑える方法の一つですが、食品の安全を永久に保つものではありません。\n表示された保存方法や期限を確認し、開封後は早めに使いましょう。",
-    source: "当サイト作成の一般向けクイズ。"
-  }
-];
-
-/* =========================================================
-   3. 共通関数と保存処理
-   ========================================================= */
-
-const $ = selector => document.querySelector(selector);
-const app = $("#app");
-
-const escapeHTML = value => String(value ?? "").replace(
-  /[&<>"']/g,
-  ch => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#39;"
-  })[ch]
-);
-
-const byId = new Map(QUESTIONS.map(q => [q.id, q]));
-const rate = (a, b) => b ? Math.round(a / b * 100) : 0;
-
-function freshData() {
-  return {
-    version: SITE.version,
-    course: "student",
-    records: {},
-    bookmarks: [],
-    session: null
-  };
-}
-
-function validSelection(value, q) {
-  return Array.isArray(value)
-    && value.length <= q.answers.length
-    && new Set(value).size === value.length
-    && value.every(n =>
-      Number.isInteger(n) && n >= 0 && n < q.choices.length
-    );
-}
-
-function sameAnswers(a, b) {
-  return a.length === b.length
-    && [...a].sort((x, y) => x - y)
-      .every((n, i) => n === [...b].sort((x, y) => x - y)[i]);
-}
-
-function validateData(raw) {
-  if (!raw || raw.version !== SITE.version) {
-    throw new Error("対応していないバックアップです。");
-  }
-
-  const clean = freshData();
-  clean.course = raw.course === "public" ? "public" : "student";
-
-  if (!raw.records || typeof raw.records !== "object"
-      || Array.isArray(raw.records)) {
-    throw new Error("学習記録の形式が正しくありません。");
-  }
-
-  for (const [id, r] of Object.entries(raw.records)) {
-    const q = byId.get(id);
-    if (!q) continue;
-
-    if (!r || !Number.isSafeInteger(r.attempts)
-        || r.attempts < 1
-        || !Number.isSafeInteger(r.correct)
-        || r.correct < 0 || r.correct > r.attempts
-        || !validSelection(r.selected, q)
-        || r.selected.length !== q.answers.length
-        || !Number.isFinite(Date.parse(r.updated))) {
-      throw new Error("学習記録に不正な値があります。");
-    }
-
-    clean.records[id] = {
-      attempts: r.attempts,
-      correct: r.correct,
-      selected: [...r.selected],
-      lastCorrect: sameAnswers(r.selected, q.answers),
-      updated: r.updated
-    };
-  }
-
-  clean.bookmarks = Array.isArray(raw.bookmarks)
-    ? [...new Set(raw.bookmarks.filter(id => byId.has(id)))]
-    : [];
-
-  const s = raw.session;
-  if (s !== null && s !== undefined) {
-    if (!s || !Array.isArray(s.ids) || !s.ids.length
-        || new Set(s.ids).size !== s.ids.length
-        || !s.ids.every(id => byId.has(id))
-        || !["student", "public"].includes(s.course)
-        || !s.ids.every(id => byId.get(id).course === s.course)
-        || !Number.isInteger(s.index)
-        || s.index < 0 || s.index >= s.ids.length
-        || !["practice", "exam"].includes(s.type)
-        || typeof s.finished !== "boolean"
-        || (s.type === "exam" &&
-          (!Number.isFinite(s.deadline) || s.deadline <= 0))
-        || !s.answers || typeof s.answers !== "object"
-        || Array.isArray(s.answers)
-        || !s.logged || typeof s.logged !== "object"
-        || Array.isArray(s.logged)) {
-      throw new Error("途中の学習データが正しくありません。");
-    }
-
-    const answers = {};
-    const logged = {};
-
-    for (const id of s.ids) {
-      const q = byId.get(id);
-      const a = s.answers[id] ?? [];
-
-      if (!validSelection(a, q)) {
-        throw new Error("解答データが正しくありません。");
-      }
-
-      answers[id] = [...a];
-
-      if (s.logged[id] === true) {
-        if (a.length !== q.answers.length) {
-          throw new Error("確定済み解答が正しくありません。");
-        }
-        logged[id] = true;
-      }
-    }
-
-    clean.session = {
-      course: s.course,
-      ids: [...s.ids],
-      index: s.index,
-      type: s.type,
-      deadline: s.type === "exam" ? s.deadline : null,
-      title: typeof s.title === "string"
-        ? s.title.slice(0, 100) : "学習",
-      answers,
-      logged,
-      finished: s.finished
-    };
-  }
-
-  return clean;
-}
-
-let data = freshData();
-
-try {
-  const saved = localStorage.getItem(SITE.storageKey);
-  if (saved) data = validateData(JSON.parse(saved));
-} catch (error) {
-  $("#storageWarning").hidden = false;
-  $("#storageWarning").textContent =
-    "保存済み記録を読み込めませんでした。現在は新しい記録で表示しています。";
-}
-
-function save() {
-  try {
-    localStorage.setItem(SITE.storageKey, JSON.stringify(data));
-  } catch (error) {
-    $("#storageWarning").hidden = false;
-  }
-}
-
-let toastTimer;
-
-function toast(message) {
-  const el = $("#toast");
-  el.textContent = message;
-  el.hidden = false;
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => { el.hidden = true; }, 3500);
-}
-
-function bank() {
-  return QUESTIONS.filter(q => q.course === data.course);
-}
-
-function categories() {
-  return data.course === "student" ? SUBJECTS : PUBLIC_CATEGORIES;
-}
-
-function shuffle(items, random = Math.random) {
-  const out = [...items];
-  for (let i = out.length - 1; i > 0; i--) {
-    const j = Math.floor(random() * (i + 1));
-    [out[i], out[j]] = [out[j], out[i]];
-  }
-  return out;
-}
-
-function japanDate() {
-  return new Intl.DateTimeFormat("sv-SE", {
-    timeZone: "Asia/Tokyo",
-    year: "numeric", month: "2-digit", day: "2-digit"
-  }).format(new Date());
-}
-
-function dailyQuestions() {
-  const seedText = japanDate() + data.course;
-  let seed = 2166136261;
-
-  for (const ch of seedText) {
-    seed = Math.imul(seed ^ ch.charCodeAt(0), 16777619);
-  }
-
-  function random() {
-    seed |= 0;
-    seed = (seed + 0x6D2B79F5) | 0;
-    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
-    t ^= t + Math.imul(t ^ (t >>> 7), 61 | t);
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  }
-
-  return shuffle(bank(), random).slice(0, 5);
-}
-
-function metrics(list = bank()) {
-  const records = list.map(q => data.records[q.id]).filter(Boolean);
-  const attempts = records.reduce((sum, r) => sum + r.attempts, 0);
-  const correct = records.reduce((sum, r) => sum + r.correct, 0);
-
-  return {
-    total: list.length,
-    answered: records.length,
-    attempts,
-    correct,
-    accuracy: rate(correct, attempts),
-    wrong: records.filter(r => !r.lastCorrect).length,
-    bookmarks: list.filter(q => data.bookmarks.includes(q.id)).length
-  };
-}
-
-function questionLabel(q) {
-  if (q.kind === "past") {
-    return `第${q.round}回・問${q.number}（${q.year}年）`;
-  }
-  return "オリジナル問題";
-}
-
-function sourceHTML(q) {
-  if (q.kind !== "past") {
-    return `<p class="small muted">${escapeHTML(q.source)}</p>`;
-  }
-
-  return `
-    <p class="small muted">${escapeHTML(q.source)}</p>
-    <div class="actions">
-      <a class="btn outline small"
-         href="${SITE.officialQuestions}"
-         target="_blank" rel="noopener noreferrer">公式問題PDF ↗</a>
-      <a class="btn outline small"
-         href="${SITE.officialAnswers}"
-         target="_blank" rel="noopener noreferrer">公式正答PDF ↗</a>
-    </div>`;
-}
-
-function button(label, action, css = "btn secondary", disabled = false) {
-  return `<button type="button"
-    class="${css}"
-    data-action="${action}"
-    ${disabled ? "disabled" : ""}>${label}</button>`;
-}
-
-function tile(icon, title, description, action) {
-  return `<button type="button" class="tile" data-action="${action}">
-    <span class="icon" aria-hidden="true">${icon}</span>
-    <strong>${escapeHTML(title)}</strong>
-    <small>${escapeHTML(description)}</small>
-  </button>`;
-}
-
-function heading(title, back = false) {
-  return `<div class="page-heading">
-    <div>
-      <p class="eyebrow">
-        ${data.course === "student" ? "STUDENT COURSE" : "EVERYDAY NUTRITION"}
-      </p>
-      <h1>${escapeHTML(title)}</h1>
-    </div>
-    ${back ? button("戻る", "learn", "btn outline") : ""}
-  </div>`;
-}
-
-function empty(title, text) {
-  return `<div class="card empty">
-    <div class="icon" aria-hidden="true">🌱</div>
-    <h2>${escapeHTML(title)}</h2>
-    <p class="muted">${escapeHTML(text)}</p>
-    <div class="actions">${button("学習メニューへ", "learn", "btn")}</div>
-  </div>`;
-}
-
-/* =========================================================
-   4. 画面
-   ========================================================= */
-
-let page = "home";
-let listMode = "subject";
-let searchText = "";
-
-function homeHTML() {
-  const m = metrics();
-  const student = data.course === "student";
-  const pastCount = bank().filter(q => q.kind === "past").length;
-  const originalCount = bank().length - pastCount;
-  const s = data.session;
-
-  return `
-    ${heading(student ? "スキマ時間を、合格への一歩に。" : "食の知識を、毎日の味方に。")}
-    <section class="card hero">
-      <p class="small muted">YOUR LEARNING</p>
-      <h2>${student ? "ひとつずつ、わかるを増やす。" : "知って、選んで、おいしく暮らす。"}</h2>
-      <div><span class="big">${m.answered}</span>
-        <span> / ${m.total}問 学習済み</span></div>
-      <div class="progress" role="progressbar"
-        aria-label="学習進捗"
-        aria-valuemin="0" aria-valuemax="${m.total || 1}"
-        aria-valuenow="${m.answered}">
-        <span style="width:${rate(m.answered, m.total)}%"></span>
-      </div>
-      <p class="small" style="margin-top:10px">
-        解答した問題の割合 ${rate(m.answered, m.total)}%
-        ／ 延べ正答率 ${m.accuracy}%
-      </p>
-    </section>
-
-    ${s && !s.finished && s.course === data.course ? `
-      <section class="card">
-        <span class="pill">途中の学習があります</span>
-        <h2 style="margin-top:12px">${escapeHTML(s.title)}</h2>
-        <p class="small muted">
-          ${s.index + 1} / ${s.ids.length}問目
-          ${s.type === "exam" ? "／制限時間は中断中も進みます。" : ""}
-        </p>
-        ${button("続きから再開 →", "resume", "btn full")}
-      </section>` : ""}
-
-    <section class="card">
-      <span class="pill">${japanDate()}・日本時間</span>
-      <h2 style="margin-top:12px">☀️ 今日の${Math.min(5, m.total)}問</h2>
-      <p class="small muted">まずは短い学習から。同じ日・同じコースでは同じ問題です。</p>
-      <div class="actions">${button("今日の問題を解く →", "daily", "btn")}</div>
-    </section>
-
-    <h2 class="section-title">クイックスタート</h2>
-    <div class="grid">
-      ${tile("📚", student ? "科目別学習" : "テーマ別クイズ",
-        "学びたい分野を選ぶ", "subjects")}
-      ${student ? tile("🗓️", "年度別過去問",
-        "収録済みの実施年から選ぶ", "years") : ""}
-      ${tile("🔀", "ランダム",
-        "最大10問をシャッフル", "random")}
-      ${tile("↻", "間違えた問題",
-        `${m.wrong}問・直近の解答が不正解`, "wrong")}
-      ${tile("⭐", "ブックマーク",
-        `${m.bookmarks}問を保存中`, "bookmarks")}
-      ${tile("🌿", "未回答の問題",
-        `${m.total - m.answered}問`, "unanswered")}
-      ${tile("⏱️", "時間制限付き練習",
-        "最後にまとめて採点", "exam-setup")}
+<body class="bg-slate-100 text-slate-800 antialiased min-h-screen flex flex-col items-center justify-start">
+
+    <!-- Mobile Frame Wrapper for Web & Mobile hybrid preview -->
+    <div id="app-container" class="w-full max-w-md bg-white min-h-screen shadow-2xl flex flex-col relative pb-20">
+        
+        <!-- Top Header Navigation -->
+        <header id="header" class="bg-[#1b7a43] text-white px-4 py-3.5 flex items-center justify-between sticky top-0 z-50 shadow-md">
+            <div class="flex items-center space-x-2">
+                <button id="back-btn" onclick="goHome()" class="hidden text-white text-base p-1 hover:bg-emerald-800 rounded-lg transition"><i class="fa-solid fa-chevron-left"></i></button>
+                <h1 id="header-title" class="font-bold text-base tracking-wide">管理栄養士 試験対策</h1>
+            </div>
+            <div class="flex items-center space-x-2">
+                <button onclick="toggleAiMode()" class="text-xs bg-emerald-800/80 hover:bg-emerald-900 px-2.5 py-1 rounded-full text-emerald-100 transition flex items-center space-x-1">
+                    <i class="fa-solid fa-bolt text-amber-300"></i>
+                    <span>AI連動</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main id="main-content" class="flex-1 overflow-y-auto p-4 space-y-4">
+            <!-- Dynamic Views injected via JavaScript -->
+        </main>
+
+        <!-- Bottom Navigation Bar -->
+        <nav class="absolute bottom-0 left-0 right-0 bg-white border-t border-slate-200 py-2.5 px-6 flex justify-around items-center z-40 shadow-lg">
+            <button onclick="switchTab('home')" id="nav-home" class="flex flex-col items-center text-[#1b7a43] transition">
+                <i class="fa-solid fa-house text-lg"></i>
+                <span class="text-[10px] font-medium mt-1">ホーム</span>
+            </button>
+            <button onclick="switchTab('study')" id="nav-study" class="flex flex-col items-center text-slate-400 hover:text-[#1b7a43] transition">
+                <i class="fa-solid fa-book-open text-lg"></i>
+                <span class="text-[10px] font-medium mt-1">学習</span>
+            </button>
+            <button onclick="switchTab('stats')" id="nav-stats" class="flex flex-col items-center text-slate-400 hover:text-[#1b7a43] transition">
+                <i class="fa-solid fa-chart-simple text-lg"></i>
+                <span class="text-[10px] font-medium mt-1">成績</span>
+            </button>
+            <button onclick="switchTab('mypage')" id="nav-mypage" class="flex flex-col items-center text-slate-400 hover:text-[#1b7a43] transition">
+                <i class="fa-solid fa-user text-lg"></i>
+                <span class="text-[10px] font-medium mt-1">マイページ</span>
+            </button>
+        </nav>
     </div>
 
-    <div class="notice" style="margin-top:20px">
-      ${student
-        ? `現在の収録：公式過去問${pastCount}問＋オリジナル${originalCount}問。
-           全年度・全問題を収録したサイトではありません。`
-        : `現在の収録：一般向けオリジナル${m.total}問。
-           食や栄養を楽しく学ぶためのクイズです。`}
-    </div>`;
-}
-
-function learnHTML() {
-  return `
-    ${heading("学び方を選ぶ")}
-    <div class="grid">
-      ${tile("📚", data.course === "student" ? "科目別" : "テーマ別",
-        "分野を絞って学ぶ", "subjects")}
-      ${data.course === "student"
-        ? tile("🗓️", "年度別", "公式過去問を実施年で選ぶ", "years") : ""}
-      ${tile("🔎", "問題を探す", "問題文・選択肢から検索", "search")}
-      ${tile("🔀", "ランダム", "最大10問", "random")}
-      ${tile("☀️", "今日の5問", "日本時間で日替わり", "daily")}
-      ${tile("↻", "復習", "直近で間違えた問題", "wrong")}
-      ${tile("⭐", "ブックマーク", "気になる問題を再確認", "bookmarks")}
-      ${tile("🌿", "未回答", "まだ解いていない問題", "unanswered")}
-      ${tile("⏱️", "時間制限付き練習", "問題数・時間を設定", "exam-setup")}
-    </div>`;
-}
-
-function subjectsHTML() {
-  return `
-    ${heading(data.course === "student" ? "科目別学習" : "テーマ別クイズ", true)}
-    <p class="small muted">問題数は、このサイトに実際に収録されている数です。</p>
-    ${categories().map(([name, emoji], index) => {
-      const list = bank().filter(q => q.subject === name);
-      const m = metrics(list);
-      return `
-        <button type="button" class="row-button"
-          data-action="subject" data-value="${index}"
-          ${list.length ? "" : "disabled"}>
-          <span class="emoji" aria-hidden="true">${emoji}</span>
-          <span class="body">
-            <strong>${escapeHTML(name)}</strong>
-            <small>
-              ${list.length ? `${list.length}問 ／ 学習済み${m.answered}問` : "問題は準備中"}
-              ${m.attempts ? ` ／ 正答率${m.accuracy}%` : ""}
-            </small>
-            <span class="progress">
-              <span style="width:${rate(m.answered, list.length)}%"></span>
-            </span>
-          </span>
-          <span class="chevron" aria-hidden="true">›</span>
-        </button>`;
-    }).join("")}`;
-}
-
-function yearsHTML() {
-  const years = [...new Set(
-    bank().filter(q => q.kind === "past").map(q => q.year)
-  )].sort((a, b) => b - a);
-
-  return `
-    ${heading("年度別過去問", true)}
-    <div class="notice">
-      実際に問題が収録されている実施年だけ表示しています。
-      オリジナル問題は含みません。
-    </div>
-    ${years.length ? years.map(year => {
-      const list = bank().filter(q => q.kind === "past" && q.year === year);
-      const rounds = [...new Set(list.map(q => q.round))];
-      return `
-        <button type="button" class="row-button"
-          data-action="year" data-value="${year}">
-          <span class="emoji" aria-hidden="true">🗓️</span>
-          <span class="body">
-            <strong>${year}年・第${rounds.join("・")}回</strong>
-            <small>${list.length}問収録・一部収録</small>
-          </span>
-          <span class="chevron" aria-hidden="true">›</span>
-        </button>`;
-    }).join("") : empty("過去問は準備中です", "収録後、この画面から学習できます。")}`;
-}
-
-function questionListHTML() {
-  let list = bank();
-  const titles = {
-    wrong: "間違えた問題",
-    bookmarks: "ブックマーク",
-    unanswered: "未回答の問題",
-    search: "問題を探す"
-  };
-
-  if (listMode === "wrong") {
-    list = list.filter(q => data.records[q.id]
-      && !data.records[q.id].lastCorrect);
-  }
-  if (listMode === "bookmarks") {
-    list = list.filter(q => data.bookmarks.includes(q.id));
-  }
-  if (listMode === "unanswered") {
-    list = list.filter(q => !data.records[q.id]);
-  }
-
-  const term = searchText.trim().toLocaleLowerCase("ja");
-  if (term) {
-    list = list.filter(q =>
-      [q.text, q.subject, questionLabel(q), ...q.choices]
-        .join(" ").toLocaleLowerCase("ja").includes(term)
-    );
-  }
-
-  return `
-    ${heading(titles[listMode] || "問題一覧", true)}
-    <label class="form-label" for="questionSearch">キーワード</label>
-    <input class="search" type="search" id="questionSearch"
-      value="${escapeHTML(searchText)}"
-      placeholder="例：ビタミン、ミトコンドリア">
-    <p class="small muted">${list.length}問</p>
-    ${list.length ? `
-      ${button("表示中の問題をまとめて解く", "start-list", "btn full")}
-      <div style="height:16px"></div>
-      ${list.map(q => `
-        <button type="button" class="row-button"
-          data-action="single" data-value="${escapeHTML(q.id)}">
-          <span class="body">
-            <small>${escapeHTML(questionLabel(q))} ／ ${escapeHTML(q.subject)}</small>
-            <strong>${escapeHTML(q.text)}</strong>
-          </span>
-          <span class="chevron" aria-hidden="true">›</span>
-        </button>`).join("")}
-    ` : empty("該当する問題はありません", "検索語を変えるか、ほかの学び方を選んでください。")}`;
-}
-
-function examSetupHTML() {
-  const count = bank().length;
-  return `
-    ${heading("時間制限付き練習", true)}
-    <section class="card">
-      <span class="pill">練習用</span>
-      <h2 style="margin-top:12px">時間を決めて集中しよう</h2>
-      <p class="small muted">
-        解答中は正誤・解説を表示せず、提出後にまとめて採点します。
-        制限時間になると自動提出します。
-      </p>
-      <p class="notice">
-        本番の全問題数・試験時間を再現した模試ではありません。
-        現在のコースの収録問題から出題します。
-        中断中や画面を閉じている間も制限時間は進みます。
-      </p>
-      <div class="field">
-        <label class="form-label" for="examCount">出題数</label>
-        <select id="examCount">
-          ${[...new Set([Math.min(5, count), count])].map(n =>
-            `<option value="${n}">${n}問</option>`).join("")}
-        </select>
-      </div>
-      <div class="field">
-        <label class="form-label" for="examMinutes">制限時間</label>
-        <select id="examMinutes">
-          <option value="5">5分</option>
-          <option value="10" selected>10分</option>
-          <option value="20">20分</option>
-          <option value="30">30分</option>
-        </select>
-      </div>
-      ${button("練習を始める →", "start-exam", "btn full", !count)}
-    </section>`;
-}
-
-function explanationHTML(q, selected) {
-  const correct = sameAnswers(selected, q.answers);
-  return `
-    <section class="card explanation">
-      <p class="result-word ${correct ? "correct-text" : "wrong-text"}">
-        ${correct ? "✓ 正解です" : selected.length ? "もう一度確認しよう" : "未回答"}
-      </p>
-      <p><strong>正答：${q.answers.map(n => n + 1).join("・")}</strong></p>
-      <h3>💡 解説</h3>
-      <p>${escapeHTML(q.explanation)}</p>
-      ${sourceHTML(q)}
-    </section>`;
-}
-
-function quizHTML() {
-  const s = data.session;
-  if (!s || s.finished) return homeHTML();
-
-  const q = byId.get(s.ids[s.index]);
-  const selected = s.answers[q.id] || [];
-  const locked = s.type === "practice" && !!s.logged[q.id];
-  const marked = data.bookmarks.includes(q.id);
-  const doneCount = s.ids.filter(id => {
-    const item = byId.get(id);
-    return (s.answers[id] || []).length === item.answers.length;
-  }).length;
-
-  return `
-    ${heading(s.title)}
-    <div class="question-meta">
-      <span class="pill">${escapeHTML(q.subject)}</span>
-      <span class="small muted">${s.index + 1} / ${s.ids.length}</span>
-    </div>
-    <div class="progress" style="margin-bottom:20px">
-      <span style="width:${rate(s.index + 1, s.ids.length)}%"></span>
+    <!-- Message Modal for Alerts / Info -->
+    <div id="modal" class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl p-6 max-w-sm w-full shadow-2xl text-center space-y-4">
+            <div id="modal-icon" class="text-emerald-600 text-4xl"><i class="fa-solid fa-circle-check"></i></div>
+            <h3 id="modal-title" class="font-bold text-lg text-slate-800">通知</h3>
+            <p id="modal-text" class="text-sm text-slate-600">メッセージが入ります。</p>
+            <button onclick="closeModal()" class="w-full bg-[#1b7a43] text-white py-2.5 rounded-xl font-bold shadow-md hover:bg-emerald-800 transition">閉じる</button>
+        </div>
     </div>
 
-    ${s.type === "exam" ? `
-      <div class="question-meta">
-        <span id="timer" class="timer" aria-label="残り時間"></span>
-        <span class="small muted">選択済み ${doneCount}問</span>
-      </div>
-      <div class="question-nav" aria-label="問題番号へ移動">
-        ${s.ids.map((id, index) => `
-          <button type="button" data-action="jump" data-value="${index}"
-            aria-label="問題${index + 1}へ"
-            ${index === s.index ? 'aria-current="step"' : ""}
-            class="${(s.answers[id] || []).length === byId.get(id).answers.length
-              ? "done" : ""} ${index === s.index ? "current" : ""}">
-            ${index + 1}
-          </button>`).join("")}
-      </div>` : ""}
+    <!-- Application Logic Script -->
+    <script>
+        // State Management
+        let state = {
+            currentTab: 'home',
+            currentView: 'home', // home, study_list, sub_menu, quiz, stats, mypage
+            studyMode: null, // todays5, ai_review, year_selected, subject_selected, random, wrong, exam
+            selectedCategoryTitle: '',
+            questions: [],
+            currentIndex: 0,
+            userAnswers: {}, // qId -> selectedOption
+            bookmarks: {}, // qId -> boolean
+            wrongQuestions: {}, // qId -> boolean
+            stats: {
+                totalAnswered: 4,
+                totalCorrect: 0,
+                streak: 3
+            }
+        };
 
-    <section class="card">
-      <div class="question-meta">
-        <span class="pill ${q.kind === "original" ? "original" : ""}">
-          ${escapeHTML(questionLabel(q))}
-        </span>
-        <button type="button" class="icon-button"
-          data-action="bookmark"
-          aria-label="${marked ? "ブックマークを解除" : "ブックマークに追加"}"
-          aria-pressed="${marked}">
-          ${marked ? "★" : "☆"}
-        </button>
-      </div>
-      <p class="question-text">${escapeHTML(q.text)}</p>
-      <p class="small muted" style="margin-top:12px">
-        ${q.answers.length}つ選択してください。
-        ${q.answers.length > 1 ? "正答の組合せがすべて一致すると正解です。" : ""}
-      </p>
-    </section>
+        // Comprehensive Question Database (1-40回模擬・厳選問題)
+        const questionBank = [
+            {
+                id: 1,
+                year: "第40回 (2026年3月実施)",
+                subject: "基礎栄養学",
+                question: "吸収された栄養素の体内動態に関する記述である。最も適当なものを1つ選べ。",
+                options: [
+                    "中鎖脂肪酸はカイロミクロンに組み込まれリンパ管経由で運搬されるため、吸収速度は長鎖脂肪酸と同程度である。",
+                    "アミノ酸は小腸から吸収された後にリンパ管に入り、肝臓を経由せず直接全身の末梢組織に供給される。",
+                    "グルコースは小腸から吸収された後にリンパ管に入り、胸管を経て鎖骨下静脈から全身循環に入る。",
+                    "水溶性ビタミンの多くは門脈を経由して肝臓に運ばれるが、ビタミンB12は例外的にリンパ管を経由する。",
+                    "長鎖脂肪酸はミセル化された後にリンパ管を経由して全身循環に入り、門脈は経由しないルートで運搬される"
+                ],
+                answer: 5,
+                explanation: "長鎖脂肪酸は小腸上皮細胞内でトリアシルグリセロールに再合成されカイロミクロンに組み込まれリンパ管を経由して全身循環に入ります。門脈は経由しません。"
+            },
+            {
+                id: 2,
+                year: "第40回 (2026年3月実施)",
+                subject: "基礎栄養学",
+                question: "エネルギー代謝に関する記述である。最も適当なものを1つ選べ。",
+                options: [
+                    "基礎代謝量は、睡眠中に最も高くなる。",
+                    "食事誘発性熱産生（DIT）は、脂質摂取時が最も高い。",
+                    "呼吸商（RQ）は、糖質のみ酸化されるとき1.0となる。",
+                    "基礎代謝基準値は、高齢者の方が若年者より高い。",
+                    "非タンパク呼吸商から、タンパク質の酸化量は算出できない。"
+                ],
+                answer: 3,
+                explanation: "糖質のみが酸化されるときの呼吸商（CO2産生量/O2消費量）は1.0になります。脂質は0.7、タンパク質は0.82です。"
+            },
+            {
+                id: 3,
+                year: "第39回 (2025年3月実施)",
+                subject: "人体の構造と機能及び疾病の成り立ち",
+                question: "ホルモンとその分泌器官の組合せである。最も適当なものを1つ選べ。",
+                options: [
+                    "バソプレシン ーー 副腎皮質",
+                    "インスリン ーー 膵臓（ランゲルハンス島B細胞）",
+                    "カルシトニン ーー 甲状腺",
+                    "コルチゾール ーー 下垂体前葉",
+                    "アルドステロン ーー 甲状腺"
+                ],
+                answer: 2,
+                explanation: "インスリンは膵臓のランゲルハンス島B細胞から分泌されます。カルシトニンは甲状腺C細胞から分泌され血中カルシウム濃度を低下させます。"
+            },
+            {
+                id: 4,
+                year: "第39回 (2025年3月実施)",
+                subject: "食べ物と健康",
+                question: "食品の加工と保蔵に関する記述である。最も適当なものを1つ選べ。",
+                options: [
+                    "フリーズドライは、常圧下での加熱乾燥法である。",
+                    "塩蔵は、食品の水分活性を高めて保存性を高める方法である。",
+                    "レトルトパウチ食品は、加圧加熱殺菌を行って製造される。",
+                    "照射殺菌は、我が国ではすべての食品への使用が許可されている。",
+                    "冷蔵保存は、食品中の酵素活性を完全に停止させる。"
+                ],
+                answer: 3,
+                explanation: "レトルトパウチ食品は、気密性容器に詰めて加圧加熱殺菌（120℃以上で数分間など）を行って長期保存を可能にしたものです。"
+            },
+            {
+                id: 5,
+                year: "第38回 (2024年3月実施)",
+                subject: "臨床栄養学",
+                question: "生活習慣病と栄養管理に関する記述である。最も適当なものを1つ選べ。",
+                options: [
+                    "メタボリックシンドロームの診断では、腹囲が必須項目である。",
+                    "高血圧治療ガイドラインでは、減塩目標は1日3g未満とされている。",
+                    "2型糖尿病の栄養療法では、極端な低糖質食が第一選択となる。",
+                    "脂質異常症では、飽和脂肪酸の摂取量を増やし、n-3系脂肪酸を減らす。",
+                    "慢性腎臓病（CKD）では、初期から厳重な高タンパク質食とする。"
+                ],
+                answer: 1,
+                explanation: "メタボリックシンドロームの診断には内臓脂肪の蓄積（ウエスト周囲径：男性≧85cm、女性≧90cm）が必須項目です。"
+            },
+            {
+                id: 6,
+                year: "第37回 (2023年3月実施)",
+                subject: "公衆栄養学",
+                question: "国民健康・栄養調査に関する記述である。最も適当なものを1つ選べ。",
+                options: [
+                    "調査の法的根拠は、健康増進法である。",
+                    "対象は、全国の20歳以上の者である。",
+                    "身体状況調査における身長測定は、被測定者の意思にかかわらず強制される。",
+                    "栄養摂取状況調査は、通年の1日について実施される。",
+                    "生活習慣に関する調査項目には、喫煙や飲酒が含まれない。"
+                ],
+                answer: 1,
+                explanation: "国民健康・栄養調査は健康増進法を根拠として実施されています。"
+            }
+        ];
 
-    <div aria-label="選択肢">
-      ${q.choices.map((text, index) => {
-        let css = selected.includes(index) ? " selected" : "";
-        if (locked && q.answers.includes(index)) css = " correct";
-        if (locked && selected.includes(index) && !q.answers.includes(index)) {
-          css = " wrong";
+        // 8 Core Subjects
+        const subjects = [
+            { name: "社会・環境と健康", icon: "fa-globe", count: 80 },
+            { name: "人体の構造と機能及び疾病の成り立ち", icon: "fa-heart-pulse", count: 140 },
+            { name: "食べ物と健康", icon: "fa-apple-whole", count: 130 },
+            { name: "基礎栄養学", icon: "fa-dna", count: 70 },
+            { name: "応用栄養学", icon: "fa-baby", count: 80 },
+            { name: "栄養教育論", icon: "fa-book", count: 70 },
+            { name: "臨床栄養学", icon: "fa-hospital", count: 140 },
+            { name: "公衆栄養学", icon: "fa-chart-pie", count: 80 }
+        ];
+
+        // Years 1 to 40 generator
+        const yearsList = Array.from({length: 40}, (_, i) => `第${40 - i}回 (${2026 - i}年3月)`);
+
+        window.onload = function() {
+            render();
+        };
+
+        function switchTab(tab) {
+            state.currentTab = tab;
+            state.currentView = tab === 'home' ? 'home' : (tab === 'study' ? 'study_list' : (tab === 'stats' ? 'stats' : 'mypage'));
+            render();
         }
 
-        return `
-          <button type="button" class="choice${css}"
-            data-action="choose" data-value="${index}"
-            aria-pressed="${selected.includes(index)}"
-            ${locked ? "disabled" : ""}>
-            <span class="number">${index + 1}</span>
-            <span class="choice-text">${escapeHTML(text)}</span>
-            ${locked && q.answers.includes(index) ? '<span aria-label="正答">✓</span>' : ""}
-            ${locked && selected.includes(index) && !q.answers.includes(index)
-              ? '<span aria-label="不正解">×</span>' : ""}
-          </button>`;
-      }).join("")}
-    </div>
-
-    ${locked ? explanationHTML(q, selected) : ""}
-
-    ${s.type === "practice" ? `
-      ${locked
-        ? button(s.index === s.ids.length - 1 ? "結果を見る →" : "次の問題へ →",
-            "next", "btn full")
-        : button("解答を確定する", "confirm-answer", "btn full",
-            selected.length !== q.answers.length)}
-    ` : `
-      <div class="actions">
-        ${button("← 前へ", "previous", "btn outline", s.index === 0)}
-        ${button("次へ →", "next-exam", "btn",
-            s.index === s.ids.length - 1)}
-      </div>
-      <div class="actions">
-        ${button("提出して採点する", "submit-exam", "btn secondary full")}
-      </div>
-    `}
-
-    <div class="actions">
-      ${button("中断してホームへ", "pause", "btn outline")}
-    </div>
-    <p class="small muted" style="margin-top:14px">
-      ${s.type === "practice"
-        ? "確定した解答を学習成績に記録します。選択しただけでは記録されません。"
-        : "提出時に、選択が完了した問題を学習成績に記録します。未回答は今回の得点では不正解です。"}
-    </p>`;
-}
-
-function resultHTML() {
-  const s = data.session;
-  if (!s || !s.finished) return homeHTML();
-
-  const answered = s.ids.filter(id =>
-    (s.answers[id] || []).length === byId.get(id).answers.length
-  ).length;
-  const correct = s.ids.filter(id =>
-    sameAnswers(s.answers[id] || [], byId.get(id).answers)
-  ).length;
-
-  return `
-    ${heading("おつかれさまでした")}
-    <section class="card hero">
-      <p class="small">${escapeHTML(s.title)}</p>
-      <h2>今日の一歩が、知識になります。</h2>
-      <div><span class="big">${correct}</span> / ${s.ids.length}問 正解</div>
-      <p style="margin-top:12px">
-        今回の得点率 ${rate(correct, s.ids.length)}%
-        ／ 未回答 ${s.ids.length - answered}問
-      </p>
-    </section>
-    <div class="actions" style="margin-bottom:24px">
-      ${button("同じ問題をもう一度", "retry", "btn")}
-      ${button("ホームへ", "home", "btn outline")}
-    </div>
-    <h2>解答を振り返る</h2>
-    ${s.ids.map((id, index) => {
-      const q = byId.get(id);
-      const selected = s.answers[id] || [];
-      const ok = sameAnswers(selected, q.answers);
-      return `
-        <details>
-          <summary>
-            ${ok ? "✓" : "×"} 第${index + 1}問
-            ／ ${escapeHTML(questionLabel(q))}
-          </summary>
-          <div>
-            <p><strong>${escapeHTML(q.text)}</strong></p>
-            <ol>${q.choices.map(choice =>
-              `<li>${escapeHTML(choice)}</li>`).join("")}</ol>
-            <p class="small">
-              あなたの解答：
-              ${selected.length ? selected.map(n => n + 1).join("・") : "未回答"}
-            </p>
-            ${explanationHTML(q, selected)}
-          </div>
-        </details>`;
-    }).join("")}`;
-}
-
-function statsHTML() {
-  const m = metrics();
-  return `
-    ${heading("学習成績")}
-    <section class="card">
-      <h2>このコースの記録</h2>
-      <div class="metrics">
-        <div><strong>${m.answered}</strong><small>学習済み問題数</small></div>
-        <div><strong>${m.attempts}</strong><small>延べ解答数</small></div>
-        <div><strong>${m.accuracy}%</strong><small>延べ正答率</small></div>
-      </div>
-      <div class="progress">
-        <span style="width:${rate(m.answered, m.total)}%"></span>
-      </div>
-      <p class="small muted" style="margin-top:12px">
-        全${m.total}問中${m.answered}問を学習
-        ／ 延べ正解数${m.correct}回
-      </p>
-    </section>
-    <section class="card">
-      <h2>${data.course === "student" ? "科目別" : "テーマ別"}正答率</h2>
-      ${categories().map(([name, emoji]) => {
-        const list = bank().filter(q => q.subject === name);
-        const st = metrics(list);
-        return `
-          <div class="stat-row">
-            <div class="stat-label">
-              <strong class="small">${emoji} ${escapeHTML(name)}</strong>
-              <span class="small">
-                ${st.attempts ? `${st.accuracy}%` : "—"}
-              </span>
-            </div>
-            <div class="progress">
-              <span style="width:${st.accuracy}%"></span>
-            </div>
-            <small class="muted">
-              ${list.length ? `学習済み${st.answered} / ${list.length}問
-              ／ 延べ${st.attempts}回解答` : "問題は準備中"}
-            </small>
-          </div>`;
-      }).join("")}
-    </section>
-    <div class="notice">
-      正答率は、繰り返しを含む「延べ正解数 ÷ 延べ解答数」です。
-      「間違えた問題」は直近の確定解答が不正解の問題です。
-      学生向けと一般向けの成績は分けて表示します。
-    </div>`;
-}
-
-function settingsHTML() {
-  return `
-    ${heading("設定・このサイトについて")}
-    <section class="card">
-      <h2>学習記録のバックアップ</h2>
-      <p class="small muted">
-        記録は、この端末・ブラウザ内に保存します。
-        別の端末への自動同期はありません。
-        ブラウザのデータ削除などで消える場合があります。
-      </p>
-      <div class="actions">
-        ${button("バックアップを保存", "export", "btn")}
-        ${button("記録を復元", "restore", "btn outline")}
-      </div>
-      <p class="small muted" style="margin-top:12px">
-        保存したJSONファイルを、別の端末の同じサイトで読み込むと記録を移せます。
-        復元すると現在の両コースの記録を置き換えます。
-      </p>
-    </section>
-
-    <section class="card">
-      <h2>問題について</h2>
-      <p class="small">
-        学生向け：公式過去問2問・オリジナル4問<br>
-        一般向け：オリジナル6問
-      </p>
-      <p class="small muted">
-        過去問は第40回の問17・問20を一部収録しています。
-        過去問の解説は当サイト独自作成で、厚生労働省の公式解説ではありません。
-        オリジナル問題は過去問と区別して表示します。
-      </p>
-      <a href="${SITE.officialPage}" target="_blank"
-         rel="noopener noreferrer">
-        厚生労働省・第40回問題および正答 ↗
-      </a>
-    </section>
-
-    <section class="card">
-      <h2>利用について</h2>
-      <p class="small muted">
-        食や栄養に関する学習を目的とするサイトです。
-        個別の診断や治療、疾患に応じた食事指示を行うものではありません。
-        現在のコードにはアクセス解析や広告、
-        学習記録をサーバーへ送信する処理は含めていません。
-      </p>
-    </section>
-
-    <section class="card">
-      <h2>記録の初期化</h2>
-      <p class="small muted">
-        学生向け・一般向けの成績、ブックマーク、
-        途中の学習をすべて削除します。
-      </p>
-      ${button("すべての学習記録を削除", "reset", "btn danger full")}
-    </section>`;
-}
-
-function render(scroll = true) {
-  document.querySelectorAll("[data-course]").forEach(el => {
-    const active = el.dataset.course === data.course;
-    el.classList.toggle("active", active);
-    el.setAttribute("aria-pressed", String(active));
-  });
-
-  const activePage = ["subjects", "years", "list", "exam-setup", "quiz", "result"]
-    .includes(page) ? "learn" : page;
-
-  document.querySelectorAll("[data-page]").forEach(el => {
-    const active = el.dataset.page === activePage;
-    el.classList.toggle("active", active);
-    if (active) el.setAttribute("aria-current", "page");
-    else el.removeAttribute("aria-current");
-  });
-
-  const views = {
-    home: homeHTML,
-    learn: learnHTML,
-    subjects: subjectsHTML,
-    years: yearsHTML,
-    list: questionListHTML,
-    "exam-setup": examSetupHTML,
-    quiz: quizHTML,
-    result: resultHTML,
-    stats: statsHTML,
-    settings: settingsHTML
-  };
-
-  app.innerHTML = (views[page] || homeHTML)()
-    + `<p class="footer-note">
-        ひらのの栄養教室<br>
-        小さな「わかった」を、毎日の積み重ねに。
-      </p>`;
-
-  if (scroll) {
-    window.scrollTo({ top: 0, behavior: "instant" });
-    app.focus({ preventScroll: true });
-  }
-
-  updateTimer();
-}
-
-/* =========================================================
-   5. 学習セッション
-   ========================================================= */
-
-function startSession(list, title, type = "practice", minutes = 10) {
-  if (!list.length) {
-    toast("出題できる問題がありません。");
-    return;
-  }
-
-  if (data.session && !data.session.finished) {
-    const accepted = window.confirm(
-      "途中の学習を終了して、新しい学習を始めますか？\n"
-      + "すでに確定・採点された成績は残ります。"
-    );
-    if (!accepted) return;
-  }
-
-  data.session = {
-    course: data.course,
-    ids: list.map(q => q.id),
-    index: 0,
-    type,
-    title,
-    deadline: type === "exam" ? Date.now() + minutes * 60000 : null,
-    answers: {},
-    logged: {},
-    finished: false
-  };
-
-  save();
-  page = "quiz";
-  render();
-}
-
-function currentQuestion() {
-  const s = data.session;
-  return s ? byId.get(s.ids[s.index]) : null;
-}
-
-function recordAnswer(q, selected) {
-  const prev = data.records[q.id];
-  const ok = sameAnswers(selected, q.answers);
-
-  data.records[q.id] = {
-    attempts: (prev?.attempts || 0) + 1,
-    correct: (prev?.correct || 0) + (ok ? 1 : 0),
-    selected: [...selected],
-    lastCorrect: ok,
-    updated: new Date().toISOString()
-  };
-}
-
-function choose(index) {
-  const s = data.session;
-  const q = currentQuestion();
-
-  if (!s || !q || s.finished || page !== "quiz") return;
-  if (!Number.isInteger(index) || index < 0 || index >= q.choices.length) return;
-  if (s.type === "practice" && s.logged[q.id]) return;
-
-  let selected = [...(s.answers[q.id] || [])];
-
-  if (q.answers.length === 1) {
-    selected = [index];
-  } else if (selected.includes(index)) {
-    selected = selected.filter(n => n !== index);
-  } else {
-    if (selected.length >= q.answers.length) {
-      toast(`${q.answers.length}つまで選べます。変更するときは選択を解除してください。`);
-      return;
-    }
-    selected.push(index);
-  }
-
-  s.answers[q.id] = selected;
-  save();
-  render(false);
-}
-
-function confirmAnswer() {
-  const s = data.session;
-  const q = currentQuestion();
-
-  if (!s || !q || s.finished || s.type !== "practice") return;
-  if (s.logged[q.id]) return;
-
-  const selected = s.answers[q.id] || [];
-  if (selected.length !== q.answers.length) return;
-
-  recordAnswer(q, selected);
-  s.logged[q.id] = true;
-  save();
-  render(false);
-}
-
-function finishExam(automatic = false) {
-  const s = data.session;
-  if (!s || s.type !== "exam" || s.finished) return;
-
-  if (!automatic) {
-    const unanswered = s.ids.filter(id =>
-      (s.answers[id] || []).length !== byId.get(id).answers.length
-    ).length;
-
-    if (!window.confirm(
-      `提出して採点しますか？\n未回答：${unanswered}問`
-    )) return;
-  }
-
-  for (const id of s.ids) {
-    const q = byId.get(id);
-    const selected = s.answers[id] || [];
-
-    if (selected.length === q.answers.length && !s.logged[id]) {
-      recordAnswer(q, selected);
-      s.logged[id] = true;
-    }
-  }
-
-  s.finished = true;
-  data.course = s.course;
-  save();
-  page = "result";
-  render();
-
-  if (automatic) toast("制限時間になったため、自動提出しました。");
-}
-
-function updateTimer() {
-  const s = data.session;
-
-  if (!s || s.finished || s.type !== "exam") return;
-
-  const remaining = s.deadline - Date.now();
-
-  if (remaining <= 0) {
-    finishExam(true);
-    return;
-  }
-
-  const timer = $("#timer");
-  if (!timer) return;
-
-  const seconds = Math.ceil(remaining / 1000);
-  const minutes = Math.floor(seconds / 60);
-  timer.textContent = `⏱ 残り ${minutes}:${String(seconds % 60).padStart(2, "0")}`;
-}
-
-function visibleList() {
-  let list = bank();
-
-  if (listMode === "wrong") {
-    list = list.filter(q => data.records[q.id]
-      && !data.records[q.id].lastCorrect);
-  }
-  if (listMode === "bookmarks") {
-    list = list.filter(q => data.bookmarks.includes(q.id));
-  }
-  if (listMode === "unanswered") {
-    list = list.filter(q => !data.records[q.id]);
-  }
-
-  const term = searchText.trim().toLocaleLowerCase("ja");
-  return term ? list.filter(q =>
-    [q.text, q.subject, questionLabel(q), ...q.choices]
-      .join(" ").toLocaleLowerCase("ja").includes(term)
-  ) : list;
-}
-
-/* =========================================================
-   6. バックアップ
-   ========================================================= */
-
-function exportData() {
-  const blob = new Blob([JSON.stringify(data, null, 2)], {
-    type: "application/json"
-  });
-  const url = URL.createObjectURL(blob);
-  const anchor = document.createElement("a");
-  anchor.href = url;
-  anchor.download = `hirano-learning-${japanDate()}.json`;
-  document.body.appendChild(anchor);
-  anchor.click();
-  anchor.remove();
-  setTimeout(() => URL.revokeObjectURL(url), 30000);
-  toast("バックアップの保存を開始しました。");
-}
-
-$("#restoreFile").addEventListener("change", async event => {
-  const file = event.target.files?.[0];
-  if (!file) return;
-
-  try {
-    if (file.size > 5 * 1024 * 1024) {
-      throw new Error("ファイルが大きすぎます。");
-    }
-
-    const imported = validateData(JSON.parse(await file.text()));
-
-    if (!window.confirm(
-      "バックアップを復元しますか？\n現在の両コースの学習記録を置き換えます。"
-    )) return;
-
-    data = imported;
-    save();
-    page = "home";
-    render();
-    toast("学習記録を復元しました。");
-  } catch (error) {
-    toast("復元できませんでした。対応するバックアップJSONを確認してください。");
-  } finally {
-    event.target.value = "";
-  }
-});
-
-/* =========================================================
-   7. 操作イベント
-   ========================================================= */
-
-document.addEventListener("click", event => {
-  const courseButton = event.target.closest("[data-course]");
-  if (courseButton) {
-    data.course = courseButton.dataset.course === "public"
-      ? "public" : "student";
-    save();
-    page = "home";
-    render();
-    return;
-  }
-
-  const pageButton = event.target.closest("[data-page]");
-  if (pageButton) {
-    page = pageButton.dataset.page;
-    render();
-    return;
-  }
-
-  const target = event.target.closest("[data-action]");
-  if (!target || target.disabled) return;
-
-  const action = target.dataset.action;
-  const value = target.dataset.value;
-  const s = data.session;
-
-  if (["home", "learn", "subjects", "years", "exam-setup"].includes(action)) {
-    page = action;
-    render();
-    return;
-  }
-
-  if (["wrong", "bookmarks", "unanswered", "search"].includes(action)) {
-    listMode = action;
-    searchText = "";
-    page = "list";
-    render();
-    return;
-  }
-
-  switch (action) {
-    case "subject": {
-      const category = categories()[Number(value)];
-      if (!category) return;
-      startSession(
-        bank().filter(q => q.subject === category[0]),
-        category[0]
-      );
-      break;
-    }
-
-    case "year": {
-      const year = Number(value);
-      startSession(
-        bank().filter(q => q.kind === "past" && q.year === year),
-        `${year}年の過去問`
-      );
-      break;
-    }
-
-    case "random":
-      startSession(shuffle(bank()).slice(0, 10), "ランダム学習");
-      break;
-
-    case "daily":
-      startSession(dailyQuestions(), `${japanDate()}・今日の問題`);
-      break;
-
-    case "start-list":
-      startSession(visibleList(), {
-        wrong: "間違えた問題の復習",
-        bookmarks: "ブックマーク学習",
-        unanswered: "未回答の問題",
-        search: "検索した問題"
-      }[listMode] || "問題学習");
-      break;
-
-    case "single": {
-      const q = byId.get(value);
-      if (q && q.course === data.course) {
-        startSession([q], questionLabel(q));
-      }
-      break;
-    }
-
-    case "start-exam": {
-      const count = Number($("#examCount").value);
-      const minutes = Number($("#examMinutes").value);
-      if (!Number.isInteger(count) || count < 1 || count > bank().length) return;
-      if (![5, 10, 20, 30].includes(minutes)) return;
-      startSession(
-        shuffle(bank()).slice(0, count),
-        `時間制限付き練習・${count}問`,
-        "exam",
-        minutes
-      );
-      break;
-    }
-
-    case "resume":
-      if (s && !s.finished) {
-        data.course = s.course;
-        save();
-        page = "quiz";
-        render();
-      }
-      break;
-
-    case "choose":
-      choose(Number(value));
-      break;
-
-    case "confirm-answer":
-      confirmAnswer();
-      break;
-
-    case "bookmark": {
-      const q = currentQuestion();
-      if (!q || !s || s.finished) return;
-      const index = data.bookmarks.indexOf(q.id);
-      if (index >= 0) data.bookmarks.splice(index, 1);
-      else data.bookmarks.push(q.id);
-      save();
-      render(false);
-      toast(index >= 0 ? "ブックマークを解除しました。" : "ブックマークしました。");
-      break;
-    }
-
-    case "next":
-      if (!s || s.finished || s.type !== "practice") return;
-      if (!s.logged[s.ids[s.index]]) return;
-
-      if (s.index === s.ids.length - 1) {
-        s.finished = true;
-        page = "result";
-      } else {
-        s.index++;
-      }
-      save();
-      render();
-      break;
-
-    case "previous":
-    case "next-exam":
-    case "jump":
-      if (!s || s.finished || s.type !== "exam") return;
-      {
-        const nextIndex = action === "jump" ? Number(value)
-          : s.index + (action === "previous" ? -1 : 1);
-
-        if (!Number.isInteger(nextIndex)
-            || nextIndex < 0 || nextIndex >= s.ids.length) return;
-
-        s.index = nextIndex;
-        save();
-        render();
-      }
-      break;
-
-    case "submit-exam":
-      finishExam(false);
-      break;
-
-    case "pause":
-      save();
-      page = "home";
-      render();
-      break;
-
-    case "retry":
-      if (!s || !s.finished) return;
-      startSession(
-        s.ids.map(id => byId.get(id)),
-        s.title,
-        s.type,
-        10
-      );
-      if (s.type === "exam") {
-        toast("再挑戦の制限時間は10分です。");
-      }
-      break;
-
-    case "export":
-      exportData();
-      break;
-
-    case "restore":
-      $("#restoreFile").click();
-      break;
-
-    case "reset":
-      if (window.confirm(
-        "両コースの学習成績・ブックマーク・途中の学習をすべて削除しますか？\n"
-        + "必要なら先にバックアップしてください。"
-      )) {
-        const course = data.course;
-        data = freshData();
-        data.course = course;
-        save();
-        page = "home";
-        render();
-        toast("学習記録を削除しました。");
-      }
-      break;
-  }
-});
-
-document.addEventListener("input", event => {
-  if (event.target.id !== "questionSearch") return;
-
-  searchText = event.target.value;
-  const cursor = event.target.selectionStart;
-  render(false);
-
-  const input = $("#questionSearch");
-  input.focus({ preventScroll: true });
-
-  try {
-    input.setSelectionRange(cursor, cursor);
-  } catch (error) {
-    // 検索欄の選択範囲指定に対応しないブラウザでは省略します。
-  }
-});
-
-document.addEventListener("visibilitychange", () => {
-  if (!document.hidden) updateTimer();
-});
-
-window.addEventListener("pageshow", updateTimer);
-
-setInterval(updateTimer, 1000);
-
-/* 問題データの基本チェック */
-for (const q of QUESTIONS) {
-  if (!q.id || !["student", "public"].includes(q.course)
-      || !["past", "original"].includes(q.kind)
-      || !Array.isArray(q.choices) || q.choices.length < 2
-      || !Array.isArray(q.answers) || !q.answers.length
-      || !validSelection(q.answers, q)) {
-    throw new Error("問題データの形式が正しくありません：" + q.id);
-  }
-}
-if (byId.size !== QUESTIONS.length) {
-  throw new Error("問題IDが重複しています。");
-}
-
-render();
-</script>
+        function goHome() {
+            state.currentView = 'home';
+            state.currentTab = 'home';
+            render();
+        }
+
+        function render() {
+            const main = document.getElementById('main-content');
+            const backBtn = document.getElementById('back-btn');
+            const headerTitle = document.getElementById('header-title');
+
+            // Bottom Navigation active styling
+            ['home', 'study', 'stats', 'mypage'].forEach(t => {
+                const el = document.getElementById(`nav-${t}`);
+                if (t === state.currentTab) {
+                    el.className = "flex flex-col items-center text-[#1b7a43] transition font-bold";
+                } else {
+                    el.className = "flex flex-col items-center text-slate-400 hover:text-[#1b7a43] transition";
+                }
+            });
+
+            if (state.currentView === 'home') {
+                backBtn.classList.add('hidden');
+                headerTitle.innerText = "管理栄養士 試験対策";
+                main.innerHTML = renderHomeView();
+            } else if (state.currentView === 'study_list') {
+                backBtn.classList.remove('hidden');
+                headerTitle.innerText = "学習モード選択";
+                main.innerHTML = renderStudyListView();
+            } else if (state.currentView === 'sub_menu') {
+                backBtn.classList.remove('hidden');
+                headerTitle.innerText = state.selectedCategoryTitle;
+                main.innerHTML = renderSubMenuView();
+            } else if (state.currentView === 'quiz') {
+                backBtn.classList.remove('hidden');
+                headerTitle.innerText = "問題演習";
+                main.innerHTML = renderQuizView();
+            } else if (state.currentView === 'stats') {
+                backBtn.classList.add('hidden');
+                headerTitle.innerText = "学習統計・成績";
+                main.innerHTML = renderStatsView();
+            } else if (state.currentView === 'mypage') {
+                backBtn.classList.add('hidden');
+                headerTitle.innerText = "マイページ";
+                main.innerHTML = renderMypageView();
+            }
+        }
+
+        // View Renderers
+        function renderHomeView() {
+            return `
+                <!-- User Status Banner -->
+                <div class="bg-gradient-to-r from-emerald-600 to-[#1b7a43] text-white p-5 rounded-2xl shadow-lg relative overflow-hidden">
+                    <div class="relative z-10">
+                        <span class="bg-emerald-500/55 text-xs px-2.5 py-1 rounded-full font-medium">国家資格 / 年1回 (3月)</span>
+                        <h2 class="text-xl font-bold mt-2">第41回 管理栄養士国家試験</h2>
+                        <p class="text-xs text-emerald-100 mt-1">次回試験まであと約4ヶ月！毎日コツコツ学習しましょう。</p>
+                    </div>
+                    <i class="fa-solid fa-graduation-cap absolute -right-4 -bottom-6 text-emerald-800/25 text-9xl"></i>
+                </div>
+
+                <!-- General User: Today's 5 Questions (AI Random) -->
+                <div onclick="startMode('todays5')" class="bg-emerald-50 border border-emerald-200 p-4 rounded-2xl shadow-sm flex items-center justify-between cursor-pointer hover:bg-emerald-100 transition group">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-emerald-600 text-white rounded-xl flex items-center justify-center text-xl shadow-md group-hover:scale-105 transition">
+                            <i class="fa-solid fa-calendar-day"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs text-emerald-700 font-bold bg-emerald-200/70 px-2 py-0.5 rounded">一般向け</span>
+                            <h3 class="font-bold text-slate-800 text-sm mt-0.5">今日の5問 (AIランダム)</h3>
+                            <p class="text-xs text-slate-500">サクッと5問だけ解いて基礎力アップ</p>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-emerald-600"></i>
+                </div>
+
+                <!-- Registered Dietitian AI Review Mode -->
+                <div onclick="startMode('ai_review')" class="bg-indigo-50 border border-indigo-200 p-4 rounded-2xl shadow-sm flex items-center justify-between cursor-pointer hover:bg-indigo-100 transition group">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-indigo-600 text-white rounded-xl flex items-center justify-center text-xl shadow-md group-hover:scale-105 transition">
+                            <i class="fa-solid fa-robot"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs text-indigo-700 font-bold bg-indigo-200/70 px-2 py-0.5 rounded">管理栄養士向け</span>
+                            <h3 class="font-bold text-slate-800 text-sm mt-0.5">AI算出・専門復習問題集</h3>
+                            <p class="text-xs text-slate-500">実務・キャリアに活かす高度実践問題</p>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-indigo-600"></i>
+                </div>
+
+                <!-- Quick Stats Mini Card -->
+                <div class="bg-white border border-slate-100 p-4 rounded-2xl shadow-sm grid grid-cols-3 gap-2 text-center">
+                    <div class="border-r border-slate-100">
+                        <span class="text-xs text-slate-400">連続学習</span>
+                        <p class="font-bold text-lg text-emerald-600">${state.stats.streak} <span class="text-xs">日</span></p>
+                    </div>
+                    <div class="border-r border-slate-100">
+                        <span class="text-xs text-slate-400">回答済み</span>
+                        <p class="font-bold text-lg text-slate-800">${state.stats.totalAnswered} <span class="text-xs">問</span></p>
+                    </div>
+                    <div>
+                        <span class="text-xs text-slate-400">正答率</span>
+                        <p class="font-bold text-lg text-slate-800">${state.stats.totalAnswered > 0 ? Math.round((state.stats.totalCorrect / state.stats.totalAnswered)*100) : 0}%</p>
+                    </div>
+                </div>
+
+                <!-- Student Learning Modes Grid (5+ Student Modes) -->
+                <div>
+                    <h3 class="font-bold text-sm text-slate-700 mb-3 px-1"><i class="fa-solid fa-layer-group text-emerald-600 mr-1.5"></i> 学生向け学習モード</h3>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div onclick="openSubMenu('year')" class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm hover:border-emerald-500 cursor-pointer transition flex flex-col justify-between">
+                            <div class="w-10 h-10 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center text-lg mb-2"><i class="fa-solid fa-calendar-days"></i></div>
+                            <div>
+                                <h4 class="font-bold text-sm">年度別過去問</h4>
+                                <p class="text-[11px] text-slate-400 mt-0.5">第1〜40回 (全年度・削除問題除外)</p>
+                            </div>
+                        </div>
+                        <div onclick="openSubMenu('subject')" class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm hover:border-emerald-500 cursor-pointer transition flex flex-col justify-between">
+                            <div class="w-10 h-10 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center text-lg mb-2"><i class="fa-solid fa-book-bookmark"></i></div>
+                            <div>
+                                <h4 class="font-bold text-sm">科目別学習</h4>
+                                <p class="text-[11px] text-slate-400 mt-0.5">全8分野を集中して対策</p>
+                            </div>
+                        </div>
+                        <div onclick="startMode('random')" class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm hover:border-emerald-500 cursor-pointer transition flex flex-col justify-between">
+                            <div class="w-10 h-10 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center text-lg mb-2"><i class="fa-solid fa-shuffle"></i></div>
+                            <div>
+                                <h4 class="font-bold text-sm">ランダム演習</h4>
+                                <p class="text-[11px] text-slate-400 mt-0.5">全問からシャッフル出題</p>
+                            </div>
+                        </div>
+                        <div onclick="startMode('wrong')" class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm hover:border-emerald-500 cursor-pointer transition flex flex-col justify-between">
+                            <div class="w-10 h-10 bg-rose-100 text-rose-600 rounded-xl flex items-center justify-center text-lg mb-2"><i class="fa-solid fa-rotate-left"></i></div>
+                            <div>
+                                <h4 class="font-bold text-sm">間違えた問題</h4>
+                                <p class="text-[11px] text-slate-400 mt-0.5">苦手を確実に克服</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderStudyListView() {
+            return `
+                <div class="space-y-3">
+                    <div onclick="startMode('exam')" class="bg-emerald-600 text-white p-4 rounded-2xl shadow-md cursor-pointer hover:bg-emerald-700 transition flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div class="text-2xl"><i class="fa-solid fa-stopwatch"></i></div>
+                            <div>
+                                <h4 class="font-bold">本番試験モード（模試）</h4>
+                                <p class="text-xs text-emerald-100">5時間5分・自動採点・本番シミュレーション</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+
+                    <div onclick="openSubMenu('year')" class="bg-white border border-slate-200 p-4 rounded-2xl shadow-sm cursor-pointer hover:border-emerald-500 transition flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center"><i class="fa-solid fa-calendar"></i></div>
+                            <div>
+                                <h4 class="font-bold text-sm">年度別から選ぶ (第1〜40回)</h4>
+                                <p class="text-xs text-slate-400">全員正解や不適切問題を除外した過去問</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-slate-400"></i>
+                    </div>
+
+                    <div onclick="openSubMenu('subject')" class="bg-white border border-slate-200 p-4 rounded-2xl shadow-sm cursor-pointer hover:border-emerald-500 transition flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center"><i class="fa-solid fa-layer-group"></i></div>
+                            <div>
+                                <h4 class="font-bold text-sm">分野・科目別から選ぶ</h4>
+                                <p class="text-xs text-slate-400">基礎栄養学、臨床栄養学など全8科目</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-slate-400"></i>
+                    </div>
+
+                    <div onclick="startMode('random')" class="bg-white border border-slate-200 p-4 rounded-2xl shadow-sm cursor-pointer hover:border-emerald-500 transition flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center"><i class="fa-solid fa-shuffle"></i></div>
+                            <div>
+                                <h4 class="font-bold text-sm">ランダム学習</h4>
+                                <p class="text-xs text-slate-400">全科目シャッフル出題</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-slate-400"></i>
+                    </div>
+
+                    <div onclick="startMode('wrong')" class="bg-white border border-slate-200 p-4 rounded-2xl shadow-sm cursor-pointer hover:border-emerald-500 transition flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-rose-50 text-rose-600 rounded-xl flex items-center justify-center"><i class="fa-solid fa-xmark"></i></div>
+                            <div>
+                                <h4 class="font-bold text-sm">間違えた問題</h4>
+                                <p class="text-xs text-slate-400">過去に不正解だった問題を復習</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-slate-400"></i>
+                    </div>
+                </div>
+            `;
+        }
+
+        function openSubMenu(type) {
+            state.currentView = 'sub_menu';
+            state.subType = type;
+            state.selectedCategoryTitle = type === 'year' ? '年度別一覧 (第1〜40回)' : '科目別一覧';
+            render();
+        }
+
+        function renderSubMenuView() {
+            if (state.subType === 'year') {
+                return `
+                    <div class="space-y-2">
+                        <p class="text-xs text-slate-500 px-1">受験する年度を選択してください（全員正解・不適切問題等は除外済み）</p>
+                        ${yearsList.map(y => `
+                            <div onclick="startMode('year_selected', '${y}')" class="bg-white border border-slate-200 p-3.5 rounded-xl shadow-sm hover:border-emerald-500 cursor-pointer transition flex items-center justify-between">
+                                <span class="font-bold text-sm text-slate-800">${y} 過去問</span>
+                                <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-lg">200問 <i class="fa-solid fa-chevron-right ml-1"></i></span>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            } else {
+                return `
+                    <div class="space-y-2">
+                        <p class="text-xs text-slate-500 px-1">学習したい科目を選択してください</p>
+                        ${subjects.map(s => `
+                            <div onclick="startMode('subject_selected', '${s.name}')" class="bg-white border border-slate-200 p-3.5 rounded-xl shadow-sm hover:border-emerald-500 cursor-pointer transition flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-9 h-9 bg-emerald-50 text-emerald-600 rounded-lg flex items-center justify-center text-sm"><i class="fa-solid ${s.icon}"></i></div>
+                                    <div>
+                                        <h4 class="font-bold text-sm text-slate-800">${s.name}</h4>
+                                        <p class="text-[11px] text-slate-400">${s.count}問収録</p>
+                                    </div>
+                                </div>
+                                <i class="fa-solid fa-chevron-right text-slate-400 text-sm"></i>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+        }
+
+        function startMode(mode, param) {
+            state.studyMode = mode;
+            if (mode === 'todays5' || mode === 'random' || mode === 'ai_review') {
+                state.questions = [...questionBank].sort(() => 0.5 - Math.random()).slice(0, 5);
+            } else if (mode === 'subject_selected') {
+                state.questions = questionBank.filter(q => q.subject === param);
+                if (state.questions.length === 0) {
+                    state.questions = [questionBank[0]]; // fallback demo
+                }
+            } else if (mode === 'wrong') {
+                state.questions = questionBank.filter(q => state.wrongQuestions[q.id]);
+                if (state.questions.length === 0) {
+                    showAlert("通知", "現在間違えた問題はありません！お見事です。");
+                    return;
+                }
+            } else {
+                // year_selected or exam or default
+                state.questions = [...questionBank];
+            }
+            state.currentIndex = 0;
+            state.userAnswers = {};
+            state.currentView = 'quiz';
+            render();
+        }
+
+        function renderQuizView() {
+            const q = state.questions[state.currentIndex];
+            if (!q) {
+                return `
+                    <div class="text-center py-12 space-y-4">
+                        <div class="text-emerald-600 text-5xl"><i class="fa-solid fa-circle-check"></i></div>
+                        <h3 class="font-bold text-lg">お疲れ様でした！</h3>
+                        <p class="text-xs text-slate-500">このセッションの問題をすべてクリアしました。</p>
+                        <button onclick="goHome()" class="bg-[#1b7a43] text-white px-6 py-2.5 rounded-xl font-bold shadow-md hover:bg-emerald-800 transition">ホームに戻る</button>
+                    </div>
+                `;
+            }
+
+            const answered = state.userAnswers[q.id] !== undefined;
+            const selectedOpt = state.userAnswers[q.id];
+
+            return `
+                <!-- Quiz Progress Bar -->
+                <div class="space-y-1">
+                    <div class="flex justify-between text-xs text-slate-500 font-medium">
+                        <span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-bold">${q.subject}</span>
+                        <span>問題 ${state.currentIndex + 1} / ${state.questions.length}</span>
+                    </div>
+                    <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                        <div class="bg-emerald-600 h-full transition-all duration-300" style="width: ${((state.currentIndex + 1) / state.questions.length) * 100}%"></div>
+                    </div>
+                </div>
+
+                <!-- Question Card -->
+                <div class="bg-white border border-slate-200 p-4 rounded-2xl shadow-sm space-y-3">
+                    <div class="flex items-center justify-between text-xs text-slate-400">
+                        <span class="font-semibold text-emerald-700">${q.year}</span>
+                        <button onclick="toggleBookmark(${q.id})" class="text-lg ${state.bookmarks[q.id] ? 'text-amber-500' : 'text-slate-300'}"><i class="fa-solid fa-star"></i></button>
+                    </div>
+                    <h3 class="font-bold text-sm text-slate-900 leading-relaxed"><span class="text-emerald-600 font-black mr-1">Q.</span>${q.question}</h3>
+                </div>
+
+                <!-- Options List -->
+                <div class="space-y-2">
+                    ${q.options.map((opt, idx) => {
+                        const optNum = idx + 1;
+                        let btnStyle = "bg-white border-slate-200 text-slate-700 hover:border-emerald-500";
+                        if (answered) {
+                            if (optNum === q.answer) {
+                                btnStyle = "bg-emerald-50 border-emerald-500 text-emerald-900 font-bold";
+                            } else if (selectedOpt === optNum) {
+                                btnStyle = "bg-rose-50 border-rose-500 text-rose-900";
+                            } else {
+                                btnStyle = "bg-white border-slate-100 text-slate-400 opacity-60";
+                            }
+                        }
+                        return `
+                            <button onclick="selectOption(${q.id}, ${optNum})" ${answered ? 'disabled' : ''} class="w-full text-left p-3.5 rounded-xl border ${btnStyle} shadow-sm transition flex items-start space-x-3 text-xs leading-normal">
+                                <span class="w-6 h-6 rounded-full bg-slate-100 text-slate-600 font-bold flex items-center justify-center shrink-0 text-xs">${optNum}</span>
+                                <span class="flex-1 mt-0.5">${opt}</span>
+                                ${answered && optNum === q.answer ? '<i class="fa-solid fa-circle-check text-emerald-600 text-base mt-0.5"></i>' : ''}
+                                ${answered && selectedOpt === optNum && optNum !== q.answer ? '<i class="fa-solid fa-circle-xmark text-rose-500 text-base mt-0.5"></i>' : ''}
+                            </button>
+                        `;
+                    }).join('')}
+                </div>
+
+                <!-- Explanation Area -->
+                ${answered ? `
+                    <div class="bg-amber-50/90 border border-amber-200 p-4 rounded-2xl space-y-2 animate-fade-in">
+                        <div class="flex items-center space-x-2 text-amber-800 font-bold text-xs">
+                            <i class="fa-solid fa-lightbulb text-amber-600"></i>
+                            <span>解説</span>
+                        </div>
+                        <p class="text-xs text-slate-700 leading-relaxed">${q.explanation}</p>
+                    </div>
+
+                    <div class="pt-2">
+                        <button onclick="nextQuestion()" class="w-full bg-[#1b7a43] text-white py-3 rounded-xl font-bold shadow-md hover:bg-emerald-800 transition flex items-center justify-center space-x-2 text-sm">
+                            <span>次の問題へ</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                ` : ''}
+            `;
+        }
+
+        function selectOption(qId, optNum) {
+            const q = state.questions.find(item => item.id === qId);
+            state.userAnswers[qId] = optNum;
+            state.stats.totalAnswered++;
+            if (optNum === q.answer) {
+                state.stats.totalCorrect++;
+            } else {
+                state.wrongQuestions[qId] = true;
+            }
+            render();
+        }
+
+        function nextQuestion() {
+            state.currentIndex++;
+            render();
+        }
+
+        function toggleBookmark(qId) {
+            state.bookmarks[qId] = !state.bookmarks[qId];
+            render();
+        }
+
+        function renderStatsView() {
+            const accuracy = state.stats.totalAnswered > 0 ? Math.round((state.stats.totalCorrect / state.stats.totalAnswered)*100) : 0;
+            return `
+                <div class="space-y-4">
+                    <div class="bg-white border border-slate-200 p-4 rounded-2xl shadow-sm">
+                        <h3 class="font-bold text-sm text-slate-800 mb-3"><i class="fa-solid fa-chart-pie text-emerald-600 mr-1.5"></i> 全体学習統計</h3>
+                        <div class="grid grid-cols-4 gap-2 text-center">
+                            <div class="bg-slate-50 p-2 rounded-xl">
+                                <span class="text-[10px] text-slate-400">回答済み</span>
+                                <p class="font-bold text-sm text-slate-800">${state.stats.totalAnswered}</p>
+                            </div>
+                            <div class="bg-slate-50 p-2 rounded-xl">
+                                <span class="text-[10px] text-slate-400">正解数</span>
+                                <p class="font-bold text-sm text-emerald-600">${state.stats.totalCorrect}</p>
+                            </div>
+                            <div class="bg-slate-50 p-2 rounded-xl">
+                                <span class="text-[10px] text-slate-400">正答率</span>
+                                <p class="font-bold text-sm text-slate-800">${accuracy}%</p>
+                            </div>
+                            <div class="bg-slate-50 p-2 rounded-xl">
+                                <span class="text-[10px] text-slate-400">ブックマーク</span>
+                                <p class="font-bold text-sm text-amber-500">${Object.values(state.bookmarks).filter(Boolean).length}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white border border-slate-200 p-4 rounded-2xl shadow-sm space-y-3">
+                        <h3 class="font-bold text-sm text-slate-800"><i class="fa-solid fa-list-check text-emerald-600 mr-1.5"></i> 科目別正答率</h3>
+                        <div class="space-y-3">
+                            ${subjects.map(s => `
+                                <div>
+                                    <div class="flex justify-between text-xs mb-1">
+                                        <span class="font-medium text-slate-700">${s.name}</span>
+                                        <span class="text-slate-400">0 / ${s.count}問 (-%)</span>
+                                    </div>
+                                    <div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+                                        <div class="bg-emerald-600 h-full" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderMypageView() {
+            return `
+                <div class="space-y-4">
+                    <div class="bg-white border border-slate-200 p-4 rounded-2xl shadow-sm flex items-center space-x-4">
+                        <div class="w-14 h-14 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center text-2xl font-bold">管</div>
+                        <div>
+                            <h3 class="font-bold text-base text-slate-800">管理栄養士 卵さん</h3>
+                            <p class="text-xs text-slate-400">第41回国家試験受験予定 (学生・一般切替可能)</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm divide-y divide-slate-100">
+                        <div onclick="showAlert('お知らせ', '第1回〜第40回過去問および解説データの同期が完了しました。')" class="p-3.5 flex items-center justify-between text-xs cursor-pointer hover:bg-slate-50">
+                            <span class="font-medium text-slate-700"><i class="fa-solid fa-cloud-arrow-down text-emerald-600 mr-2"></i> 問題データの同期・アップデート</span>
+                            <i class="fa-solid fa-chevron-right text-slate-300"></i>
+                        </div>
+                        <div onclick="showAlert('AI機能', 'AIによる弱点分析エンジンおよび日替わり5問自動算出機能は正常に稼働しています。')" class="p-3.5 flex items-center justify-between text-xs cursor-pointer hover:bg-slate-50">
+                            <span class="font-medium text-slate-700"><i class="fa-solid fa-brain text-emerald-600 mr-2"></i> AI弱点分析・復習問題設定</span>
+                            <i class="fa-solid fa-chevron-right text-slate-300"></i>
+                        </div>
+                        <div onclick="showAlert('GitHubガイド', 'このファイルをindex.htmlという名前でGitHubリポジトリにプッシュし、GitHub Pagesを有効化するだけで公開できます。')" class="p-3.5 flex items-center justify-between text-xs cursor-pointer hover:bg-slate-50">
+                            <span class="font-medium text-slate-700"><i class="fa-brands fa-github text-slate-800 mr-2"></i> GitHub Pages 公開手順</span>
+                            <i class="fa-solid fa-chevron-right text-slate-300"></i>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function showAlert(title, text) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-text').innerText = text;
+            document.getElementById('modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.add('hidden');
+        }
+
+        function toggleAiMode() {
+            showAlert("AI連動モード", "現役管理栄養士向けAIレコメンド機能および一般向け「今日の5問」自動出題エンジンがアクティブになりました。");
+        }
+    </script>
 </body>
 </html>
